@@ -9,6 +9,7 @@ const options={
 };
 const url = process.env.APP_URL || 'https://oziquz.herokuapp.com:443';
 const fs =require("fs")
+const path=require("path")
 const kb= require('./keyboard-button.js')
 const keyboard = require('./keyboard.js')
 const kb2= require('./keyboard-button2.js')
@@ -134,9 +135,11 @@ if (globalkey3==1 && msg.text==undefined)
  
 		}).then(()=>{
        image=process.cwd()+"/"+file_path;
-      
+      console.log("I am here");
        console.log(path.dirname(require.main.filename));
-
+        console.log("I am here 2");
+       console.log(path.resolve());
+     
     }).then(()=>{
     
     Caption=`👉🏻 `+description+`
