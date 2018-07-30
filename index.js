@@ -135,10 +135,6 @@ if (globalkey3==1 && msg.text==undefined)
  
 		}).then(()=>{
        image=process.cwd()+"/"+file_path;
-      console.log("I am here");
-       console.log(path.dirname(require.main.filename));
-        console.log("I am here 2");
-       console.log(process.env.APP_URL);
      
     }).then(()=>{
     
