@@ -137,6 +137,7 @@ if (globalkey3==1 && msg.text==undefined)
       
        console.log(image);
        console.log(url);
+       
     }).then(()=>{
     
     Caption=`👉🏻 `+description+`
@@ -146,7 +147,7 @@ if (globalkey3==1 && msg.text==undefined)
 ⭐️ #`+status_name+` #`+category[0]+` #`+location[0]+`
 
 @oziquz`+`
-<a href="`+image+`">&#160 </a>`;
+<a href="https://oziquz.herokuapp.com`+image+`">&#160 </a>`;
     console.log(Caption);
     bot.sendMessage(msg.chat.id,Caption,{
      parse_mode:"HTML"
