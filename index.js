@@ -134,7 +134,7 @@ if (globalkey3==1 && msg.text==undefined)
  
 		}).then(()=>{
        image=process.cwd()+"/"+file_path;
-     
+       console.log(image);
     }).then(()=>{
     
     Caption=`👉🏻 `+description+`
