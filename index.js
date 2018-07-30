@@ -133,7 +133,7 @@ if (globalkey3==1 && msg.text==undefined)
             
  
 		}).then(()=>{
-       image=process.cwd()+"/"+file_path;
+       image=path.resolve()+"/"+file_path;
       
        console.log(image);
     }).then(()=>{
