@@ -67,7 +67,7 @@ db.connect(function(err,res){
 })
 console.log('Bot has been started ...')	
 
-const bot = new TelegramBot(TOKEN, options);
+const bot = new Telegrambot(TOKEN, options);
 bot.setWebHook(`${url}/bot${TOKEN}`);
 	
      
