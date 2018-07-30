@@ -3,7 +3,7 @@ const Telegram = require('telegram-node-bot')
 const TOKEN = process.env.TELEGRAM_TOKEN || '636989293:AAEqf-WIQYcrDwnkr71viqrM_w6thWpY3T0';
 
 const options={
-  webhook:{
+   webHook: {
    port: process.env.PORT
   }
 };
@@ -67,7 +67,7 @@ db.connect(function(err,res){
 })
 console.log('Bot has been started ...')	
 
-const bot = new Telegrambot (TOKEN,options);
+const bot = new TelegramBot(TOKEN, options);
 bot.setWebHook(`${url}/bot${TOKEN}`);
 	
      
