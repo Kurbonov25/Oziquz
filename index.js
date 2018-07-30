@@ -149,7 +149,7 @@ if (globalkey3==1 && msg.text==undefined)
 <a href=`+image+`">&#160 </a>`;    
           
     console.log(Caption);
-    bot.sendPhoto(msg.chat.id,"app/photos/file_104.jpg");
+  
     bot.sendMessage(msg.chat.id,Caption,{
      parse_mode:"HTML"
     }).then(()=>{
