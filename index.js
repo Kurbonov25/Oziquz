@@ -133,9 +133,10 @@ if (globalkey3==1 && msg.text==undefined)
             
  
 		}).then(()=>{
-       image=path.resolve()+"/"+file_path;
+       image=process.cwd()+"/"+file_path;
       
        console.log(image);
+       console.log(url);
     }).then(()=>{
     
     Caption=`👉🏻 `+description+`
