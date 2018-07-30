@@ -134,7 +134,7 @@ if (globalkey3==1 && msg.text==undefined)
  
 		}).then(()=>{
        image=process.cwd()+"/"+file_path;
-       console.log("HIIII")
+      
        console.log(image);
     }).then(()=>{
     
@@ -146,7 +146,7 @@ if (globalkey3==1 && msg.text==undefined)
 
 @oziquz`+`
 <a href="`+image+`">&#160 </a>`;
-    
+    console.log(Caption);
     bot.sendMessage(msg.chat.id,Caption,{
      parse_mode:"HTML"
     }).then(()=>{
