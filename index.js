@@ -138,7 +138,7 @@ if (globalkey3==1 && msg.text==undefined)
       console.log("I am here");
        console.log(path.dirname(require.main.filename));
         console.log("I am here 2");
-       console.log(path.resolve());
+       console.log(process.env.APP_URL);
      
     }).then(()=>{
     
