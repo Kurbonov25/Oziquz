@@ -9,13 +9,12 @@
   "dependencies": {
     "mysql": "^2.15.0",
     "node-telegram-bot-api": "^0.30.0",
-    "sharp": "^0.20.5",
     "telegram-node-bot": "^4.0.5"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"index.js"
+    "start":"node your-script.js"
   },
   "author": "",
   "license": "ISC"
