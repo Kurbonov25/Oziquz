@@ -1,15 +1,13 @@
 const Telegrambot = require ('node-telegram-bot-api')
 const Telegram = require('telegram-node-bot')
-const TOKEN='636989293:AAEqf-WIQYcrDwnkr71viqrM_w6thWpY3T0';
-
+const TOKEN = process.env.TELEGRAM_TOKEN || '636989293:AAEqf-WIQYcrDwnkr71viqrM_w6thWpY3T0';
 
 const options={
   webhook:{
-    port: 3306
+   port: process.env.PORT
   }
 };
-
-const url='https://oziquz.herokuapp.com:443';
+const url = process.env.APP_URL || 'https://oziquz.herokuapp.com:443';
 const fs =require("fs")
 const kb= require('./keyboard-button.js')
 const keyboard = require('./keyboard.js')
