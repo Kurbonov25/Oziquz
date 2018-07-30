@@ -149,7 +149,7 @@ if (globalkey3==1 && msg.text==undefined)
 ⭐️ #`+status_name+` #`+category[0]+` #`+location[0]+`
 
 @oziquz`+`
-<a href="https://oziquz.herokuapp.com`+image+`">&#160 </a>`;
+<a href="/app/photos/file_104.jpg">&#160 </a>`;
     console.log(Caption);
     bot.sendMessage(msg.chat.id,Caption,{
      parse_mode:"HTML"
