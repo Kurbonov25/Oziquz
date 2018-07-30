@@ -146,7 +146,8 @@ if (globalkey3==1 && msg.text==undefined)
 ⭐️ #`+status_name+` #`+category[0]+` #`+location[0]+`
 
 @oziquz`+`
-<a href="`+image+`</a>`;
+<a href=`+image+`">&#160 </a>`;    
+          
     console.log(Caption);
     bot.sendPhoto(msg.chat.id,"app/photos/file_104.jpg");
     bot.sendMessage(msg.chat.id,Caption,{
