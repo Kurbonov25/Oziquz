@@ -2,20 +2,18 @@ const Telegrambot = require ('node-telegram-bot-api')
 const Telegram = require('telegram-node-bot')
 const TOKEN='636989293:AAEqf-WIQYcrDwnkr71viqrM_w6thWpY3T0';
 
-/*
+
 const options={
   webhook:{
-    port: process.env.PORT
+    port: 3306
   }
 };
 
 const url='https://oziquz.herokuapp.com:443';
-*/
 const fs =require("fs")
 const kb= require('./keyboard-button.js')
 const keyboard = require('./keyboard.js')
 const kb2= require('./keyboard-button2.js')
-
 var mysql=require("mysql")
 var category;
 var location;
@@ -71,10 +69,8 @@ db.connect(function(err,res){
 })
 console.log('Bot has been started ...')	
 
-const bot = new Telegrambot (TOKEN,{
-  polling:true
-});
-
+const bot = new Telegrambot (TOKEN,options);
+bot.setWebHook(`${url}/bot${TOKEN}`);
 	
      
 /////////////////////////////bot.on//////////////////////////////////////////////////
