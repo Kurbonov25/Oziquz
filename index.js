@@ -141,6 +141,14 @@ if (globalkey3==1 && msg.text==undefined)
              {
                console.log(path);
                bot.sendPhoto(msg.chat.id,path);
+               Caption=`👉🏻 `+description+`
+
+☎️  Маълумот учун: `+phoneNumber+`
+
+⭐️ #`+status_name+` #`+category[0]+` #`+location[0]+`
+
+@oziquz`+`
+<a href="`+path+`">&#160 </a>`;
              });
             
  
@@ -150,14 +158,7 @@ if (globalkey3==1 && msg.text==undefined)
      
     }).then(()=>{
     
-    Caption=`👉🏻 `+description+`
-
-☎️  Маълумот учун: `+phoneNumber+`
-
-⭐️ #`+status_name+` #`+category[0]+` #`+location[0]+`
-
-@oziquz`+`
-<a href="">&#160 </a>`;
+    
     console.log(Caption);
   
     bot.sendMessage(msg.chat.id,Caption,{
