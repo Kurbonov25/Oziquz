@@ -122,7 +122,7 @@ if (globalkey3==1 && msg.text==undefined)
 	
 	globalkey3=0;
 	globalkey4=1;
-
+  var path3;
 	 category=category.split(" ");
 	 location=location.split(" ");
     file_id=msg.photo[2].file_id;
@@ -141,14 +141,7 @@ if (globalkey3==1 && msg.text==undefined)
              {
                console.log(path);
                bot.sendPhoto(msg.chat.id,path);
-               Caption=`👉🏻 `+description+`
-
-☎️  Маълумот учун: `+phoneNumber+`
-
-⭐️ #`+status_name+` #`+category[0]+` #`+location[0]+`
-
-@oziquz`+`
-<a href="`+path+`">&#160 </a>`;
+               path3=path;
              });
             
  
@@ -157,8 +150,15 @@ if (globalkey3==1 && msg.text==undefined)
      
      
     }).then(()=>{
-    
-    
+    console.log(path3);
+    Caption=`👉🏻 `+description+`
+
+☎️  Маълумот учун: `+phoneNumber+`
+
+⭐️ #`+status_name+` #`+category[0]+` #`+location[0]+`
+
+@oziquz`+`
+<a href="">&#160 </a>`;
     console.log(Caption);
   
     bot.sendMessage(msg.chat.id,Caption,{
