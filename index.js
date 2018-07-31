@@ -137,7 +137,7 @@ if (globalkey3==1 && msg.text==undefined)
 	var file_info =bot.getFile(file_id).then(function(resp)
 		{
              file_path=resp.file_path;
-             bot.downloadFile(file_id,"/photos").then(function (path)
+             bot.downloadFile(file_id,"./photos").then(function (path)
              {
                console.log(path);
              });
