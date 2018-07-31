@@ -1195,7 +1195,7 @@ bot.sendMessage(Originalchannel_id,htm,{
        category1=f.category;
        location1=f.location;
        link=f.picture_path;
-       image=process.cwd()+"/"+link;
+      
        
      if (link==null)
      {
@@ -1226,7 +1226,7 @@ bot.sendMessage(Originalchannel_id,htm,{
 ⭐️ #`+status_name+` #`+category[0]+` #`+location[0]+`
 
 @oziquz`+`
-<a href="`+image+`">&#160 </a>`;
+<a href="`+link+`">&#160 </a>`;
    bot.sendMessage(Originalchannel_id,Caption,{
     parse_mode:"HTML"
    });
