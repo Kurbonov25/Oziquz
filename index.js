@@ -1199,7 +1199,7 @@ bot.sendMessage(Originalchannel_id,htm,{
        
      if (link==null)
      {
-      link=`<a href="http://gkh-grodnoraion.by/wp-content/uploads/2018/03/%D0%BE%D0%B1%D1%8A%D1%8F%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-1.jpg">&#160</a>`;
+      link="http://gkh-grodnoraion.by/wp-content/uploads/2018/03/%D0%BE%D0%B1%D1%8A%D1%8F%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-1.jpg";
      }
        if (f.status==1)
        {
