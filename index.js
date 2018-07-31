@@ -128,6 +128,9 @@ if (globalkey3==1 && msg.text==undefined)
     file_id=msg.photo[2].file_id;
     var dir = process.cwd();
     var dir2=dir+"/photos";
+    if (!fs.existsSync(dir2)){
+    fs.mkdirSync(dir2);
+}
 
 	var file_info =bot.getFile(file_id).then(function(resp)
 		{
