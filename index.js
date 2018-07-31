@@ -129,7 +129,7 @@ if (globalkey3==1 && msg.text==undefined)
     var dir = process.cwd();
     var dir2=dir+"/photos";
     if (!fs.existsSync("./photos/")){
-    fs.mkdirSync(dir2);
+    fs.mkdirSync("./photos/");
     console.log("hi");
     console.log(dir2);
 }
