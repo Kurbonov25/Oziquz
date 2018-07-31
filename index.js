@@ -147,11 +147,14 @@ if (!fs.existsSync(dir)){
              bot.downloadFile(file_id,'./photos/').then(function(path)
              {
                console.log(path);
+               cloudinary.uploader.upload(path, function(result) { 
+              console.log(result) 
+}); 
              });
         
  
 		}).then(()=>{
-       image=process.cwd()+"/"+file_path;
+      
      
      
     }).then(()=>{
@@ -163,7 +166,7 @@ if (!fs.existsSync(dir)){
 ⭐️ #`+status_name+` #`+category[0]+` #`+location[0]+`
 
 @oziquz`+`
-<a href="`+image`">&#160 </a>`;
+<a href=" ">&#160 </a>`;
     console.log(Caption);
   
     bot.sendMessage(msg.chat.id,Caption,{
