@@ -128,11 +128,11 @@ if (globalkey3==1 && msg.text==undefined)
     file_id=msg.photo[2].file_id;
     var dir = process.cwd();
     var dir2=dir+"/photos";
-    console.log(dir2);
+
 	var file_info =bot.getFile(file_id).then(function(resp)
 		{
              file_path=resp.file_path;
-             bot.downloadFile(file_id,'/app')
+             bot.downloadFile(file_id,dir2)
             
  
 		}).then(()=>{
