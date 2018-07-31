@@ -1,5 +1,6 @@
 const Telegrambot = require ('node-telegram-bot-api')
 const Telegram = require('telegram-node-bot')
+var cloudinary = require('cloudinary')
 const CLOUDINARY_URL=' https://api.cloudinary.com/v1_1/digitalm-uz/image/upload';
 const TOKEN = process.env.TELEGRAM_TOKEN || '636989293:AAEqf-WIQYcrDwnkr71viqrM_w6thWpY3T0';
 
@@ -137,8 +138,7 @@ if (!fs.existsSync(dir)){
 		{
              file_path=resp.file_path;
              bot.downloadFile(file_id,'./photos/')
-            cloudinary.v2.uploader.upload(file_path, 
-    function(error, result) {console.log(result, error)});
+           cloudinary.uploader.upload("my_picture.jpg", function(result) { console.log(result) })
  
 		}).then(()=>{
        image=process.cwd()+"/"+file_path;
