@@ -148,7 +148,7 @@ if (!fs.existsSync(dir)){
              {
                console.log(path);
                cloudinary.uploader.upload(path, function(result) { 
-              console.log(result) 
+              console.log(result.url) 
 }); 
              });
         
