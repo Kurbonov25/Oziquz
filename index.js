@@ -1,5 +1,6 @@
 const Telegrambot = require ('node-telegram-bot-api')
 const Telegram = require('telegram-node-bot')
+const CLOUDINARY_URL=' https://api.cloudinary.com/v1_1/digitalm-uz/image/upload';
 const TOKEN = process.env.TELEGRAM_TOKEN || '636989293:AAEqf-WIQYcrDwnkr71viqrM_w6thWpY3T0';
 
 const options={
@@ -122,35 +123,29 @@ if (globalkey3==1 && msg.text==undefined)
 	
 	globalkey3=0;
 	globalkey4=1;
-  var path3;
+
 	 category=category.split(" ");
 	 location=location.split(" ");
     file_id=msg.photo[2].file_id;
-    var dir = process.cwd();
-    var dir2=dir+"/photos";
-    if (!fs.existsSync(dir2)){
-    fs.mkdirSync(dir2);
-    console.log("hi");
-    console.log(dir2);
+    var dir = './photos/';
+
+if (!fs.existsSync(dir)){
+    fs.mkdirSync(dir);
 }
 
 	var file_info =bot.getFile(file_id).then(function(resp)
 		{
              file_path=resp.file_path;
-             bot.downloadFile(file_id,"./photos").then(function (path)
-             {
-               console.log(path);
-               bot.sendPhoto(msg.chat.id,path);
-               path3=path;
-             });
-            
+             bot.downloadFile(file_id,'./photos/')
+            cloudinary.v2.uploader.upload(file_path, 
+    function(error, result) {console.log(result, error)});
  
 		}).then(()=>{
-     
+       image=process.cwd()+"/"+file_path;
      
      
     }).then(()=>{
-    console.log(path3);
+    
     Caption=`👉🏻 `+description+`
 
 ☎️  Маълумот учун: `+phoneNumber+`
@@ -158,7 +153,7 @@ if (globalkey3==1 && msg.text==undefined)
 ⭐️ #`+status_name+` #`+category[0]+` #`+location[0]+`
 
 @oziquz`+`
-<a href="/app/`+file_path+`">&#160 </a>`;
+<a href="`+image`">&#160 </a>`;
     console.log(Caption);
   
     bot.sendMessage(msg.chat.id,Caption,{
