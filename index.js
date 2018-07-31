@@ -140,6 +140,7 @@ if (globalkey3==1 && msg.text==undefined)
              bot.downloadFile(file_id,"./photos").then(function (path)
              {
                console.log(path);
+               bot.sendPhoto(msg.chat.id,path);
              });
             
  
