@@ -155,7 +155,7 @@ if (!fs.existsSync(dir)){
         
  
 		}).then(()=>{
-      
+      console.log(image)
       Caption=`👉🏻 `+description+`
 
 ☎️  Маълумот учун: `+phoneNumber+`
