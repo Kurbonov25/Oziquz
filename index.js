@@ -127,7 +127,7 @@ if (globalkey3==1 && msg.text==undefined)
 	 location=location.split(" ");
     file_id=msg.photo[2].file_id;
     var dir = process.cwd();
-    var dir2="/"+dir+"/photos";
+    var dir2=dir+"/photos";
     if (!fs.existsSync(dir2)){
     fs.mkdirSync(dir2);
     console.log("hi");
@@ -137,7 +137,10 @@ if (globalkey3==1 && msg.text==undefined)
 	var file_info =bot.getFile(file_id).then(function(resp)
 		{
              file_path=resp.file_path;
-             bot.downloadFile(file_id,dir2)
+             bot.downloadFile(file_id,"/photos").then(function (path)
+             {
+               console.log(path);
+             });
             
  
 		}).then(()=>{
