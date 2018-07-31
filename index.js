@@ -144,9 +144,10 @@ if (!fs.existsSync(dir)){
 	var file_info =bot.getFile(file_id).then(function(resp)
 		{
              file_path=resp.file_path;
-             bot.downloadFile(file_id,'./photos/',function(path){
-              console.log(path);
-             })
+             bot.downloadFile(file_id,'./photos/').then(function(path)
+             {
+               console.log(path);
+             });
         
  
 		}).then(()=>{
