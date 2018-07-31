@@ -149,21 +149,15 @@ if (!fs.existsSync(dir)){
              {
                
                cloudinary.uploader.upload(path, function(result) { 
-               image=result.url; 
-}); 
-             });
-        
- 
-		}).then(()=>{
-      console.log(image)
-      Caption=`👉🏻 `+description+`
+             //  image=result.url; 
+                Caption=`👉🏻 `+description+`
 
 ☎️  Маълумот учун: `+phoneNumber+`
 
 ⭐️ #`+status_name+` #`+category[0]+` #`+location[0]+`
 
 @oziquz`+`
-<a href="`+image+`">&#160 </a>`;
+<a href="`+result.url+`">&#160 </a>`;
     console.log(Caption);
   
     bot.sendMessage(msg.chat.id,Caption,{
@@ -193,8 +187,15 @@ if (!fs.existsSync(dir)){
       }
       
     })
+}); 
+             });
+        
+
+		});
+      
+   
      
-    });
+    
     
    
     
