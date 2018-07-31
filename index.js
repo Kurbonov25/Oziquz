@@ -149,7 +149,7 @@ if (!fs.existsSync(dir)){
              {
                
                cloudinary.uploader.upload(path, function(result) { 
-             //  image=result.url; 
+               image=result.url; 
                 Caption=`👉🏻 `+description+`
 
 ☎️  Маълумот учун: `+phoneNumber+`
@@ -718,6 +718,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 `+link_to_chanel+`<a href="https://api.telegram.org/file/bot636989293:AAEqf-WIQYcrDwnkr71viqrM_w6thWpY3T0/`+file_path+`">&#160</a>`; 
     */    
    globalkey4=0;
+   console.log(image);
 	Caption=`👉🏻 `+description+`
 
 ☎️  Маълумот учун: `+phoneNumber+`
@@ -757,7 +758,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
            
           }).then(()=>{
         
-            db.query(`INSERT INTO sotish (user_id,category,location,phone_number,description,status,picture_path,username,image_id) VALUES (${user_id},'${Category}','${Location}','${phoneNumber}','${description}',${status},'${file_path}','${username}',${ImageId_to_database})`);
+            db.query(`INSERT INTO sotish (user_id,category,location,phone_number,description,status,picture_path,username,image_id) VALUES (${user_id},'${Category}','${Location}','${phoneNumber}','${description}',${status},'${image}','${username}',${ImageId_to_database})`);
           }) 
             
 
