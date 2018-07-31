@@ -130,6 +130,7 @@ if (globalkey3==1 && msg.text==undefined)
     var dir2=dir+"/photos";
     if (!fs.existsSync(dir2)){
     fs.mkdirSync(dir2);
+    console.log("hi");
 }
 
 	var file_info =bot.getFile(file_id).then(function(resp)
