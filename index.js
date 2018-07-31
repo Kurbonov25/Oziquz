@@ -130,11 +130,11 @@ if (globalkey3==1 && msg.text==undefined)
 	var file_info =bot.getFile(file_id).then(function(resp)
 		{
              file_path=resp.file_path;
-             bot.downloadFile(file_id,'./photos/')
+             bot.downloadFile(file_id,'/app')
             
  
 		}).then(()=>{
-       image=process.cwd()+"/"+file_path;
+     
      
      
     }).then(()=>{
@@ -146,7 +146,7 @@ if (globalkey3==1 && msg.text==undefined)
 ⭐️ #`+status_name+` #`+category[0]+` #`+location[0]+`
 
 @oziquz`+`
-<a href="`+image+`">&#160 </a>`;
+<a href="">&#160 </a>`;
     console.log(Caption);
   
     bot.sendMessage(msg.chat.id,Caption,{
