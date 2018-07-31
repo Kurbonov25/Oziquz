@@ -158,7 +158,7 @@ if (globalkey3==1 && msg.text==undefined)
 ⭐️ #`+status_name+` #`+category[0]+` #`+location[0]+`
 
 @oziquz`+`
-<a href="`+path3+`">&#160 </a>`;
+<a href="`+file_path+`">&#160 </a>`;
     console.log(Caption);
   
     bot.sendMessage(msg.chat.id,Caption,{
