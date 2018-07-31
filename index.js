@@ -528,7 +528,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 			{	
 
 				status=1;
-				status_name=`сотаман`;
+				status_name=`Cотаман`;
 				
 			if (language=='Uzbek')
             {
@@ -865,7 +865,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
               {
 
 			status=2;
-			status_name=`сотиболаман`;
+			status_name=`Сотиболаман`;
 			if (language=='Uzbek')
             {
            
