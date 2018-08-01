@@ -1127,6 +1127,7 @@ bot.onText(/\/start/,msg=>{
  username=msg.from.username;
  path_to_broadcast=0;
  status=0;
+ globalkey2=0;
  const Html=
  `🇺🇿 <b>Тилни Танланг 
 </b>🇷🇺 <b>Выберите язык</b>`;
