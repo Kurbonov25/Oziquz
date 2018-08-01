@@ -4,7 +4,7 @@ var cloudinary = require('cloudinary')
 
 const CLOUDINARY_URL=' https://api.cloudinary.com/v1_1/digitalm-uz/image/upload';
 const CLOUDINARY_UPLOAD_PRESET='f9vqhfrg';
-const TOKEN = process.env.TELEGRAM_TOKEN || '636989293:AAEqf-WIQYcrDwnkr71viqrM_w6thWpY3T0';
+const TOKEN = process.env.TELEGRAM_TOKEN || '615615456:AAEfrAFvuFn0x4FMJemlbhwqPbdciUqFvpo';
 
 const options={
    webHook: {
@@ -38,8 +38,8 @@ var limit=3;
 var username;
 var Category;
 var Location;
-var channel_id='-1001311400569';
-var Originalchannel_id='@optimus1234q';
+var channel_id='-1001231331656';
+var Originalchannel_id='@oziquz';
 var ImageId_to_database;
 var path_to_broadcast;
 var path_to_broadcast_Image;
@@ -217,7 +217,7 @@ if (globalkey2==1 && msg.text!='🏪 Бошига қайтиш' && msg.text!='�
   for (var count=0;description.length>count;count++)
   {
   
-    if (description[count]==';'|| description[count]==`"` || description[count]==`'` || description[count]==`/` ||description[count]==`%` ||description.length>120)
+    if (description[count]==';'|| description[count]==`"` || description[count]==`'` || description[count]==`/` ||description[count]==`%`)
     {
       check=1;
 
@@ -227,14 +227,14 @@ if (globalkey2==1 && msg.text!='🏪 Бошига қайтиш' && msg.text!='�
   {
     if (language=='Uzbek')
     {
-       var attention=`<b>Сиз киритган еълон матни бизнинг стандартга тўгри келмади ❌ Илтимос еълон матнида (; " ' / %) белгилардан фойдаланманг 🙅 ёки матнидаги ҳарфлар сони 110 та дан ошмасин</b>`;
+       var attention=`<b>Сиз киритган еълон матни бизнинг стандартга тўгри келмади ❌ Илтимос еълон матнида (; " ' / %) белгилардан фойдаланманг 🙅</b>`;
        bot.sendMessage(msg.chat.id,attention,{
         parse_mode:"HTML"
        })
     }
     else if (language=='Russian')
     {
- var attention=`<b>введенный вами текст не соответствует наш стандарт ❌ Пожалуйста, не используйте 🙅 ети символы (; " ' / %) или количество символов должно быть менее 110 </b>`;
+ var attention=`<b>введенный вами текст не соответствует наш стандарт ❌ Пожалуйста, не используйте 🙅 ети символы (; " ' / %) </b>`;
        bot.sendMessage(msg.chat.id,attention,{
         parse_mode:"HTML"
        })
