@@ -1233,7 +1233,7 @@ bot.sendMessage(Originalchannel_id,htm,{
 
 ☎️  Маълумот учун: `+phoneNumber+`
 
-⭐️ #`+status_name+` #`+hashCat+` #`+location[0]+`
+⭐️ #`+status_name+` #1111`+hashCat+` #`+location[0]+`
 
 📲 Каналга обуна учун 👉 @oziquz 👈 `+`
 <a href="`+link+`">&#160 </a>`;
