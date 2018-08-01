@@ -1342,12 +1342,12 @@ bot.sendMessage(Originalchannel_id,htm,{
   
   
 	
-db.query(`SELECT location FROM locations WHERE location='${data}'`,function(err,res)
+db.query(`SELECT * FROM locations WHERE location='${data}'`,function(err,res)
 { var counter=0;
  
   res.map((f,i)=>{
     counter++;
-    if (i==0){HashLoc=f.hash}
+    HashLoc=f.hash;
   })
   if (counter>=1)
   { Location=data;
