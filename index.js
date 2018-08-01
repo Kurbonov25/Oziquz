@@ -1123,6 +1123,8 @@ const text=`Вы собираетесь <b> Продавать  </b>или  <b>�
 bot.onText(/\/start/,msg=>{
 
 
+
+
  user_id=msg.from.id;
  username=msg.from.username;
  path_to_broadcast=0;
