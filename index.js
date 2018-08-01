@@ -49,6 +49,8 @@ var cap;
 var news;
 var key;
 var image;
+var HashCat;
+var HashLoc;
 
 //////////////////////////html texts////////////////////////////////////////////////
 
@@ -1175,8 +1177,6 @@ bot.on("callback_query",function(query){
     var category1;
     var location1;
     var link;
-    var hashCat;
-    var hashLoc;
  /* 
   var images={
     jpg: './photos/file_27.jpg'
@@ -1197,7 +1197,7 @@ bot.sendMessage(Originalchannel_id,htm,{
        category1=f.category;
        location1=f.location;
        link=f.picture_path;
- 
+      
        
      if (link==null)
      {
@@ -1220,28 +1220,18 @@ bot.sendMessage(Originalchannel_id,htm,{
     });
        console.log(image);
      Promise.all(promises).then(function(values){
-   
-   db.query(`SELECT * FROM categories WHERE category=${category1}`,function(err,res)
-    {
-      let promises=res.map((f,i)=>{
-              if (i==0){hashCat=f.hash};
-              console.log(hashCat)
-      });
-    });
-      Promise.all(promises).then(function(values){
-        Caption=`👉🏻 `+description+`
+
+    Caption=`👉🏻 `+description+`
 
 ☎️  Маълумот учун: `+phoneNumber+`
 
-⭐️ #`+status_name+` #1111`+hashCat+` #`+location[0]+`
+⭐️ #`+status_name+` #`+category[0]+` #`+location[0]+`
 
 📲 Каналга обуна учун 👉 @oziquz 👈 `+`
 <a href="`+link+`">&#160 </a>`;
    bot.sendMessage(Originalchannel_id,Caption,{
     parse_mode:"HTML"
    });
-      })
-    
 
      })
 
@@ -1261,16 +1251,18 @@ bot.sendMessage(Originalchannel_id,htm,{
   db.query(update);
   }
 
-
-  db.query(`SELECT category FROM categories WHERE category='${data}'`,function(err,res){
+ 
+  db.query(`SELECT * FROM categories WHERE category='${data}'`,function(err,res){
     
     var counter=0; 
     res.map((f,i)=>{
          counter++;
+         HashCat=f.hash;
     })
      if (counter>=1)
      {
        Category=data;
+       console.log(HashCat);
 
       category=data;
       var array1=[];
