@@ -135,8 +135,7 @@ if (globalkey3==1 && msg.text==undefined)
 	globalkey3=0;
 	globalkey4=1;
 
-	 category=category.split(" ");
-	 location=location.split(" ");
+	 
     file_id=msg.photo[2].file_id;
     var dir = './photos/';
 
@@ -803,8 +802,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 		{
 		
 		globalkey3=0;	
-         category=category.split(" ");
-         location=location.split(" ");
+         
          
 	  /*  var Caption=`⭐ #`+status_name+` | #`+category[0]+` | 🌎 #`+location[0]+`
 
@@ -1217,8 +1215,7 @@ bot.sendMessage(Originalchannel_id,htm,{
         status_name1="Сотиболамиз";
         
        }
-       category1=category1.split(" ");
-       location1=location1.split(" ");
+    
 
     });
        console.log(image);
