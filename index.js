@@ -156,7 +156,7 @@ if (!fs.existsSync(dir)){
 
 ☎️  Маълумот учун: `+phoneNumber+`
 
-⭐️ #`+status_name+` #`+HashCat+` #`+location[0]+`
+⭐️ #`+status_name+` #`+HashCat+` #`+HashLoc+`
 
 📲 Каналга обуна учун 👉 @oziquz 👈 `+`
 <a href="`+result.url+`">&#160 </a>`;
@@ -673,7 +673,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 
 ☎️  Маълумот учун: `+phoneNumber+`
 
-⭐️ #`+status_name+` #`+HashCat+` #`+location[0]+`
+⭐️ #`+status_name+` #`+HashCat+` #`+HashLoc+`
 
 📲 Каналга обуна учун 👉 @oziquz 👈`+
 `<a href="http://gkh-grodnoraion.by/wp-content/uploads/2018/03/%D0%BE%D0%B1%D1%8A%D1%8F%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-1.jpg">&#160</a>`;
@@ -705,7 +705,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
           }).then(()=>{
           
 
-            db.query(`INSERT INTO sotish (user_id,category,location,phone_number,description,status,username,image_id,hashcat) VALUES (${user_id},'${Category}','${Location}','${phoneNumber}','${description}',${status},'${username}',${ImageId_to_database},'${HashCat}')`);
+            db.query(`INSERT INTO sotish (user_id,category,location,phone_number,description,status,username,image_id,hashCat,hashLoc) VALUES (${user_id},'${Category}','${Location}','${phoneNumber}','${description}',${status},'${username}',${ImageId_to_database},'${HashCat},'${HashLoc}')`);
           }) 
       
       }
@@ -725,7 +725,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 
 ☎️  Маълумот учун: `+phoneNumber+`
 
-⭐️ #`+status_name+` #`+HashCat+` #`+location[0]+`
+⭐️ #`+status_name+` #`+HashCat+` #`+HashLoc+`
 
 📲 Каналга обуна учун 👉 @oziquz 👈 `+`
 <a href="`+image+`">&#160 </a>`;		
@@ -760,7 +760,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
            
           }).then(()=>{
         
-            db.query(`INSERT INTO sotish (user_id,category,location,phone_number,description,status,picture_path,username,image_id) VALUES (${user_id},'${Category}','${Location}','${phoneNumber}','${description}',${status},'${image}','${username}',${ImageId_to_database})`);
+            db.query(`INSERT INTO sotish (user_id,category,location,phone_number,description,status,picture_path,username,image_id,hashCat,hashLoc) VALUES (${user_id},'${Category}','${Location}','${phoneNumber}','${description}',${status},'${image}','${username}',${ImageId_to_database},'${HashCat}','${HashLoc}')`);
           }) 
             
 
@@ -1198,6 +1198,7 @@ bot.sendMessage(Originalchannel_id,htm,{
        location1=f.location;
        link=f.picture_path;
        hash1=f.hashCat;
+       hash2=f.hashLoc;
       
        
      if (link==null)
@@ -1226,7 +1227,7 @@ bot.sendMessage(Originalchannel_id,htm,{
 
 ☎️  Маълумот учун: `+phoneNumber+`
 
-⭐️ #`+status_name+` #`+hash1+` #`+location[0]+`
+⭐️ #`+status_name+` #`+hash1+` #`+hash2+`
 
 📲 Каналга обуна учун 👉 @oziquz 👈 `+`
 <a href="`+link+`">&#160 </a>`;
