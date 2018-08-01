@@ -815,7 +815,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 
 ☎️  Маълумот учун: `+phoneNumber+`
 
-⭐️ #`+status_name+` #`+category[0]+` #`+location[0]+`
+⭐️ #`+status_name+` #`+HashCat+` #`+location[0]+`
 
 📲 Каналга обуна учун 👉 @oziquz 👈 `+
 `<a href="http://gkh-grodnoraion.by/wp-content/uploads/2018/03/%D0%BE%D0%B1%D1%8A%D1%8F%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-1.jpg">&#160</a>`;
