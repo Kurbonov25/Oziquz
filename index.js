@@ -1198,7 +1198,7 @@ bot.sendMessage(Originalchannel_id,htm,{
        location1=f.location;
        link=f.picture_path;
        hash1=f.hashCat;
-       hash2=f.hashLoc;
+
       
        
      if (link==null)
@@ -1227,7 +1227,7 @@ bot.sendMessage(Originalchannel_id,htm,{
 
 ☎️  Маълумот учун: `+phoneNumber+`
 
-⭐️ #`+status_name+` #`+hash1+` #`+hash2+`
+⭐️ #`+status_name+` #`+hash1+`
 
 📲 Каналга обуна учун 👉 @oziquz 👈 `+`
 <a href="`+link+`">&#160 </a>`;
