@@ -44,7 +44,7 @@ var ImageId_to_database;
 var path_to_broadcast;
 var path_to_broadcast_Image;
 var adver;
-var Admin_id= 224666382;
+var Admin_id= 511599;
 var cap;
 var news;
 var key;
