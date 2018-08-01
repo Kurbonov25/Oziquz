@@ -1225,7 +1225,7 @@ bot.sendMessage(Originalchannel_id,htm,{
     {
       let promises=res.map((f,i)=>{
               if (i==0){hashCat=f.hash};
-              
+              console.log(hashCat)
       });
     });
       Promise.all(promises).then(function(values){
