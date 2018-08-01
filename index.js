@@ -705,7 +705,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
           }).then(()=>{
           
 
-            db.query(`INSERT INTO sotish (user_id,category,location,phone_number,description,status,username,image_id,hashCat,hashLoc) VALUES (${user_id},'${Category}','${Location}','${phoneNumber}','${description}',${status},'${username}',${ImageId_to_database},'${HashCat},'${HashLoc}')`);
+            db.query(`INSERT INTO sotish (user_id,category,location,phone_number,description,status,username,image_id,hashCat,hashLoc) VALUES (${user_id},'${Category}','${Location}','${phoneNumber}','${description}',${status},'${username}',${ImageId_to_database},'${HashCat}','${HashLoc}')`);
           }) 
       
       }
