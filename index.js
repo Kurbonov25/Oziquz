@@ -701,7 +701,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
              }
           }).then(function(resp)
           {
-           bot.forwardMessage(channel_id,forward_id);
+           bot.forwardMessage(channel_id,msg.chat.id,forward_id);
            ImageId_to_database=resp.message_id;
            
           }).then(()=>{
