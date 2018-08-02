@@ -4,7 +4,7 @@ var cloudinary = require('cloudinary')
 
 const CLOUDINARY_URL=' https://api.cloudinary.com/v1_1/digitalm-uz/image/upload';
 const CLOUDINARY_UPLOAD_PRESET='f9vqhfrg';
-const TOKEN = process.env.TELEGRAM_TOKEN || '615615456:AAEfrAFvuFn0x4FMJemlbhwqPbdciUqFvpo';
+const TOKEN = process.env.TELEGRAM_TOKEN || '636989293:AAEqf-WIQYcrDwnkr71viqrM_w6thWpY3T0';
 
 const options={
    webHook: {
@@ -38,7 +38,7 @@ var limit=3;
 var username;
 var Category;
 var Location;
-var channel_id='-1001231331656';
+var channel_id='-1001311400569';
 var Originalchannel_id='@oziquz';
 var ImageId_to_database;
 var path_to_broadcast;
@@ -693,6 +693,12 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
                           callback_data:'delete'
                         }
 
+                    ],
+                    [
+                           {
+                             text:'Contact with user',
+                             callback_data:'contact'
+                           }
                     ]
               ]
              }
