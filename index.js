@@ -697,7 +697,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
                     [
                            {
                              text:'Contact with user',
-                             url:"https://www.google.co.uz/"
+                             url:"tg://user?id=511599"
                              
                            }
                     ]
