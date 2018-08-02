@@ -518,13 +518,13 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 			
 		   
 		        	
-		  //      	db.query(`SELECT * FROM sotish WHERE user_id=${user_id} `,function(err,res){
+		        	db.query(`SELECT * FROM sotish WHERE user_id=${user_id} `,function(err,res){
 				    
-		//				let promises=res.map((f,i)=>{max_counter=i+1;});
-		//				Promise.all(promises).then(function(values)
-		//				{ 
+						let promises=res.map((f,i)=>{max_counter=i+1;});
+						Promise.all(promises).then(function(values)
+						{ 
 					
-                          if (/*max_counter<limit ||*/ res[0]==undefined || 1==1) /////////////Check
+                          if (max_counter<limit || res[0]==undefined || 1==1) /////////////Check
 			
 			{	
 
@@ -622,7 +622,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
          
           }  
 			
-	/*		else if (max_counter>2)
+			else if (max_counter>2)
 				{
 					if (language=='Uzbek')
 					{
@@ -642,9 +642,9 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 						parse_mode:"HTML"
 					});
 				}
-					*/	
-				//	});
-       //   });
+						
+					});
+          });
 
 
 				
