@@ -697,7 +697,8 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
                     [
                            {
                              text:'Contact with user',
-                             callback_data:'contact'
+                             url:"https://web.telegram.org/#/im?p=@"+username;  
+                             
                            }
                     ]
               ]
