@@ -658,7 +658,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 		case kb.Final.approve:
 		case kb2.Final.approve:
 		{ 
-    
+     console.log(msg);
      if (globalkey4==0)
 			{
        
@@ -693,14 +693,8 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
                           callback_data:'delete'
                         }
 
-                    ],
-                    [
-                           {
-                             text:'Contact with user',
-                             url:"tg://user?id=511599"
-                             
-                           }
                     ]
+                   
               ]
              }
           }).then(function(resp)
