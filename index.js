@@ -658,7 +658,8 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 		case kb.Final.approve:
 		case kb2.Final.approve:
 		{ 
-     console.log(msg);
+     
+     var forward_id(msg.message_id);
      if (globalkey4==0)
 			{
        
