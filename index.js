@@ -4,7 +4,7 @@ var cloudinary = require('cloudinary')
 
 const CLOUDINARY_URL=' https://api.cloudinary.com/v1_1/digitalm-uz/image/upload';
 const CLOUDINARY_UPLOAD_PRESET='f9vqhfrg';
-const TOKEN = process.env.TELEGRAM_TOKEN || '636989293:AAEqf-WIQYcrDwnkr71viqrM_w6thWpY3T0';
+const TOKEN = process.env.TELEGRAM_TOKEN || '615615456:AAEfrAFvuFn0x4FMJemlbhwqPbdciUqFvpo';
 
 const options={
    webHook: {
@@ -38,7 +38,7 @@ var limit=3;
 var username;
 var Category;
 var Location;
-var channel_id='-1001311400569';
+var channel_id='-1001231331656';
 var Originalchannel_id='@oziquz';
 var ImageId_to_database;
 var path_to_broadcast;
@@ -159,7 +159,7 @@ if (!fs.existsSync(dir)){
 
 📲 Каналга обуна учун 👉 @oziquz 👈 `+`
 <a href="`+result.url+`">&#160 </a>`;
-    console.log(Caption);
+
   
     bot.sendMessage(msg.chat.id,Caption,{
      parse_mode:"HTML"
@@ -660,7 +660,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 		{ 
      
      var forward_id=msg.message_id;
-     console.log(forward_id);
+   
      if (globalkey4==0)
 			{
        
@@ -722,7 +722,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 `+link_to_chanel+`<a href="https://api.telegram.org/file/bot636989293:AAEqf-WIQYcrDwnkr71viqrM_w6thWpY3T0/`+file_path+`">&#160</a>`; 
     */    
    globalkey4=0;
-   console.log(image);
+ 
 	Caption=`👉🏻 `+description+`
 
 ☎️  Маълумот учун: `+phoneNumber+`
@@ -1227,7 +1227,7 @@ bot.sendMessage(Originalchannel_id,htm,{
     
 
     });
-       console.log(image);
+    
      Promise.all(promises).then(function(values){
 
     Caption=`👉🏻 `+description+`
@@ -1271,7 +1271,7 @@ bot.sendMessage(Originalchannel_id,htm,{
      if (counter>=1)
      {
        Category=data;
-       console.log(HashCat);
+  
 
       category=data;
       var array1=[];
