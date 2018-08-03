@@ -815,7 +815,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
                     [
                         {
                            text:text7,
-                          url:"tg://#/im?p=@joylash"
+                          url:"https://t.me/audioengli"
                         }
                     ],
                     
