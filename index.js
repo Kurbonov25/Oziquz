@@ -225,7 +225,7 @@ if (globalkey2==1 && msg.text!='🏪 Бошига қайтиш' && msg.text!='�
   for (var count=0;description.length>count;count++)
   {
   
-    if (description[count]==';'|| description[count]==`"` || description[count]==`'` || description[count]==`/` ||description[count]==`%` || description[count]=='.')
+    if (description[count]==';'|| description[count]==`"` || description[count]==`'` || description[count]==`/` ||description[count]==`%`)
     {
       check=1;
 
@@ -235,7 +235,7 @@ if (globalkey2==1 && msg.text!='🏪 Бошига қайтиш' && msg.text!='�
   {
     if (language=='Uzbek')
     {
-       var attention=`<b>Сиз киритган еълон матни бизнинг стандартга тўгри келмади ❌ Илтимос еълон матнида (; " ' / % .) белгилардан фойдаланманг 🙅</b>`;
+       var attention=`<b>Сиз киритган еълон матни бизнинг стандартга тўгри келмади ❌ Илтимос еълон матнида (; " ' / % ) белгилардан фойдаланманг 🙅</b>`;
        bot.sendMessage(msg.chat.id,attention,{
         parse_mode:"HTML"
        })
