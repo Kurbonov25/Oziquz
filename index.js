@@ -815,7 +815,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
                     [
                         {
                            text:text7,
-                          
+                          url:"https://core.telegram.org/bots/api#inlinekeyboardmarkup"
                         }
                     ],
                     
