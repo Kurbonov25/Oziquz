@@ -14,6 +14,7 @@ module.exports={
 	{
          sell:'💰 Продать',
          buy:'💵 Купить',
+         help:'❓ Помогите',
          back:'⬅️ Назад'
 	},
 	Phone:

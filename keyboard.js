@@ -10,7 +10,7 @@ module.exports =
           ],
      choice:[
                [kb.Choice.sell,kb.Choice.buy],
-               [kb.Choice.back]
+               [kb.Choice.help,kb.Choice.back]
 
             ] ,
       backfromCat:[
@@ -32,7 +32,7 @@ module.exports =
  ////////////////////////////////////In Rus////////////////////////////////////////
       choice2:[
                          [kb2.Choice.sell,kb2.Choice.buy],
-                         [kb2.Choice.back]
+                         [kb2.Choice.help,kb2.Choice.back]
 
               ] ,
       backfromCat2:     

@@ -21,6 +21,7 @@ module.exports={
 	{
          sell:'💰 Сотмоқчиман',
          buy:'💵 Сотиб oлмоқчиман',
+         help:'❓ Yordam',
          back:'⬅️ Орқага'
 	},
 	Phone:
