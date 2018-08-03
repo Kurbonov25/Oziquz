@@ -537,8 +537,10 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 			
 			{	
 
-				status=1;
-				status_name=`Сотамиз`;
+				
+        if (language=="Uzbek"){status=1;status_name=`Сотамиз`;}
+        else if (language=="Russian"){status=2;status_name=`Продаем `}
+				
 				
 			if (language=='Uzbek')
             {
@@ -900,8 +902,9 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
                           if (max_counter<limit || res[0]==undefined || 1==1)
               {
 
-			status=2;
-			status_name=`СотибОламиз`;
+			
+      if (language=="Uzbek"){status=3;status_name=`СотибОламиз`;}
+			else if (language=="Russian"){status=4;status_name=`Покупаем`;}
 			if (language=='Uzbek')
             {
            
@@ -1249,13 +1252,19 @@ bot.sendMessage(Originalchannel_id,htm,{
        if (f.status==1)
        {
         status_name1='Сотамиз';
-
         
        }
        else if (f.status==2)
        {
+        status_name="Продаем";
+       }
+       else if (f.status==3)
+       {
         status_name1="Сотиболамиз";
-        
+       }
+        else if (f.status==4)
+       {
+        status_name1="Покупаем";
        }
     
 
