@@ -322,7 +322,7 @@ Masalan:
 	}
 
 	bot.sendMessage(msg.chat.id,sent).then(()=>{
-		if (status==1)
+		if (status==1 || status==2)
 		{
 			bot.sendMessage(msg.chat.id,html,{
 			parse_mode:"HTML",
@@ -335,7 +335,7 @@ Masalan:
           globalkey2=1;
 		})
 	   }
-	   else if(status==2)
+	   else if(status==3 || status=4)
 	   {
            if (language=='Uzbek')
 	   	{
