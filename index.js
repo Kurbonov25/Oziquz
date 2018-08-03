@@ -87,7 +87,15 @@ bot.setWebHook(`${url}/bot${TOKEN}`);
 /////////////////////////////bot.on//////////////////////////////////////////////////
 
 bot.on('message',msg=>{
-
+if (msg.text=="/start")
+{
+      globalkey=0;
+      globalkey2=0;
+      globalkey3=0;
+      status=0;
+      path_to_broadcast=0;
+      user_id=msg.from.id;
+}
 if (path_to_broadcast_Image==1 && msg.text==undefined)
 {  
    cap=`<b>📢 News || Новости || Yangilik </b>
