@@ -1241,7 +1241,7 @@ bot.sendMessage(Originalchannel_id,htm,{
        link=f.picture_path;
        hash1=f.hashCat;
        hash2=f.hashLoc;
-       var text7=`<b>Sizning e’loningiz, @oziquz kanalida chop etildi.
+       var text7=`<b>Sizning e\’loningiz, @oziquz kanalida chop etildi.
 Ваше объявление было опубликовано на канале @oziquz</b>.                   `
        bot.sendMessage(f.user_id,text7,{
         parse_mode:"HTML"
