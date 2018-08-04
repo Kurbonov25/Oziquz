@@ -1241,8 +1241,8 @@ bot.sendMessage(Originalchannel_id,htm,{
        link=f.picture_path;
        hash1=f.hashCat;
        hash2=f.hashLoc;
-       var text7=`<b>Сизнинг эълонингиз</b> @озиқуз <b>каналида чоп этилди.</b>
-<b>Ваше объявление было опубликовано на канале</b>@oziquz.                   `
+       var text7=`<b>Сизнинг эълонингиз</b> 👉🏻  @oziquz <b>каналида чоп этилди.</b>
+<b>Ваше объявление было опубликовано на канале</b> 👉🏻  @oziquz.                   `
        bot.sendMessage(f.user_id,text7,{
         parse_mode:"HTML"
        })
