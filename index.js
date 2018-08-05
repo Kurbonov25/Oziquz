@@ -527,7 +527,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 			
 		   
 		        	
-		        	db.query(`SELECT * FROM sotish WHERE user_id=${user_id} `,function(err,res){
+		       /* 	db.query(`SELECT * FROM sotish WHERE user_id=${user_id} `,function(err,res){
 				    
 						let promises=res.map((f,i)=>{max_counter=i+1;});
 						Promise.all(promises).then(function(values)
@@ -535,7 +535,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 					
                           if (max_counter<limit || res[0]==undefined || 1==1) /////////////Check
 			
-			{	
+			{	*/
 
 				
         if (language=="Uzbek"){status=1;status_name=`Сотамиз`;}
@@ -631,9 +631,9 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
           
          });
          
-          }  
+         // }  
 			
-			else if (max_counter>2)
+	/*		else if (max_counter>2)
 				{
 					if (language=='Uzbek')
 					{
@@ -652,10 +652,10 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 					bot.sendMessage(msg.chat.id,text,{
 						parse_mode:"HTML"
 					});
-				}
+				}*/
 						
-					});
-          });
+				//	});
+        //  });
 
 
 				
@@ -892,14 +892,14 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 			
 				
 			
-      	db.query(`SELECT * FROM sotish WHERE user_id=${user_id} `,function(err,res){
+      /*	db.query(`SELECT * FROM sotish WHERE user_id=${user_id} `,function(err,res){
 				    
 					let promises=res.map((f,i)=>{max_counter=i+1;});
 						Promise.all(promises).then(function(values)
 						{ 
 							
                           if (max_counter<limit || res[0]==undefined || 1==1)
-              {
+              {*/
 
 			
       if (language=="Uzbek"){status=3;status_name=`СотибОламиз`;}
@@ -987,7 +987,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 
 
 
-}
+//}
 
 
 
@@ -998,7 +998,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
           
 		
 	
- else
+ /*else
 				{
 					if (language=='Uzbek')
 					{
@@ -1026,7 +1026,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 
 				});
 			 	
-	
+	*/
 		
            
 			break;
