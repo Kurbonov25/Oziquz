@@ -63,7 +63,8 @@ var db =mysql.createConnection({
 	host:"g9fej9rujq0yt0cd.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
 	user:"mxz90fyzzvjtjjvq",
 	password:"f5ofc6478zwp7vy5",
-	database:"wv77yz38ipm4joli"
+	database:"wv77yz38ipm4joli",
+  charset : 'utf8mb4'
 })
 db.connect(function(err,res){
    if(!err)
