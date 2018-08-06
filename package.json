@@ -16,8 +16,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-   "start": "forever start --minUptime 1000 --spinSleepTime 1000 index.js",
-    "stop":  "forever stop index.js"
+   "start": "forever start index.js"
   },
   "author": "",
   "license": "ISC"
