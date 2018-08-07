@@ -369,6 +369,7 @@ Masalan:
               one_time_keyboard:true
       }
     }).then(()=>{
+      console.log('123');
           db.query(`UPDATE temp SET flag=2 WHERE user_id=${msg.from.id}`)
     })
      }
@@ -413,6 +414,7 @@ Masalan:
               one_time_keyboard:true
       }
     }).then(()=>{
+      console.log('123');
         db.query(`UPDATE temp SET flag=2 WHERE user_id=${msg.from.id}`)
     })
   })
