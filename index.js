@@ -378,8 +378,7 @@ var dir = './photos/';
 if (!fs.existsSync(dir)){
   fs.mkdirSync(dir);
 }
-  console.log("1");
-  console.log(file_id);
+
   var file_info =bot.getFile(file_id).then(function(resp)
     {
              file_path=resp.file_path;
@@ -387,7 +386,7 @@ if (!fs.existsSync(dir)){
              {
                
                cloudinary.uploader.upload(path, function(result) { 
-               image=result.url; 
+                image=result.url; 
                 var Caption=`👉🏻 `+description+`
 
 ☎️  Маълумот учун: `+phoneNumber+`
@@ -395,8 +394,8 @@ if (!fs.existsSync(dir)){
 ⭐️ #`+status_name+` #`+HashCat+` #`+HashLoc+`
 
 📲 Каналга обуна учун 👉 @oziquz 👈 `+`
-<a href="`+result.url+`">&#160 </a>`;
-  console.log(Caption);
+<a href="${result.url}">&#160 </a>`;
+  
   
     bot.sendMessage(msg.chat.id,Caption,{
      parse_mode:"HTML"
@@ -853,15 +852,17 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 		case kb2.Desc.continue:
 		{
 		
-		globalkey3=0;	
-         
-         
-	  /*  var Caption=`⭐ #`+status_name+` | #`+category[0]+` | 🌎 #`+location[0]+`
+		db.query(`SELECT * FROM temp WHERE user_id=${msg.chat.id}`,function(err,res)
+{
+  var flag=res[0].flag;
+  var language=res[0].language;
+  var status=res[0].status;
+  var location=res[0].location;
+  var phoneNumber=res[0].phone_number;
+  var description=res[0].description;
+  var status_name=res[0].status_name;
 
-📜 <b>`+description+`</b>
-
-`+link_to_chanel+`<a href="http://idum.uz/wp-content/uploads/2016/08/diqqat_vnimaniye.jpg">&#160</a>`; */
-      var Caption=`👉🏻 `+description+`
+  var Caption=`👉🏻 `+description+`
 
 ☎️  Маълумот учун: `+phoneNumber+`
 
@@ -873,30 +874,36 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
     bot.sendMessage(msg.chat.id,Caption,{
      parse_mode:"HTML"
     }).then(()=>{
-    	if (language=='Uzbek')
-    	{
+      if (language=='Uzbek')
+      {
           var text='❗ Агар еълон кўриниши ва Барча маълумотлар тўғри бўлса еълон бериш клавишини босинг акс ҳолда бошига қайтинг.'; 
-    	  bot.sendMessage(msg.chat.id,text,{
-    		reply_markup:{
-    			keyboard:keyboard.final,
-    			resize_keyboard:true,
-  		        one_time_keyboard:true
-    		}
-    	})
-    	}
-    	else if(language=='Russian')
-    	{
+        bot.sendMessage(msg.chat.id,text,{
+        reply_markup:{
+          keyboard:keyboard.final,
+          resize_keyboard:true,
+              one_time_keyboard:true
+        }
+      })
+      }
+      else if(language=='Russian')
+      {
            var text='❗ Если проверили ваще объявление и вся информация верна, нажмите на кнопку \"объявление\", в противном случае вернуться в Главное меню и заполните все снова';
-    	   bot.sendMessage(msg.chat.id,text,{
-    		reply_markup:{
-    			keyboard:keyboard.final2,
-    			resize_keyboard:true,
-  		        one_time_keyboard:true
-    		}
-    	})
-    	}
-    	
+         bot.sendMessage(msg.chat.id,text,{
+        reply_markup:{
+          keyboard:keyboard.final2,
+          resize_keyboard:true,
+              one_time_keyboard:true
+        }
+      })
+      }
+      
     })
+
+})
+         
+         
+	  
+    
 
 
 			break;
