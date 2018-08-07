@@ -116,26 +116,7 @@ if (path_to_broadcast_Image==1 && msg.text==undefined)
   })
   path_to_broadcast_Image=0;
 }
-if (user_id==undefined && msg.text!='🏪 Назад на главную' && msg.text!='🏪 Бошига қайтиш' && msg.text!='/start' && path_to_broadcast==0)
-{
-     
-    
-      globalkey3=0;
-      status=0;
-      user_id=msg.from.id;
-        const Html=
- `🇺🇿 <b>Тилни Танланг</b>  🇷🇺 <b>Выберите язык</b>`;
 
-  bot.sendMessage(msg.chat.id,Html,{
-    parse_mode:"HTML",
-    reply_markup:{
-      keyboard:keyboard.home,
-      resize_keyboard:true,
-      one_time_keyboard:true
-    }
-  })  
-   
-        }
 
 if (globalkey3==1 && msg.text==undefined)
 {
