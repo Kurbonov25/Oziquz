@@ -31,7 +31,7 @@ var user_id;
 var description;
 var status;
 var status_name;
-var language;
+//var language;
 var globalkey=0;
 var globalkey2=0;
 var globalkey3=0;
@@ -510,7 +510,9 @@ else
         }
 		case kb.Home.Uzbek:
 		{
-			language='Uzbek';
+			var language='Uzbek';
+      db.query(`UPDATE temp SET language='Uzbek'`)
+
 const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Сотиб Олмоқчимисиз ?</b>  `	
          bot.sendMessage(msg.chat.id,text,{
          	parse_mode:"HTML",
