@@ -948,19 +948,22 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 			
 				
 			
-      /*	db.query(`SELECT * FROM sotish WHERE user_id=${user_id} `,function(err,res){
-				    
-					let promises=res.map((f,i)=>{max_counter=i+1;});
-						Promise.all(promises).then(function(values)
-						{ 
-							
+     
+
+			db.query(`SELECT language FROM temp WHERE user_id=${msg.from.id}`,function(err,res)
+      { 
+           var language=res[0].language;
+         /* db.query(`SELECT * FROM sotish WHERE user_id=${user_id} `,function(err,res){
+            
+          let promises=res.map((f,i)=>{max_counter=i+1;});
+            Promise.all(promises).then(function(values)
+            { 
+              
                           if (max_counter<limit || res[0]==undefined || 1==1)
               {*/
-
-			
-      if (language=="Uzbek"){status=3;status_name=`СотибОламиз`;}
-			else if (language=="Russian"){status=4;status_name=`Покупаем`;}
-			if (language=='Uzbek')
+        if (language=="Uzbek"){status=3;status_name=`СотибОламиз`;}
+      else if (language=="Russian"){status=4;status_name=`Покупаем`;}
+      if (language=='Uzbek')
             {
            
             var text=`Қайси турдаги Маҳсулот сотиб олмоқчисиз:`;
@@ -1052,37 +1055,39 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 
 
           
-		
-	
+    
+  
  /*else
-				{
-					if (language=='Uzbek')
-					{
+        {
+          if (language=='Uzbek')
+          {
                      var text=`<b>Сизда еълон бериш лимити тугади!
 Агар сиз кўпроқ еълон бермоқчи бўлсангиз пуллик хизматдан фойдаланинг.
 
 💰 1 та еълон бериш учун PayMe ёки CLICK орқали қуйидаги карта 8600 3029 2503 5154 га 30.000 (ўттиз минг сўм) ўтказиб бизга ёзинг. Тўлиқ малумот учун бизга @yozing.</b>`;
-					}
-					else if(language=='Russian')
-					{
+          }
+          else if(language=='Russian')
+          {
                      var text=`<b>У Вас закончился лимит на публикацию объявления!
 Если хотите разместить больше объявления, воспользуйтесь платными услугами.
 
 💰 Что бы приобрести пакет из 1 объявление, отправьте через Payme или CLICK 30 000 сум на карту 8600 3029 2503 5154
 
 Для подробной информации свяжитесь с нами @yozing</b>`;
-					}	
-					bot.sendMessage(msg.chat.id,text,{
-						parse_mode:"HTML"
-					});
-				}
+          } 
+          bot.sendMessage(msg.chat.id,text,{
+            parse_mode:"HTML"
+          });
+        }
                         
-                          	});
-				
+                            });
+        
 
-				});
-			 	
-	*/
+        });
+        
+  */
+      })
+      
 		
            
 			break;
