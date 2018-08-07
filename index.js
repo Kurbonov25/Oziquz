@@ -1164,8 +1164,30 @@ bot.onText(/\/start/,msg=>{
 
 
 
-
+var count=0;
  user_id=msg.from.id;
+ db.query(`SELECT user_id FROM temp WHERE user_id=${user_id}`,function(err,res)
+ {
+    let promises=res.map((f,i)=>{
+      count++;
+    })
+  Promise.all(promises).then(function(values){
+    if (count>0)
+    {
+      db.query(`DELETE FROM admin WHERE user_id=${user_id}`)
+      db.query(`INSERT INTO temp (user_id) VALUES (${user_id})`) 
+    }
+    else if(count==0)
+    {
+      db.query(`INSERT INTO temp (user_id) VALUES (${user_id})`)
+
+    }
+  })
+ })
+ 
+
+
+
  username=msg.from.username;
  path_to_broadcast=0;
  status=0;
