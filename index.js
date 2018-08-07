@@ -1451,7 +1451,8 @@ db.query(`SELECT * FROM locations WHERE location='${data}'`,function(err,res)
     db.query(`UPDATE temp SET location='${location}' WHERE user_id=${user_id}`);
     chatID=query.message.chat.id;
    db.query(`SELECT language FROM temp WHERE user_id=${user_id}`,function(err,res)
-        { 
+        {    
+             var language=res[0].language;
               if (language =='Uzbek')
             {
               var text=`Сиз <b>${data}</b>  Шаҳрини танладингиз`;
