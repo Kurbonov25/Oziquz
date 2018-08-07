@@ -34,10 +34,10 @@ var Admin_id= 511599;
 //var language;
 //var globalkey=0;
 //var globalkey2=0;
-var globalkey3=0;
+//var globalkey3=0;
 var globalkey4=0;
 var max_counter=1;
-var file_id;
+//var file_id;
 var file_path;
 var username;
 //var Category;
@@ -92,8 +92,8 @@ bot.on('message',msg=>{
 if (msg.text=="/start")
 {
      db.query(`UPDATE temp SET flag=0 WHERE user_id=${msg.from.id}`)
-      globalkey3=0;
-      status=0;
+
+
       path_to_broadcast=0;
       user_id=msg.from.id;
 }
@@ -118,84 +118,7 @@ if (path_to_broadcast_Image==1 && msg.text==undefined)
 }
 
 
-if (globalkey3==1 && msg.text==undefined)
-{
-	
-	globalkey3=0;
-	globalkey4=1;
 
-	 
-    file_id=msg.photo[2].file_id;
-    var dir = './photos/';
-
-if (!fs.existsSync(dir)){
-    fs.mkdirSync(dir);
-}
-
-	var file_info =bot.getFile(file_id).then(function(resp)
-		{
-             file_path=resp.file_path;
-             bot.downloadFile(file_id,'./photos/').then(function(path)
-             {
-               
-               cloudinary.uploader.upload(path, function(result) { 
-               image=result.url; 
-                Caption=`👉🏻 `+description+`
-
-☎️  Маълумот учун: `+phoneNumber+`
-
-⭐️ #`+status_name+` #`+HashCat+` #`+HashLoc+`
-
-📲 Каналга обуна учун 👉 @oziquz 👈 `+`
-<a href="`+result.url+`">&#160 </a>`;
-
-  
-    bot.sendMessage(msg.chat.id,Caption,{
-     parse_mode:"HTML"
-    }).then(()=>{
-      if (language=='Uzbek')
-      {
-          var text='❗ Агар еълон кўриниши ва Барча малумотлар тўгри бўлса еълон бериш клавишини босинг акс ҳолда бошига қайтинг'; 
-        bot.sendMessage(msg.chat.id,text,{
-        reply_markup:{
-          keyboard:keyboard.final,
-          resize_keyboard:true,
-              one_time_keyboard:true
-        }
-      })
-      }
-      else if(language=='Russian')
-      {
-           var text='❗ Если просматривать объявления и вся информация верны , нажмите на кнопку \"объявление\", в противном случае вернуться в Главное меню и заполнить все снова';
-         bot.sendMessage(msg.chat.id,text,{
-        reply_markup:{
-          keyboard:keyboard.final2,
-          resize_keyboard:true,
-              one_time_keyboard:true
-        }
-      })
-      }
-      
-    })
-}); 
-             });
-        
-
-		});
-      
-   
-     
-    
-    
-   
-    
-	
-	
-  
-  
-
-
-}
 
 /////////////////////////////////////flag////////////////////////////////////////////////////
 db.query(`SELECT * FROM temp WHERE user_id=${msg.chat.id}`,function(err,res)
@@ -203,6 +126,11 @@ db.query(`SELECT * FROM temp WHERE user_id=${msg.chat.id}`,function(err,res)
   var flag=res[0].flag;
   var language=res[0].language;
   var status=res[0].status;
+  var location=res[0].location;
+  var phoneNumber=res[0].phone_number;
+  var description=res[0].description;
+  var status_name=res[0].status_name;
+  
 if (flag==1 && msg.text==undefined)
 {
  
@@ -426,7 +354,7 @@ bot.sendMessage(msg.chat.id,pict,{
       one_time_keyboard:true
     }
    }).then(()=>{
-    globalkey3=1;
+     db.query(`UPDATE temp SET flag=3 WHERE user_id=${msg.from.id}`)
    }) 
    }
   }
@@ -435,6 +363,85 @@ bot.sendMessage(msg.chat.id,pict,{
    
    
   
+}
+///////////////////////////////////////////global key 3////////////////////////////////////////////////////
+if (flag==3 && msg.text==undefined)
+{
+  
+ db.query(`UPDATE temp SET flag=4 WHERE user_id=${msg.from.id}`)
+  
+
+   
+    var file_id=msg.photo[2].file_id;
+   
+
+/*if (!fs.existsSync(dir)){
+  fs.mkdirSync(dir);
+}*/
+
+  var file_info =bot.getFile(file_id).then(function(resp)
+    {
+             file_path=resp.file_path;
+             bot.downloadFile(file_id,'./photos/').then(function(path)
+             {
+               
+               cloudinary.uploader.upload(path, function(result) { 
+               image=result.url; 
+                Caption=`👉🏻 `+description+`
+
+☎️  Маълумот учун: `+phoneNumber+`
+
+⭐️ #`+status_name+` #`+HashCat+` #`+HashLoc+`
+
+📲 Каналга обуна учун 👉 @oziquz 👈 `+`
+<a href="`+result.url+`">&#160 </a>`;
+
+  
+    bot.sendMessage(msg.chat.id,Caption,{
+     parse_mode:"HTML"
+    }).then(()=>{
+      if (language=='Uzbek')
+      {
+          var text='❗ Агар еълон кўриниши ва Барча малумотлар тўгри бўлса еълон бериш клавишини босинг акс ҳолда бошига қайтинг'; 
+        bot.sendMessage(msg.chat.id,text,{
+        reply_markup:{
+          keyboard:keyboard.final,
+          resize_keyboard:true,
+              one_time_keyboard:true
+        }
+      })
+      }
+      else if(language=='Russian')
+      {
+           var text='❗ Если просматривать объявления и вся информация верны , нажмите на кнопку \"объявление\", в противном случае вернуться в Главное меню и заполнить все снова';
+         bot.sendMessage(msg.chat.id,text,{
+        reply_markup:{
+          keyboard:keyboard.final2,
+          resize_keyboard:true,
+              one_time_keyboard:true
+        }
+      })
+      }
+      
+    })
+}); 
+             });
+        
+
+    });
+      
+   
+     
+    
+    
+   
+    
+  
+  
+  
+  
+
+
 }
 })
 
@@ -469,11 +476,9 @@ else
 		{
      
 			
-			globalkey3=0;
-			status=0;
+			
       path_to_broadcast=0;
-			user_id=msg.from.id;
-      username=msg.from.username;
+		
    
 		    const Html=
  `🇺🇿 <b>Тилни Танланг</b>  🇷🇺 <b>Выберите язык</b>`;
