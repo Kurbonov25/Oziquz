@@ -50,7 +50,7 @@ var cap;
 var news;
 var key;
 //var image;
- var HashCat;
+  HashCat;
  var HashLoc;
 
 //////////////////////////html texts////////////////////////////////////////////////
