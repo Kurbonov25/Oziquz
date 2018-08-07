@@ -547,7 +547,6 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
         db.query(`SELECT language FROM temp WHERE user_id=${user_id}`,function(err,res)
         { 
          
-         console.log(res[0].language)
           language=res[0].language;
           if (language=="Uzbek"){status=1;status_name=`Сотамиз`;}
         else if (language=="Russian"){status=2;status_name=`Продаем `}
@@ -1348,10 +1347,10 @@ bot.sendMessage(Originalchannel_id,htm,{
     })
      if (counter>=1)
      {
-       Category=data;
-  
+       var category=data;
+       var user_id=query.message.chat.id;
 
-      category=data;
+     db.query(`UPDATE temp SET category='${category}' WHERE user_id=${user_id}`)
       var array1=[];
        var array2=[];
        var counter1=0;
