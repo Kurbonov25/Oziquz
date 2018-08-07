@@ -26,7 +26,7 @@ var Admin_id= 511599;
 /////////////////////////////////////////////////////
 //var category;
 //var location;
-var phoneNumber;
+//var phoneNumber;
 //var user_id;
 var description;
 //var status;
@@ -303,7 +303,8 @@ db.query(`SELECT * FROM temp WHERE user_id=${msg.chat.id}`,function(err,res)
 if (flag==1 && msg.text==undefined)
 {
  
-  phoneNumber=msg.contact.phone_number;
+  var phoneNumber=msg.contact.phone_number;
+  db.query(`UPDATE temp SET phone_number='${phoneNumber}' WHERE user_id=${msg.from.id}`)
   if (language == 'Uzbek')
   {
     var sent=phoneNumber + ` Телефон Рақами қабул қилинди ✅`;
@@ -368,7 +369,7 @@ Masalan:
               one_time_keyboard:true
       }
     }).then(()=>{
-          globalkey2=1;
+          db.query(`UPDATE temp SET flag=2 WHERE user_id=${msg.from.id}`)
     })
      }
      }
@@ -381,7 +382,9 @@ Masalan:
 {
   if((/^[\+][9]{2}[8]{1}[1-9]{1}[0-9]{8}/.test(msg.text)))
   {
-  phoneNumber=msg.text;
+
+  var phoneNumber=msg.text;
+  db.query(`UPDATE temp SET phone_number='${phoneNumber}' WHERE user_id=${msg.from.id}`)
 
     if (language == 'Uzbek')
   {
@@ -410,7 +413,7 @@ Masalan:
               one_time_keyboard:true
       }
     }).then(()=>{
-         globalkey2=1;
+        db.query(`UPDATE temp SET flag=2 WHERE user_id=${msg.from.id}`)
     })
   })
   
