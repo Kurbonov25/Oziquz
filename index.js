@@ -1401,7 +1401,7 @@ bot.sendMessage(Originalchannel_id,htm,{
     var counter=0; 
     res.map((f,i)=>{
          counter++;
-         HashCat=f.hash;
+        var HashCat=f.hash;
          db.query(`UPDATE temp SET hashCat='${HashCat}' WHERE user_id=${user_id}`)
     })
      if (counter>=1)
@@ -1501,7 +1501,7 @@ db.query(`SELECT * FROM locations WHERE location='${data}'`,function(err,res)
  
   res.map((f,i)=>{
     counter++;
-    HashLoc=f.hash;
+   var HashLoc=f.hash;
     db.query(`UPDATE temp SET hashLoc='${HashLoc}' WHERE user_id=${user_id}`)
   })
   if (counter>=1)
