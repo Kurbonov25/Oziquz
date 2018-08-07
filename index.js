@@ -1355,8 +1355,10 @@ bot.sendMessage(Originalchannel_id,htm,{
        var array2=[];
        var counter1=0;
        var counter2=0;
-      console.log("1")
-      db.query(`SELECT location FROM locations WHERE language='${language}'`,function(err,res){
+     db.query(`SELECT language FROM temp WHERE user_id=${user_id}`,function(err,res)
+        { 
+         var language=res[0].language;
+            db.query(`SELECT location FROM locations WHERE language='${language}'`,function(err,res){
                
                let promises= res.map((f,i)=>{
                     if((i+1)%2==1)
@@ -1425,6 +1427,9 @@ bot.sendMessage(Originalchannel_id,htm,{
            
 
              });
+
+        });
+   
      }
   })
 
