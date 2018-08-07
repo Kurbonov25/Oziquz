@@ -1404,6 +1404,7 @@ bot.sendMessage(Originalchannel_id,htm,{
          HashCat=f.hash;
        
     })
+    db.query(`UPDATE temp SET hashCat='${HashCat}' WHERE user_id=${user_id}`)
      if (counter>=1)
      {
        var category=data;
@@ -1504,6 +1505,7 @@ db.query(`SELECT * FROM locations WHERE location='${data}'`,function(err,res)
     HashLoc=f.hash;
    
   })
+  db.query(`UPDATE temp SET hashCat='${HashLoc}' WHERE user_id=${user_id}`)
   if (counter>=1)
   { 
     var location=data;
