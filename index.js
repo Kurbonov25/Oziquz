@@ -482,7 +482,7 @@ else
 		{
      
 			
-			
+			db.query(`UPDATE temp SET flag=0 WHERE user_id=${msg.chat.id}`)
       path_to_broadcast=0;
 		
    
@@ -1404,13 +1404,14 @@ bot.sendMessage(Originalchannel_id,htm,{
          HashCat=f.hash;
        
     })
-    db.query(`UPDATE temp SET hashCat='${HashCat}' WHERE user_id=${user_id}`)
+   
      if (counter>=1)
      {
        var category=data;
        var user_id=query.message.chat.id;
    
      db.query(`UPDATE temp SET category='${category}' WHERE user_id=${user_id}`);
+     db.query(`UPDATE temp SET hashCat='${HashCat}' WHERE user_id=${user_id}`)
       var array1=[];
        var array2=[];
        var counter1=0;
@@ -1505,14 +1506,14 @@ db.query(`SELECT * FROM locations WHERE location='${data}'`,function(err,res)
     HashLoc=f.hash;
    
   })
-  db.query(`UPDATE temp SET hashCat='${HashLoc}' WHERE user_id=${user_id}`)
+  
   if (counter>=1)
   { 
     var location=data;
     var user_id=query.message.chat.id;
     chatID=query.message.chat.id;
     db.query(`UPDATE temp SET location='${location}' WHERE user_id=${user_id}`);
-   
+   db.query(`UPDATE temp SET hashCat='${HashLoc}' WHERE user_id=${user_id}`)
    db.query(`SELECT language FROM temp WHERE user_id=${user_id}`,function(err,res)
         {    
              var language=res[0].language;
