@@ -28,12 +28,12 @@ var Admin_id= 511599;
 //var location;
 //var phoneNumber;
 //var user_id;
-var description;
+//var description;
 //var status;
 //var status_name;
 //var language;
 //var globalkey=0;
-var globalkey2=0;
+//var globalkey2=0;
 var globalkey3=0;
 var globalkey4=0;
 var max_counter=1;
@@ -215,83 +215,7 @@ if (!fs.existsSync(dir)){
 
 
 }
-if (globalkey2==1 && msg.text!='🏪 Бошига қайтиш' && msg.text!='🏪 Назад на главную')
-{
-  
 
-	
-  var check=0;
-  description=msg.text;
-  for (var count=0;description.length>count;count++)
-  {
-  
-    if (description[count]==';'|| description[count]==`"` || description[count]==`'` || description[count]==`/` ||description[count]==`%`)
-    {
-      check=1;
-
-    }
-  }
-  if (check==1)
-  {
-    if (language=='Uzbek')
-    {
-       var attention=`<b>Сиз киритган еълон матни бизнинг стандартга тўгри келмади ❌ Илтимос еълон матнида (; " ' / % ) белгилардан фойдаланманг 🙅</b>`;
-       bot.sendMessage(msg.chat.id,attention,{
-        parse_mode:"HTML"
-       })
-    }
-    else if (language=='Russian')
-    {
- var attention=`<b>введенный вами текст не соответствует наш стандарт ❌ Пожалуйста, не используйте 🙅 ети символы (; " ' / %) </b>`;
-       bot.sendMessage(msg.chat.id,attention,{
-        parse_mode:"HTML"
-       })
-    }
-  
-  }
-  else if (check==0)
-  {
-    globalkey2=0;
-    if (language=='Uzbek')
-  {
-     var pict=`Элонга таллуқли расм жойланг! 
-     👉Расм юклаш учун 📎белгисини босинг. 👉 Эсингизда бўлсин еълон расм билан яхшироқ кўринади ва харидорлар етиборини тортади. 
-     ❗️Расм ёқ бўлса "<b>Давом еттириш</b>" тугмасини босиб ушбу қадамни ўтказиб юборинг.`;
-bot.sendMessage(msg.chat.id,pict,{
-    parse_mode:"HTML",
-    reply_markup:{
-      keyboard:keyboard.desc,
-      resize_keyboard:true,
-      one_time_keyboard:true
-    }
-   }).then(()=>{
-    globalkey3=1;
-   }) 
-   }
-   else if (language=='Russian')
-   {
-     var pict=`Загрузите 1 фотографию для этого объявления!
-👉Щелкните значок📎 изображения для загрузки.
-👉Имейте в виду, что объявления с изображением выглядит лучше и привлекает внимание клиента.
-❗️Если нет фото, пропустите этот шаг, нажав кнопку <b>«Продолжить»</b>.`;
-bot.sendMessage(msg.chat.id,pict,{
-    parse_mode:"HTML",
-    reply_markup:{
-      keyboard:keyboard.desc2,
-      resize_keyboard:true,
-      one_time_keyboard:true
-    }
-   }).then(()=>{
-    globalkey3=1;
-   }) 
-   }
-  }
-	
-   
-   
-   
-  
-}
 /////////////////////////////////////flag////////////////////////////////////////////////////
 db.query(`SELECT * FROM temp WHERE user_id=${msg.chat.id}`,function(err,res)
 {
@@ -449,7 +373,88 @@ Masalan:
       
     }
 }
+//////////////////////////////////global key2/////////////////////////////////////////
+if (flag==2 && msg.text!='🏪 Бошига қайтиш' && msg.text!='🏪 Назад на главную')
+{
+  
 
+  
+  var check=0;
+  var description=msg.text;
+  
+
+  for (var count=0;description.length>count;count++)
+  {
+  
+    if (description[count]==';'|| description[count]==`"` || description[count]==`'` || description[count]==`/` ||description[count]==`%`)
+    {
+      check=1;
+
+    }
+  }
+  if (check==1)
+  { 
+    if (language=='Uzbek')
+    {
+       var attention=`<b>Сиз киритган еълон матни бизнинг стандартга тўгри келмади ❌ Илтимос еълон матнида (; " ' / % ) белгилардан фойдаланманг 🙅</b>`;
+       bot.sendMessage(msg.chat.id,attention,{
+        parse_mode:"HTML"
+       })
+    }
+    else if (language=='Russian')
+    {
+ var attention=`<b>введенный вами текст не соответствует наш стандарт ❌ Пожалуйста, не используйте 🙅 ети символы (; " ' / %) </b>`;
+       bot.sendMessage(msg.chat.id,attention,{
+        parse_mode:"HTML"
+       })
+    }
+  
+  }
+  else if (check==0)
+  {
+
+    db.query(`UPDATE temp SET description='${description}' WHERE user_id=${msg.from.id}`)
+
+    if (language=='Uzbek')
+  {
+     var pict=`Элонга таллуқли расм жойланг! 
+     👉Расм юклаш учун 📎белгисини босинг. 👉 Эсингизда бўлсин еълон расм билан яхшироқ кўринади ва харидорлар етиборини тортади. 
+     ❗️Расм ёқ бўлса "<b>Давом еттириш</b>" тугмасини босиб ушбу қадамни ўтказиб юборинг.`;
+bot.sendMessage(msg.chat.id,pict,{
+    parse_mode:"HTML",
+    reply_markup:{
+      keyboard:keyboard.desc,
+      resize_keyboard:true,
+      one_time_keyboard:true
+    }
+   }).then(()=>{
+   db.query(`UPDATE temp SET flag=3 WHERE user_id=${msg.from.id}`)
+   }) 
+   }
+   else if (language=='Russian')
+   {
+     var pict=`Загрузите 1 фотографию для этого объявления!
+👉Щелкните значок📎 изображения для загрузки.
+👉Имейте в виду, что объявления с изображением выглядит лучше и привлекает внимание клиента.
+❗️Если нет фото, пропустите этот шаг, нажав кнопку <b>«Продолжить»</b>.`;
+bot.sendMessage(msg.chat.id,pict,{
+    parse_mode:"HTML",
+    reply_markup:{
+      keyboard:keyboard.desc2,
+      resize_keyboard:true,
+      one_time_keyboard:true
+    }
+   }).then(()=>{
+    globalkey3=1;
+   }) 
+   }
+  }
+  
+   
+   
+   
+  
+}
 })
 
 
