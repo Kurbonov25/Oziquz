@@ -37,7 +37,7 @@ var Admin_id= 511599;
 //var globalkey3=0;
 var globalkey4=0;
 var max_counter=1;
-//var file_id;
+var file_id;
 var file_path;
 var username;
 //var Category;
@@ -372,11 +372,14 @@ if (flag==3 && msg.text==undefined)
   
 
    
-    var file_id=msg.photo[2].file_id;
+  globalkey4=1;
+
    
-var dir = './photos/';
+     file_id=msg.photo[2].file_id;
+    var dir = './photos/';
+
 if (!fs.existsSync(dir)){
-  fs.mkdirSync(dir);
+    fs.mkdirSync(dir);
 }
 
   var file_info =bot.getFile(file_id).then(function(resp)
@@ -386,16 +389,16 @@ if (!fs.existsSync(dir)){
              {
                
                cloudinary.uploader.upload(path, function(result) { 
-                image=result.url; 
-                var Caption=`👉🏻 `+description+`
+               image=result.url; 
+                Caption=`👉🏻 `+description+`
 
 ☎️  Маълумот учун: `+phoneNumber+`
 
 ⭐️ #`+status_name+` #`+HashCat+` #`+HashLoc+`
 
 📲 Каналга обуна учун 👉 @oziquz 👈 `+`
-<a href="${result.url}">&#160 </a>`;
-  
+<a href="`+result.url+`">&#160 </a>`;
+
   
     bot.sendMessage(msg.chat.id,Caption,{
      parse_mode:"HTML"
@@ -430,7 +433,7 @@ if (!fs.existsSync(dir)){
 
     });
       
-   
+
      
     
     
