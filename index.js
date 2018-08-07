@@ -545,7 +545,8 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 
 			
         db.query(`SELECT language FROM temp WHERE user_id=${user_id}`,function(err,res)
-        { console.log(res)
+        { 
+          console.log(res)
           if (language=="Uzbek"){status=1;status_name=`Сотамиз`;}
         else if (language=="Russian"){status=2;status_name=`Продаем `}
         
