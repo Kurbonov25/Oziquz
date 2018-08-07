@@ -1377,8 +1377,7 @@ bot.sendMessage(Originalchannel_id,htm,{
 
                 Promise.all(promises).then(function(values)
             {
-                   db.query(`SELECT language FROM temp WHERE user_id=${user_id}`,function(err,res)
-                  {  
+                  
                     var language="Uzbek"; 
                              if (language == 'Uzbek')    
                   {
@@ -1420,7 +1419,7 @@ bot.sendMessage(Originalchannel_id,htm,{
 
     })
                  
-            })
+            
 
                   });
            
