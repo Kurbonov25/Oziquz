@@ -27,7 +27,7 @@ var Admin_id= 511599;
 var category;
 var location;
 var phoneNumber;
-var user_id;
+//var user_id;
 var description;
 var status;
 var status_name;
@@ -510,8 +510,9 @@ else
         }
 		case kb.Home.Uzbek:
 		{
+      var user_id=msg.from.id;
 			var language='Uzbek';
-      db.query(`UPDATE temp SET language='Uzbek'`)
+      db.query(`UPDATE temp SET language='Uzbek' WHERE user_id=${user_id}`)
 
 const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Сотиб Олмоқчимисиз ?</b>  `	
          bot.sendMessage(msg.chat.id,text,{
@@ -541,7 +542,8 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 			
 			{	*/
 
-				
+				var language;
+        db.query(`SELECT language FROM temp where`)
         if (language=="Uzbek"){status=1;status_name=`Сотамиз`;}
         else if (language=="Russian"){status=2;status_name=`Продаем `}
 				
