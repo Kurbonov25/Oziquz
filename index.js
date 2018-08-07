@@ -92,7 +92,14 @@ bot.on('message',msg=>{
 
 
 
+if (msg.text=="/start")
+{
+     db.query(`UPDATE temp SET flag=0 WHERE user_id=${msg.from.id}`)
 
+
+      path_to_broadcast=0;
+      user_id=msg.from.id;
+}
 if (path_to_broadcast_Image==1 && msg.text==undefined)
 {  
    cap=`<b>📢 News || Новости || Yangilik </b>
@@ -1233,7 +1240,8 @@ bot.onText(/\/start/,msg=>{
 
 
  db.query(`SELECT user_id FROM temp WHERE user_id=${user_id}`,function(err,res)
- {
+ {  
+     console.log(res)
     let promises=res.map((f,i)=>{
       count++;
     })
