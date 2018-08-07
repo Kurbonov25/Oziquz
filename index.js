@@ -50,8 +50,8 @@ var cap;
 var news;
 var key;
 //var image;
-//var HashCat;
-//var HashLoc;
+ HashCat;
+ HashLoc;
 
 //////////////////////////html texts////////////////////////////////////////////////
 
@@ -1401,7 +1401,7 @@ bot.sendMessage(Originalchannel_id,htm,{
     var counter=0; 
     res.map((f,i)=>{
          counter++;
-        var HashCat=f.hash;
+         HashCat=f.hash;
          db.query(`UPDATE temp SET hashCat='${HashCat}' WHERE user_id=${user_id}`)
     })
      if (counter>=1)
@@ -1501,7 +1501,7 @@ db.query(`SELECT * FROM locations WHERE location='${data}'`,function(err,res)
  
   res.map((f,i)=>{
     counter++;
-   var HashLoc=f.hash;
+    HashLoc=f.hash;
     db.query(`UPDATE temp SET hashLoc='${HashLoc}' WHERE user_id=${user_id}`)
   })
   if (counter>=1)
