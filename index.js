@@ -1349,13 +1349,13 @@ bot.sendMessage(Originalchannel_id,htm,{
      {
        var category=data;
        var user_id=query.message.chat.id;
-
-     db.query(`UPDATE temp SET category='${category}' WHERE user_id=${user_id}`)
+    console.log(user_id)
+     db.query(`UPDATE temp SET category='${category}' WHERE user_id=${user_id}`);
       var array1=[];
        var array2=[];
        var counter1=0;
        var counter2=0;
-     
+      console.log("1")
       db.query(`SELECT location FROM locations WHERE language='${language}'`,function(err,res){
                
                let promises= res.map((f,i)=>{
