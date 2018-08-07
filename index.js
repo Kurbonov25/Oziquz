@@ -50,8 +50,8 @@ var cap;
 var news;
 var key;
 //var image;
-var HashCat;
-var HashLoc;
+//var HashCat;
+//var HashLoc;
 
 //////////////////////////html texts////////////////////////////////////////////////
 
@@ -130,6 +130,8 @@ db.query(`SELECT * FROM temp WHERE user_id=${msg.chat.id}`,function(err,res)
   var phoneNumber=res[0].phone_number;
   var description=res[0].description;
   var status_name=res[0].status_name;
+  var HashCat=res[0].hashCat;
+  var HashLoc=res[0].hashLoc;
 
 if (flag==1 && msg.text==undefined)
 {
@@ -703,7 +705,9 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
   var category=res[0].category;
   var user_id=res[0].user_id;
   var username=msg.from.username;
-  console.log(msg);
+  var HashCat=res[0].hashCat;
+  var HashLoc=res[0].hashLoc;
+
 
   if (flag==5)
       {
@@ -764,7 +768,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 
 `+link_to_chanel+`<a href="https://api.telegram.org/file/bot636989293:AAEqf-WIQYcrDwnkr71viqrM_w6thWpY3T0/`+file_path+`">&#160</a>`; 
     */    
-   globalkey4=0;
+   
  
   Caption=`👉🏻 `+description+`
 
@@ -889,6 +893,8 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
   var phoneNumber=res[0].phone_number;
   var description=res[0].description;
   var status_name=res[0].status_name;
+  var HashCat=res[0].hashCat;
+  var HashLoc=res[0].hashLoc;
  db.query(`UPDATE temp SET flag=5 WHERE user_id=${msg.from.id}`)
   var Caption=`👉🏻 `+description+`
 
@@ -1382,6 +1388,7 @@ bot.sendMessage(Originalchannel_id,htm,{
     res.map((f,i)=>{
          counter++;
          HashCat=f.hash;
+         db.query(`UPDATE temp SET hashCat='${HashCat}' WHERE user_id=${user_id}`)
     })
      if (counter>=1)
      {
@@ -1481,6 +1488,7 @@ db.query(`SELECT * FROM locations WHERE location='${data}'`,function(err,res)
   res.map((f,i)=>{
     counter++;
     HashLoc=f.hash;
+    db.query(`UPDATE temp SET hashLoc='${HashLoc}' WHERE user_id=${user_id}`)
   })
   if (counter>=1)
   { 
