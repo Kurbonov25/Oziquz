@@ -33,7 +33,7 @@ var description;
 //var status_name;
 //var language;
 //var globalkey=0;
-//var globalkey2=0;
+var globalkey2=0;
 var globalkey3=0;
 var globalkey4=0;
 var max_counter=1;
@@ -119,8 +119,7 @@ if (path_to_broadcast_Image==1 && msg.text==undefined)
 if (user_id==undefined && msg.text!='🏪 Назад на главную' && msg.text!='🏪 Бошига қайтиш' && msg.text!='/start' && path_to_broadcast==0)
 {
      
-    //  globalkey=0;
-      globalkey2=0;
+    
       globalkey3=0;
       status=0;
       user_id=msg.from.id;
@@ -483,8 +482,7 @@ else
 		case  kb2.Choice.back:
 		{
      
-			globalkey=0;
-			globalkey2=0;
+			
 			globalkey3=0;
 			status=0;
       path_to_broadcast=0;
@@ -1215,8 +1213,8 @@ bot.onText(/\/start/,msg=>{
  username=msg.from.username;
  path_to_broadcast=0;
  status=0;
- globalkey=0;
- globalkey2=0;
+ 
+
  globalkey3=0;
  globalkey4=0;
  const Html=
