@@ -18,6 +18,12 @@ const kb= require('./keyboard-button.js')
 const keyboard = require('./keyboard.js')
 const kb2= require('./keyboard-button2.js')
 var mysql=require("mysql")
+var link_to_chanel=`@oziquz`;
+var limit=3;
+var channel_id='@oziquz12';
+var Originalchannel_id='@optimus1234q';
+var Admin_id= 511599;
+/////////////////////////////////////////////////////
 var category;
 var location;
 var phoneNumber;
@@ -26,7 +32,6 @@ var description;
 var status;
 var status_name;
 var language;
-var link_to_chanel=`@oziquz`;
 var globalkey=0;
 var globalkey2=0;
 var globalkey3=0;
@@ -34,17 +39,13 @@ var globalkey4=0;
 var max_counter=1;
 var file_id;
 var file_path;
-var limit=3;
 var username;
 var Category;
 var Location;
-var channel_id='-1001231331656';
-var Originalchannel_id='@oziquz';
 var ImageId_to_database;
 var path_to_broadcast;
 var path_to_broadcast_Image;
 var adver;
-var Admin_id= 511599;
 var cap;
 var news;
 var key;
@@ -1232,7 +1233,7 @@ bot.sendMessage(Originalchannel_id,htm,{
 });
  */
   //bot.forwardMessage(Originalchannel_id,chatID,message_id);
-  db.query(`SELECT * FROM sotish WHERE image_id=${message_id}`,function(err,res)
+  db.query(`SELECT * FROM sotish WHERE image_id=${message_id} ORDER BY id DESC LIMIT 1;`,function(err,res)
   {
        let promises=res.map((f,i)=>{
        description1=f.description;
