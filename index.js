@@ -49,7 +49,7 @@ var adver;
 var cap;
 var news;
 var key;
-var image;
+//var image;
 var HashCat;
 var HashLoc;
 
@@ -389,7 +389,7 @@ if (!fs.existsSync(dir)){
              {
                
                cloudinary.uploader.upload(path, function(result) { 
-               image=result.url;
+              var image=result.url;
                db.query(`UPDATE temp SET image='${image}' WHERE user_id=${msg.chat.id}`) 
                 Caption=`👉🏻 `+description+`
 
@@ -699,6 +699,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
   var phoneNumber=res[0].phone_number;
   var description=res[0].description;
   var status_name=res[0].status_name; 
+  var image =res[0].image;
 
   if (flag==5)
       {
