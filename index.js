@@ -374,10 +374,10 @@ if (flag==3 && msg.text==undefined)
    
     var file_id=msg.photo[2].file_id;
    
-
-/*if (!fs.existsSync(dir)){
+var dir = './photos/';
+if (!fs.existsSync(dir)){
   fs.mkdirSync(dir);
-}*/
+}
   console.log("1");
   console.log(file_id);
   var file_info =bot.getFile(file_id).then(function(resp)
