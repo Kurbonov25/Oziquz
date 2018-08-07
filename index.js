@@ -33,7 +33,7 @@ var description;
 //var status_name;
 //var language;
 //var globalkey=0;
-var globalkey2=0;
+
 var globalkey3=0;
 var globalkey4=0;
 var max_counter=1;
