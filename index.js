@@ -1349,7 +1349,7 @@ bot.sendMessage(Originalchannel_id,htm,{
      {
        var category=data;
        var user_id=query.message.chat.id;
-    console.log(user_id)
+   
      db.query(`UPDATE temp SET category='${category}' WHERE user_id=${user_id}`);
       var array1=[];
        var array2=[];
@@ -1357,6 +1357,7 @@ bot.sendMessage(Originalchannel_id,htm,{
        var counter2=0;
      db.query(`SELECT language FROM temp WHERE user_id=${user_id}`,function(err,res)
         { 
+          chatID=query.message.chat.id;
          var language=res[0].language;
             db.query(`SELECT location FROM locations WHERE language='${language}'`,function(err,res){
                
@@ -1444,10 +1445,14 @@ db.query(`SELECT * FROM locations WHERE location='${data}'`,function(err,res)
     HashLoc=f.hash;
   })
   if (counter>=1)
-  { Location=data;
-    location=data;
-
-   if (language =='Uzbek')
+  { 
+    var location=data;
+    var user_id=query.message.chat.id;
+    db.query(`UPDATE temp SET location='${location}' WHERE user_id=${user_id}`);
+    chatID=query.message.chat.id;
+   db.query(`SELECT language FROM temp WHERE user_id=${user_id}`,function(err,res)
+        { 
+              if (language =='Uzbek')
             {
               var text=`Сиз <b>${data}</b>  Шаҳрини танладингиз`;
             }
@@ -1455,9 +1460,7 @@ db.query(`SELECT * FROM locations WHERE location='${data}'`,function(err,res)
             {
               var text=`Вы выбрали город <b>${data}</b>`;
             } 
-  
-            
-          bot.editMessageText(text,{
+                bot.editMessageText(text,{
                 chat_id:chatID,
                 message_id:message_id,
                 parse_mode:"HTML"
@@ -1499,6 +1502,11 @@ db.query(`SELECT * FROM locations WHERE location='${data}'`,function(err,res)
         
 
     })
+        })
+   
+  
+            
+  
 
 
   }
