@@ -341,7 +341,7 @@ Masalan:
               one_time_keyboard:true
       }
     }).then(()=>{
-          globalkey2=1;
+         db.query(`UPDATE temp SET flag=2 WHERE user_id=${msg.from.id}`)
     })
      }
      else if(status==3 || status==4)
@@ -356,7 +356,7 @@ Masalan:
               one_time_keyboard:true
       }
     }).then(()=>{
-          globalkey2=1;
+          db.query(`UPDATE temp SET flag=2 WHERE user_id=${msg.from.id}`)
     })
      }
      else if (language=='Russian')
@@ -369,7 +369,6 @@ Masalan:
               one_time_keyboard:true
       }
     }).then(()=>{
-      console.log('123');
           db.query(`UPDATE temp SET flag=2 WHERE user_id=${msg.from.id}`)
     })
      }
@@ -414,7 +413,7 @@ Masalan:
               one_time_keyboard:true
       }
     }).then(()=>{
-      console.log('123');
+
         db.query(`UPDATE temp SET flag=2 WHERE user_id=${msg.from.id}`)
     })
   })
