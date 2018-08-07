@@ -299,7 +299,7 @@ db.query(`SELECT * FROM temp WHERE user_id=${msg.chat.id}`,function(err,res)
 {
   var flag=res[0].flag;
   var language=res[0].language;
-  var status=res.[0].status;
+  var status=res[0].status;
 if (flag==1 && msg.text==undefined)
 {
  
