@@ -33,7 +33,7 @@ var description;
 //var status_name;
 //var language;
 //var globalkey=0;
-var globalkey2=0;
+//var globalkey2=0;
 var globalkey3=0;
 var globalkey4=0;
 var max_counter=1;
@@ -91,8 +91,7 @@ bot.setWebHook(`${url}/bot${TOKEN}`);
 bot.on('message',msg=>{
 if (msg.text=="/start")
 {
-     // globalkey=0;
-      globalkey2=0;
+     db.query(`UPDATE temp SET flag=0 WHERE user_id=${msg.from.id}`)
       globalkey3=0;
       status=0;
       path_to_broadcast=0;
@@ -446,11 +445,7 @@ Masalan:
               resize_keyboard:true,
               one_time_keyboard:true
              }
-      }).then(()=>{
-              
-        globalkey=1;
-        
-      })
+      });
 
       
     }
