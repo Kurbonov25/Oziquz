@@ -24,8 +24,8 @@ var channel_id='@oziquz12';
 var Originalchannel_id='@optimus1234q';
 var Admin_id= 511599;
 /////////////////////////////////////////////////////
-var category;
-var location;
+//var category;
+//var location;
 var phoneNumber;
 //var user_id;
 var description;
@@ -40,8 +40,8 @@ var max_counter=1;
 var file_id;
 var file_path;
 var username;
-var Category;
-var Location;
+//var Category;
+//var Location;
 var ImageId_to_database;
 var path_to_broadcast;
 var path_to_broadcast_Image;
@@ -1448,8 +1448,9 @@ db.query(`SELECT * FROM locations WHERE location='${data}'`,function(err,res)
   { 
     var location=data;
     var user_id=query.message.chat.id;
-    db.query(`UPDATE temp SET location='${location}' WHERE user_id=${user_id}`);
     chatID=query.message.chat.id;
+    db.query(`UPDATE temp SET location='${location}' WHERE user_id=${user_id}`);
+   
    db.query(`SELECT language FROM temp WHERE user_id=${user_id}`,function(err,res)
         {    
              var language=res[0].language;
@@ -1494,8 +1495,8 @@ db.query(`SELECT * FROM locations WHERE location='${data}'`,function(err,res)
               one_time_keyboard:true
              }
       }).then(()=>{
-           
-        globalkey=1;
+        user_id=query.message.chat.id;   
+       db.query(`UPDATE temp SET flag=1 WHERE user_id=${user_id}`)
         
       })
 
