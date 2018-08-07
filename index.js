@@ -690,7 +690,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
      
      var forward_id=msg.message_id;
 
-     b.query(`SELECT * FROM temp WHERE user_id=${msg.chat.id}`,function(err,res)
+     db.query(`SELECT * FROM temp WHERE user_id=${msg.chat.id}`,function(err,res)
 {
   var flag=res[0].flag;
   var language=res[0].language;
