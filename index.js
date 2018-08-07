@@ -35,7 +35,7 @@ var Admin_id= 511599;
 //var globalkey=0;
 //var globalkey2=0;
 //var globalkey3=0;
-var globalkey4=0;
+//var globalkey4=0;
 var max_counter=1;
 var file_id;
 var file_path;
@@ -89,14 +89,10 @@ bot.setWebHook(`${url}/bot${TOKEN}`);
 /////////////////////////////bot.on//////////////////////////////////////////////////
 
 bot.on('message',msg=>{
-if (msg.text=="/start")
-{
-     db.query(`UPDATE temp SET flag=0 WHERE user_id=${msg.from.id}`)
 
 
-      path_to_broadcast=0;
-      user_id=msg.from.id;
-}
+
+
 if (path_to_broadcast_Image==1 && msg.text==undefined)
 {  
    cap=`<b>📢 News || Новости || Yangilik </b>
@@ -374,7 +370,7 @@ if (flag==3 && msg.text==undefined)
   
 
    
-  globalkey4=1;
+ 
 
    
      file_id=msg.photo[2].file_id;
@@ -1259,11 +1255,7 @@ bot.onText(/\/start/,msg=>{
 
  username=msg.from.username;
  path_to_broadcast=0;
- status=0;
  
-
- globalkey3=0;
- globalkey4=0;
  const Html=
  `🇺🇿 <b>Тилни Танланг 
 </b>🇷🇺 <b>Выберите язык</b>`;
