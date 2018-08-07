@@ -130,7 +130,7 @@ db.query(`SELECT * FROM temp WHERE user_id=${msg.chat.id}`,function(err,res)
   var phoneNumber=res[0].phone_number;
   var description=res[0].description;
   var status_name=res[0].status_name;
-  
+
 if (flag==1 && msg.text==undefined)
 {
  
@@ -378,7 +378,8 @@ if (flag==3 && msg.text==undefined)
 /*if (!fs.existsSync(dir)){
   fs.mkdirSync(dir);
 }*/
-
+  console.log("1");
+  console.log(file_id);
   var file_info =bot.getFile(file_id).then(function(resp)
     {
              file_path=resp.file_path;
@@ -387,7 +388,7 @@ if (flag==3 && msg.text==undefined)
                
                cloudinary.uploader.upload(path, function(result) { 
                image=result.url; 
-                Caption=`👉🏻 `+description+`
+                var Caption=`👉🏻 `+description+`
 
 ☎️  Маълумот учун: `+phoneNumber+`
 
@@ -395,7 +396,7 @@ if (flag==3 && msg.text==undefined)
 
 📲 Каналга обуна учун 👉 @oziquz 👈 `+`
 <a href="`+result.url+`">&#160 </a>`;
-
+  console.log(Caption);
   
     bot.sendMessage(msg.chat.id,Caption,{
      parse_mode:"HTML"
