@@ -1377,8 +1377,10 @@ bot.sendMessage(Originalchannel_id,htm,{
 
                 Promise.all(promises).then(function(values)
             {
-                   
-                  if (language == 'Uzbek')    
+                   db.query(`SELECT language FROM temp WHERE user_id=${user_id}`,function(err,res)
+                  {  
+                    var language=res[0].language; 
+                             if (language == 'Uzbek')    
                   {
                       var html=`Шаҳарни танланг`;
                       var text=`Сиз <b>${data}</b> бўлимини танладингиз`;
@@ -1419,6 +1421,9 @@ bot.sendMessage(Originalchannel_id,htm,{
     })
                  
             })
+
+                  });
+           
 
              });
      }
