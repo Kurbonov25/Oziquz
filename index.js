@@ -389,7 +389,8 @@ if (!fs.existsSync(dir)){
              {
                
                cloudinary.uploader.upload(path, function(result) { 
-               image=result.url; 
+               image=result.url;
+               db.query(`UPDATE temp SET image='${image}' WHERE user_id=${msg.chat.id}`) 
                 Caption=`👉🏻 `+description+`
 
 ☎️  Маълумот учун: `+phoneNumber+`
@@ -688,11 +689,21 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 		{ 
      
      var forward_id=msg.message_id;
-   
-     if (globalkey4==0)
-			{
+
+     b.query(`SELECT * FROM temp WHERE user_id=${msg.chat.id}`,function(err,res)
+{
+  var flag=res[0].flag;
+  var language=res[0].language;
+  var status=res[0].status;
+  var location=res[0].location;
+  var phoneNumber=res[0].phone_number;
+  var description=res[0].description;
+  var status_name=res[0].status_name; 
+
+  if (flag==5)
+      {
        
-				/*var Caption=`⭐ #`+status_name+` | #`+category[0]+` |🌎 #`+location[0]+`
+        /*var Caption=`⭐ #`+status_name+` | #`+category[0]+` |🌎 #`+location[0]+`
 
 📜<b>`+description+`</b>
 
@@ -705,7 +716,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 ⭐️ #`+status_name+` #`+HashCat+` #`+HashLoc+`
 
 📲 Каналга обуна учун 👉 @oziquz 👈`;
-			var result=bot.sendMessage(channel_id,Caption,{
+      var result=bot.sendMessage(channel_id,Caption,{
              parse_mode:"HTML",
              caption:Caption,
              reply_markup:{
@@ -738,9 +749,9 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
           }) 
       
       }
-			else if (globalkey4==1)
-				{
-				   
+      else if (flag==4)
+        {
+           
 
        /*    var Caption=`⭐ #`+status_name+` | #`+category[0]+` |🌎 #`+location[0]+`
 
@@ -750,16 +761,16 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
     */    
    globalkey4=0;
  
-	Caption=`👉🏻 `+description+`
+  Caption=`👉🏻 `+description+`
 
 ☎️  Маълумот учун: `+phoneNumber+`
 
 ⭐️ #`+status_name+` #`+HashCat+` #`+HashLoc+`
 
 📲 Каналга обуна учун 👉 @oziquz 👈 `+`
-<a href="`+image+`">&#160 </a>`;		
+<a href="`+image+`">&#160 </a>`;    
           
-				
+        
             
             
 
@@ -793,35 +804,38 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
           }) 
             
 
-				  
+          
     
     
-        }	
-				if (language=='Uzbek')
-				{
+        } 
+        if (language=='Uzbek')
+        {
                    var text=`Сизнинг еълонингиз қабул қилинди . ✅ Модератор текширувидан сўнг @oziquz каналида чоп етилади`;
-				   bot.sendMessage(msg.chat.id,text,{
-				  reply_markup:{
+           bot.sendMessage(msg.chat.id,text,{
+          reply_markup:{
                   keyboard:keyboard.backfromDesc,
                   resize_keyboard:true,
-  		          one_time_keyboard:true,
-  	
-			    }
-			})
-				}
-				else if (language=='Russian')
-				{
+                one_time_keyboard:true,
+    
+          }
+      })
+        }
+        else if (language=='Russian')
+        {
                    var text=`Вашему озвучить принято ✅. После проверки руководителем, ваш сообщить, будут размещены на канал @oziquz`;
-				   bot.sendMessage(msg.chat.id,text,{
-				  reply_markup:{
+           bot.sendMessage(msg.chat.id,text,{
+          reply_markup:{
                   keyboard:keyboard.backfromDesc2,
                   resize_keyboard:true,
-  		          one_time_keyboard:true,
-  		         
-			    }
-			})
-				}
-					
+                one_time_keyboard:true,
+               
+          }
+      })
+        }
+          
+
+})
+     
 				
 			
 			
@@ -864,7 +878,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
   var phoneNumber=res[0].phone_number;
   var description=res[0].description;
   var status_name=res[0].status_name;
-
+ db.query(`UPDATE temp SET flag=5 WHERE user_id=${msg.from.id}`)
   var Caption=`👉🏻 `+description+`
 
 ☎️  Маълумот учун: `+phoneNumber+`
