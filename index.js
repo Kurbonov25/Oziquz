@@ -961,8 +961,16 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
               
                           if (max_counter<limit || res[0]==undefined || 1==1)
               {*/
-        if (language=="Uzbek"){status=3;status_name=`СотибОламиз`;}
-      else if (language=="Russian"){status=4;status_name=`Покупаем`;}
+        if (language=="Uzbek")
+        {
+        
+          db.query(`UPDATE temp SET status=3, status_name='СотибОламиз'  WHERE user_id=${msg.from.id}`)
+        }
+      else if (language=="Russian")
+      {
+      
+        db.query(`UPDATE temp SET status=4, status_name='Покупаем'  WHERE user_id=${msg.from.id}`)
+      }
       if (language=='Uzbek')
             {
            
@@ -1095,7 +1103,8 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 		case kb.Home.Russian:
 		case kb2.BackfromCat.goBack:
 		{
-			language='Russian';
+			var language='Russian';
+      db.query(`UPDATE temp SET language='Russian' WHERE user_id=${msg.from.id}`)
 const text=`Вы собираетесь <b> Продавать  </b>или  <b>купить </b> продукты?  `	
          bot.sendMessage(msg.chat.id,text,{
          	parse_mode:"HTML",
