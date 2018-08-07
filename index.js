@@ -39,7 +39,7 @@ var globalkey4=0;
 var max_counter=1;
 var file_id;
 var file_path;
-var username;
+//var username;
 //var Category;
 //var Location;
 var ImageId_to_database;
@@ -700,6 +700,10 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
   var description=res[0].description;
   var status_name=res[0].status_name; 
   var image =res[0].image;
+  var category=res[0].category;
+  var user_id=res[0].user_id;
+  var username=msg.from.username;
+  console.log(msg);
 
   if (flag==5)
       {
@@ -746,7 +750,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
           }).then(()=>{
           
 
-            db.query(`INSERT INTO sotish (user_id,category,location,phone_number,description,status,username,image_id,hashCat,hashLoc) VALUES (${user_id},'${Category}','${Location}','${phoneNumber}','${description}',${status},'${username}',${ImageId_to_database},'${HashCat}','${HashLoc}')`);
+            db.query(`INSERT INTO sotish (user_id,category,location,phone_number,description,status,username,image_id,hashCat,hashLoc) VALUES (${user_id},'${category}','${location}','${phoneNumber}','${description}',${status},'${username}',${ImageId_to_database},'${HashCat}','${HashLoc}')`);
           }) 
       
       }
