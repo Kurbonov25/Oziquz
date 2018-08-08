@@ -1649,7 +1649,7 @@ db.query(`SELECT * FROM locations WHERE location='${data}'`,function(err,res)
  `🇺🇿 <b>Тилни Танланг 
 </b>🇷🇺 <b>Выберите язык</b>`;
 
-  bot.sendMessage(msg.chat.id,Html,{
+  bot.sendMessage(chatID,Html,{
     parse_mode:"HTML",
     reply_markup:{
       keyboard:keyboard.home,
