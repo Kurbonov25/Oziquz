@@ -1334,13 +1334,14 @@ bot.onText(/\/broadcast/,msg=>{
 })
 //////////////////////////////////bot.on (callback)/////////////////////////////////////////
 bot.on("callback_query",function(query){
-  db.query(`SELECT * FROM temp WHERE user_id=${msg.chat.id}`,function(err,res)
+  var data=query.data;
+  var chatID=query.message.chat.id;
+  var message_id=query.message.message_id;
+  db.query(`SELECT * FROM temp WHERE user_id=${chatID}`,function(err,res)
   {
-
-  })
-	var data=query.data;
-	var chatID=query.message.chat.id;
-	var message_id=query.message.message_id;
+     if(res[0]!=undefined)
+     {
+     
   
   if (data=='post')
   {
@@ -1535,7 +1536,7 @@ bot.sendMessage(Originalchannel_id,htm,{
 
   
   
-	
+  
 db.query(`SELECT * FROM locations WHERE location='${data}'`,function(err,res)
 { var counter=0;
  
@@ -1615,6 +1616,49 @@ db.query(`SELECT * FROM locations WHERE location='${data}'`,function(err,res)
   }
 })    
 
+     }
+     else {
+       var count=0;
+ db.query(`SELECT user_id FROM temp WHERE user_id=${chatID}`,function(err,res)
+ {  
+    
+    let promises=res.map((f,i)=>{
+      count++;
+    })
+  Promise.all(promises).then(function(values){
+    if (count>0)
+    {
+      db.query(`DELETE FROM temp WHERE user_id=${chatID}`)
+      db.query(`INSERT INTO temp (user_id) VALUES (${chatID})`) 
+    }
+    else if(count==0)
+    {
+      db.query(`INSERT INTO temp (user_id) VALUES (${chatID})`)
+    }
+  })
+ })
+ 
+
+
+
+ username=msg.from.username;
+ path_to_broadcast=0;
+ 
+ const Html=
+ `🇺🇿 <b>Тилни Танланг 
+</b>🇷🇺 <b>Выберите язык</b>`;
+
+  bot.sendMessage(msg.chat.id,Html,{
+    parse_mode:"HTML",
+    reply_markup:{
+      keyboard:keyboard.home,
+      resize_keyboard:true,
+      one_time_keyboard:true
+    }
+  })
+     }
+  })
+	
     
     
        
