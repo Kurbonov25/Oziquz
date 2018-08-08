@@ -125,7 +125,7 @@ if (path_to_broadcast_Image==1 && msg.text==undefined)
 
 /////////////////////////////////////flag////////////////////////////////////////////////////
 db.query(`SELECT * FROM temp WHERE user_id=${msg.chat.id}`,function(err,res)
-{
+{  console.log(res)
   var flag=res[0].flag;
   var language=res[0].language;
   var status=res[0].status;
