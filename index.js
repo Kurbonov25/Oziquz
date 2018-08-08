@@ -22,7 +22,7 @@ var link_to_chanel=`@oziquz`;
 var limit=3;
 var channel_id='@oziquz12';
 var Originalchannel_id='@optimus1234q';
-var Admin_id= 511599;
+var Admin_id=224666382; // 511599;
 /////////////////////////////////////////////////////
 //var category;
 //var location;
@@ -43,8 +43,8 @@ var file_path;
 //var Category;
 //var Location;
 var ImageId_to_database;
-var path_to_broadcast;
-var path_to_broadcast_Image;
+//var path_to_broadcast;
+//var path_to_broadcast_Image;
 var adver;
 var cap;
 var news;
@@ -94,31 +94,9 @@ bot.on('message',msg=>{
 
 if (msg.text=="/start")
 {
-     db.query(`UPDATE temp SET flag=0 WHERE user_id=${msg.from.id}`)
-
-
-      path_to_broadcast=0;
-      user_id=msg.from.id;
+     db.query(`UPDATE temp SET flag=0 WHERE user_id=${msg.from.id}`)      
 }
-if (path_to_broadcast_Image==1 && msg.text==undefined)
-{  
-   cap=`<b>📢 News || Новости || Yangilik </b>
-   
-  👉🏻 <b>`+adver+`</b>`;
-  key=1;
-  news=msg.photo[2].file_id;
-  bot.sendPhoto(Admin_id,msg.photo[2].file_id,{
-    caption:cap,
-    parse_mode:"HTML",
-    reply_markup:{
-      keyboard:keyboard.broadcast2,
-     resize_keyboard:true,
-     one_time_keyboard:true,
-     hide_keyboard:true
-    }
-  })
-  path_to_broadcast_Image=0;
-}
+
 
 
 
@@ -439,19 +417,44 @@ if (!fs.existsSync(dir)){
         
 
     });
-      
 
-     
-    
-    
+}
+if(flag==6 && msg.text!=undefined && msg.text!='🏪 Бошига қайтиш' )
+{ 
    
-    
-  
-  
-  
-  
+   adver=msg.text;
+  bot.sendMessage( Admin_id,"Расм Қўшмоқчимисиз ?",{
+  reply_markup:{
+     keyboard:keyboard.broadcast,
+     resize_keyboard:true,
+     one_time_keyboard:true
+  }
+ }) 
+ db.query(`UPDATE temp SET flag=7 WHERE user_id=${user_id}`)
 
-
+}
+if (flag==6 && msg.text==undefined )
+{
+  bot.sendMessage(Admin_id,"Фақат string да хабар ёзинг");
+}
+if (flag==7 && msg.text==undefined)
+{  
+   cap=`<b>📢 News || Новости || Yangilik </b>
+   
+  👉🏻 <b>`+adver+`</b>`;
+  key=1;
+  news=msg.photo[2].file_id;
+  bot.sendPhoto(Admin_id,msg.photo[2].file_id,{
+    caption:cap,
+    parse_mode:"HTML",
+    reply_markup:{
+      keyboard:keyboard.broadcast2,
+     resize_keyboard:true,
+     one_time_keyboard:true,
+     hide_keyboard:true
+    }
+  })
+  
 }
   }
   
@@ -459,24 +462,7 @@ if (!fs.existsSync(dir)){
 
 
 
-if(path_to_broadcast==1 && msg.text!=undefined && msg.text!='🏪 Бошига қайтиш' )
-{ 
-  path_to_broadcast=0;
-   adver=msg.text;
- bot.sendMessage( Admin_id,"Расм Қўшмоқчимисиз ?",{
-  reply_markup:{
-     keyboard:keyboard.broadcast,
-     resize_keyboard:true,
-     one_time_keyboard:true
-  }
- }) 
- path_to_broadcast_Image=1;
 
-}
-if (path_to_broadcast==1 && msg.text==undefined )
-{
-  bot.sendMessage(Admin_id,"Фақат string да хабар ёзинг");
-}
 else
 {
 	switch(msg.text)
@@ -1124,7 +1110,9 @@ const text=`Вы собираетесь <b> Продавать  </b>или  <b>�
 		}
     case kb.Broadcast2.declare:
     {
-      db.query(`SELECT DISTINCT user_id FROM sotish`,function(err,res)
+
+       bot.sendMessage(msg.chat.id,"Ishladim")
+     /* db.query(`SELECT DISTINCT user_id FROM sotish`,function(err,res)
       {
       
         res.map((f,i)=>{
@@ -1168,7 +1156,7 @@ const text=`Вы собираетесь <b> Продавать  </b>или  <b>�
         
       
       
-      })
+      })*/
       break;
     }
     case kb.GoBroadcast.goBroadcast:
@@ -1287,7 +1275,7 @@ bot.onText(/\/broadcast/,msg=>{
  user_id=msg.from.id;
  if (user_id==Admin_id)
  {
-  path_to_broadcast=1;
+   db.query(`UPDATE temp SET flag=6 WHERE user_id=${user_id}`);
  const Html=
  ` <b>Янгилик ёки Хабарни Киритинг</b>`;
 
