@@ -1250,50 +1250,7 @@ if (flag==7 && msg.text==undefined)
   
 }
   }
-  else 
-  {
-    var count=0;
- user_id=msg.from.id;
-
-
- db.query(`SELECT user_id FROM temp WHERE user_id=${user_id}`,function(err,res)
- {  
-     console.log(res)
-    let promises=res.map((f,i)=>{
-      count++;
-    })
-  Promise.all(promises).then(function(values){
-    if (count>0)
-    {
-      db.query(`DELETE FROM temp WHERE user_id=${user_id}`)
-      db.query(`INSERT INTO temp (user_id) VALUES (${user_id})`) 
-    }
-    else if(count==0)
-    {
-      db.query(`INSERT INTO temp (user_id) VALUES (${user_id})`)
-    }
-  })
- })
  
-
-
-
- username=msg.from.username;
- path_to_broadcast=0;
- 
- const Html=
- `🇺🇿 <b>Тилни Танланг 
-</b>🇷🇺 <b>Выберите язык</b>`;
-
-  bot.sendMessage(msg.chat.id,Html,{
-    parse_mode:"HTML",
-    reply_markup:{
-      keyboard:keyboard.home,
-      resize_keyboard:true,
-      one_time_keyboard:true
-    }
-  })
-  }
   
 })
 
