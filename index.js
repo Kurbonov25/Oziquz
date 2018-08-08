@@ -463,8 +463,7 @@ if (flag==7 && msg.text==undefined)
 
 
 
-else
-{
+
 	switch(msg.text)
 	{
 		case kb.GoHome.goHome:
@@ -1216,7 +1215,7 @@ const text=`Вы собираетесь <b> Продавать  </b>или  <b>�
     break;
    }
 		}
-		}
+		
        
 
 })
