@@ -20,9 +20,9 @@ const kb2= require('./keyboard-button2.js')
 var mysql=require("mysql")
 var link_to_chanel=`@oziquz`;
 var limit=3;
-var channel_id='@oziquz12';
-var Originalchannel_id='@optimus1234q';
-var Admin_id=224666382; // 511599;
+var channel_id='-1001231331656';
+var Originalchannel_id='@oziquz';
+var Admin_id=511599;
 /////////////////////////////////////////////////////
 //var category;
 //var location;
@@ -474,7 +474,7 @@ if (flag==7 && msg.text==undefined)
      
 			
 			db.query(`UPDATE temp SET flag=0 WHERE user_id=${msg.chat.id}`)
-      path_to_broadcast=0;
+    
 		
    
 		    const Html=
@@ -1110,8 +1110,8 @@ const text=`Вы собираетесь <b> Продавать  </b>или  <b>�
     case kb.Broadcast2.declare:
     {
 
-       bot.sendMessage(msg.chat.id,"Ishladim")
-     /* db.query(`SELECT DISTINCT user_id FROM sotish`,function(err,res)
+     
+      db.query(`SELECT DISTINCT user_id FROM sotish`,function(err,res)
       {
       
         res.map((f,i)=>{
@@ -1155,7 +1155,7 @@ const text=`Вы собираетесь <b> Продавать  </b>или  <b>�
         
       
       
-      })*/
+      })
       break;
     }
     case kb.GoBroadcast.goBroadcast:
