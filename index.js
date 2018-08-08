@@ -93,420 +93,6 @@ bot.on('message',msg=>{
 
 
 
-if (msg.text=="/start")
-{
-     db.query(`UPDATE temp SET flag=0 WHERE user_id=${msg.from.id}`)      
-}
-
-
-
-
-
-/////////////////////////////////////flag////////////////////////////////////////////////////
-db.query(`SELECT * FROM temp WHERE user_id=${msg.chat.id}`,function(err,res)
-{  if (res[0]!=undefined)
-  {  
-    var flag=res[0].flag;
-  var language=res[0].language;
-  var status=res[0].status;
-  var location=res[0].location;
-  var phoneNumber=res[0].phone_number;
-  var description=res[0].description;
-  var status_name=res[0].status_name;
-   HashCat=res[0].hashCat;
-   HashLoc=res[0].hashLoc;
-
-if (flag==1 && msg.text==undefined)
-{
- 
-  var phoneNumber=msg.contact.phone_number;
-  db.query(`UPDATE temp SET phone_number='${phoneNumber}' WHERE user_id=${msg.from.id}`)
-  if (language == 'Uzbek')
-  {
-    var sent=phoneNumber + ` Телефон Рақами қабул қилинди ✅`;
-    var html=`<b> Элон Матнини киритинг.Илтимос қисқа ва лўнда бўлсин.</b>
-Масалан:
-
-✏📄 <code> Шакар Сотаман. Улгуржи нархда. Россияда ишлаб чиқарилган. 1 қопда 50 кг. Минимал миқдор бир тўнна. Нархи 4500 сўм.</code>`;
-var html2=`<b>Элон Матнини киритинг.Илтимос қисқа ва лўнда болсин.</b>
-Masalan:
-
-✏📄 <code>Kаптива Автомобилини Сотиб оламан. Йили 2017. Қора Ранг </code>`;
-  }
-   else if (language=='Russian')
-  {
-    var sent=`Принят ` +phoneNumber+ ` номер телефона ✅`;
-    var html=`<b>Введите текст объявления.Пожалуйста как можно короче.</b>
-Например:
-
-✏📄<code> Продам Сахар. По оптовой цене. Коричневого цвета. Произведено в России. В упаковке 25 кг. Минимальный объем 1 тонна</code>`;
-         var html2=`<b>Введите текст объявления. Пожалуйста как можно короче.</b>
-Например:
-
-✏📄 <code>Куплю автомобиль Каптива. 2017 год выпуска. Черный Цвет</code>`;
-  }
-
-  bot.sendMessage(msg.chat.id,sent).then(()=>{
-    if (status==1 || status==2)
-    {
-      bot.sendMessage(msg.chat.id,html,{
-      parse_mode:"HTML",
-      reply_markup:{
-        keyboard:keyboard.backfromDesc,
-              resize_keyboard:true,
-              one_time_keyboard:true
-      }
-    }).then(()=>{
-         db.query(`UPDATE temp SET flag=2 WHERE user_id=${msg.from.id}`)
-    })
-     }
-     else if(status==3 || status==4)
-     {
-           if (language=='Uzbek')
-      {
-        bot.sendMessage(msg.chat.id,html2,{
-      parse_mode:"HTML",
-      reply_markup:{
-        keyboard:keyboard.backfromDesc,
-              resize_keyboard:true,
-              one_time_keyboard:true
-      }
-    }).then(()=>{
-          db.query(`UPDATE temp SET flag=2 WHERE user_id=${msg.from.id}`)
-    })
-     }
-     else if (language=='Russian')
-     {
-      bot.sendMessage(msg.chat.id,html2,{
-      parse_mode:"HTML",
-      reply_markup:{
-        keyboard:keyboard.backfromDesc2,
-              resize_keyboard:true,
-              one_time_keyboard:true
-      }
-    }).then(()=>{
-          db.query(`UPDATE temp SET flag=2 WHERE user_id=${msg.from.id}`)
-    })
-     }
-     }
-  })
-  
-  
-}
-
-  if (flag==1 && msg.text!=undefined && msg.text!='🏪 Бошига қайтиш' && msg.text!='🏪 Назад на главную' )
-{
-  if((/^[\+][9]{2}[8]{1}[1-9]{1}[0-9]{8}/.test(msg.text)))
-  {
-
-  var phoneNumber=msg.text;
-  db.query(`UPDATE temp SET phone_number='${phoneNumber}' WHERE user_id=${msg.from.id}`)
-
-    if (language == 'Uzbek')
-  {
-    var sent=phoneNumber+` Телефон Рақами қабул қилинди ✅`;
-    var html=`<b>Элон Матнини киритинг.Илтимос қисқа ва лўнда.</b>
-Масалан:
-
-✏📄<code>Шакар Сотаман. Улгуржи нархда. Россияда ишлаб чиқарилган. 1 қопда 50 кг. Минимал миқдор бир тўнна. Нархи 4500 сўм.</code>`;
-  }
-   else if (language=='Russian')
-  {
-    var sent=`Принят ` +phoneNumber+ ` номер телефона ✅`;
-    var html=`<b>Введите текст объявления.Пожалуйста как можно короче.</b>
-Например:
-
-✏📄 <code>Продам Сахар. По оптовой цене. Коричневого цвета. Произведено в России. В упаковке 25 кг. Минимальный объем 1 тонна </code>`;
-  }
-
-  
-    bot.sendMessage(msg.chat.id,sent).then(()=>{
-    bot.sendMessage(msg.chat.id,html,{
-      parse_mode:"HTML",
-      reply_markup:{
-        keyboard:keyboard.backfromDesc,
-              resize_keyboard:true,
-              one_time_keyboard:true
-      }
-    }).then(()=>{
-
-        db.query(`UPDATE temp SET flag=2 WHERE user_id=${msg.from.id}`)
-    })
-  })
-  
-    }
-    else {
-      if (language=='Uzbek')
-      { 
-       var text=`Сиз киритган <b>Телефон Рақамингиз</b> бизнинг стандартга тўгри келмади ❌ Илтимос қайтадан киритинг (мисол: +998901234567)`;
-       var text2=`📲 Телеграмдаги Телефон Рақамингизни жонатиш`;
-     var text3=`🏪 Бошига қайтиш`;
-      }
-      else if (language=='Russian')
-      {
-      var text=`Вы ввели <b>номер телефона</b> не соответствует нашим стандартам ❌ Пожалуйста, введите, используя этот шаблон (+998913274140)`;
-        var text2=`📲 отправьте номер телефона в вашей телеграмме контакты`; 
-      var text3=`🏪 Назад на главную`;
-      } 
-      bot.sendMessage(msg.chat.id,text,{
-        parse_mode:"HTML",
-             reply_markup:{
-              keyboard:[[
-             {
-                text: text2,
-                request_contact: true,
-
-             },
-
-            ],[text3]],
-              resize_keyboard:true,
-              one_time_keyboard:true
-             }
-      });
-
-      
-    }
-}
-//////////////////////////////////global key2/////////////////////////////////////////
-if (flag==2 && msg.text!='🏪 Бошига қайтиш' && msg.text!='🏪 Назад на главную')
-{
-  
-
-  
-  var check=0;
-  var description=msg.text;
-  
-
-  for (var count=0;description.length>count;count++)
-  {
-  
-    if (description[count]==';'|| description[count]==`"` || description[count]==`'` || description[count]==`/` ||description[count]==`%`)
-    {
-      check=1;
-
-    }
-  }
-  if (check==1)
-  { 
-    if (language=='Uzbek')
-    {
-       var attention=`<b>Сиз киритган еълон матни бизнинг стандартга тўгри келмади ❌ Илтимос еълон матнида (; " ' / % ) белгилардан фойдаланманг 🙅</b>`;
-       bot.sendMessage(msg.chat.id,attention,{
-        parse_mode:"HTML"
-       })
-    }
-    else if (language=='Russian')
-    {
- var attention=`<b>введенный вами текст не соответствует наш стандарт ❌ Пожалуйста, не используйте 🙅 ети символы (; " ' / %) </b>`;
-       bot.sendMessage(msg.chat.id,attention,{
-        parse_mode:"HTML"
-       })
-    }
-  
-  }
-  else if (check==0)
-  {
-
-    db.query(`UPDATE temp SET description='${description}' WHERE user_id=${msg.from.id}`)
-
-    if (language=='Uzbek')
-  {
-     var pict=`Элонга таллуқли расм жойланг! 
-     👉Расм юклаш учун 📎белгисини босинг. 👉 Эсингизда бўлсин еълон расм билан яхшироқ кўринади ва харидорлар етиборини тортади. 
-     ❗️Расм ёқ бўлса "<b>Давом еттириш</b>" тугмасини босиб ушбу қадамни ўтказиб юборинг.`;
-bot.sendMessage(msg.chat.id,pict,{
-    parse_mode:"HTML",
-    reply_markup:{
-      keyboard:keyboard.desc,
-      resize_keyboard:true,
-      one_time_keyboard:true
-    }
-   }).then(()=>{
-   db.query(`UPDATE temp SET flag=3 WHERE user_id=${msg.from.id}`)
-   }) 
-   }
-   else if (language=='Russian')
-   {
-     var pict=`Загрузите 1 фотографию для этого объявления!
-👉Щелкните значок📎 изображения для загрузки.
-👉Имейте в виду, что объявления с изображением выглядит лучше и привлекает внимание клиента.
-❗️Если нет фото, пропустите этот шаг, нажав кнопку <b>«Продолжить»</b>.`;
-bot.sendMessage(msg.chat.id,pict,{
-    parse_mode:"HTML",
-    reply_markup:{
-      keyboard:keyboard.desc2,
-      resize_keyboard:true,
-      one_time_keyboard:true
-    }
-   }).then(()=>{
-     db.query(`UPDATE temp SET flag=3 WHERE user_id=${msg.from.id}`)
-   }) 
-   }
-  }
-  
-   
-   
-   
-  
-}
-///////////////////////////////////////////global key 3////////////////////////////////////////////////////
-if (flag==3 && msg.text==undefined)
-{
-  
- db.query(`UPDATE temp SET flag=4 WHERE user_id=${msg.from.id}`)
-  
-
-   
- 
-
-   
-     file_id=msg.photo[2].file_id;
-    var dir = './photos/';
-
-if (!fs.existsSync(dir)){
-    fs.mkdirSync(dir);
-}
-
-  var file_info =bot.getFile(file_id).then(function(resp)
-    {
-             file_path=resp.file_path;
-             bot.downloadFile(file_id,'./photos/').then(function(path)
-             {
-               
-               cloudinary.uploader.upload(path, function(result) { 
-              var image=result.url;
-               db.query(`UPDATE temp SET image='${image}' WHERE user_id=${msg.chat.id}`) 
-                Caption=`👉🏻 `+description+`
-
-☎️  Маълумот учун: `+phoneNumber+`
-
-⭐️ #`+status_name+` #`+HashCat+` #`+HashLoc+`
-
-📲 Каналга обуна учун 👉 @oziquz 👈 `+`
-<a href="`+result.url+`">&#160 </a>`;
-
-  
-    bot.sendMessage(msg.chat.id,Caption,{
-     parse_mode:"HTML"
-    }).then(()=>{
-      if (language=='Uzbek')
-      {
-          var text='❗ Агар еълон кўриниши ва Барча малумотлар тўгри бўлса еълон бериш клавишини босинг акс ҳолда бошига қайтинг'; 
-        bot.sendMessage(msg.chat.id,text,{
-        reply_markup:{
-          keyboard:keyboard.final,
-          resize_keyboard:true,
-              one_time_keyboard:true
-        }
-      })
-      }
-      else if(language=='Russian')
-      {
-           var text='❗ Если просматривать объявления и вся информация верны , нажмите на кнопку \"объявление\", в противном случае вернуться в Главное меню и заполнить все снова';
-         bot.sendMessage(msg.chat.id,text,{
-        reply_markup:{
-          keyboard:keyboard.final2,
-          resize_keyboard:true,
-              one_time_keyboard:true
-        }
-      })
-      }
-      
-    })
-}); 
-             });
-        
-
-    });
-
-}
-if(flag==6 && msg.text!=undefined && msg.text!='🏪 Бошига қайтиш' )
-{ 
-   db.query(`UPDATE temp SET flag=7 WHERE user_id=${msg.from.id}`)
-  adver=msg.text;
-  bot.sendMessage( Admin_id,"Расм Қўшмоқчимисиз ?",{
-  reply_markup:{
-     keyboard:keyboard.broadcast,
-     resize_keyboard:true,
-     one_time_keyboard:true
-  }
- }) 
- 
-
-}
-if (flag==6 && msg.text==undefined )
-{
-  bot.sendMessage(Admin_id,"Фақат string да хабар ёзинг");
-}
-if (flag==7 && msg.text==undefined)
-{  
-   cap=`<b>📢 News || Новости || Yangilik </b>
-   
-  👉🏻 <b>`+adver+`</b>`;
-  key=1;
-  news=msg.photo[2].file_id;
-  bot.sendPhoto(Admin_id,msg.photo[2].file_id,{
-    caption:cap,
-    parse_mode:"HTML",
-    reply_markup:{
-      keyboard:keyboard.broadcast2,
-     resize_keyboard:true,
-     one_time_keyboard:true,
-     hide_keyboard:true
-    }
-  })
-  
-}
-  }
-  else 
-  {
-    var count=0;
- user_id=msg.from.id;
-
-
- db.query(`SELECT user_id FROM temp WHERE user_id=${user_id}`,function(err,res)
- {  
-     console.log(res)
-    let promises=res.map((f,i)=>{
-      count++;
-    })
-  Promise.all(promises).then(function(values){
-    if (count>0)
-    {
-      db.query(`DELETE FROM temp WHERE user_id=${user_id}`)
-      db.query(`INSERT INTO temp (user_id) VALUES (${user_id})`) 
-    }
-    else if(count==0)
-    {
-      db.query(`INSERT INTO temp (user_id) VALUES (${user_id})`)
-    }
-  })
- })
- 
-
-
-
- username=msg.from.username;
- path_to_broadcast=0;
- 
- const Html=
- `🇺🇿 <b>Тилни Танланг 
-</b>🇷🇺 <b>Выберите язык</b>`;
-
-  bot.sendMessage(msg.chat.id,Html,{
-    parse_mode:"HTML",
-    reply_markup:{
-      keyboard:keyboard.home,
-      resize_keyboard:true,
-      one_time_keyboard:true
-    }
-  })
-  }
-  
-})
-
-
-
 
 
 	switch(msg.text)
@@ -1260,6 +846,420 @@ const text=`Вы собираетесь <b> Продавать  </b>или  <b>�
     break;
    }
 		}
+if (msg.text=="/start")
+{
+     db.query(`UPDATE temp SET flag=0 WHERE user_id=${msg.from.id}`)      
+}
+
+
+
+
+
+/////////////////////////////////////flag////////////////////////////////////////////////////
+db.query(`SELECT * FROM temp WHERE user_id=${msg.chat.id}`,function(err,res)
+{  if (res[0]!=undefined)
+  {  
+    var flag=res[0].flag;
+  var language=res[0].language;
+  var status=res[0].status;
+  var location=res[0].location;
+  var phoneNumber=res[0].phone_number;
+  var description=res[0].description;
+  var status_name=res[0].status_name;
+   HashCat=res[0].hashCat;
+   HashLoc=res[0].hashLoc;
+
+if (flag==1 && msg.text==undefined)
+{
+ 
+  var phoneNumber=msg.contact.phone_number;
+  db.query(`UPDATE temp SET phone_number='${phoneNumber}' WHERE user_id=${msg.from.id}`)
+  if (language == 'Uzbek')
+  {
+    var sent=phoneNumber + ` Телефон Рақами қабул қилинди ✅`;
+    var html=`<b> Элон Матнини киритинг.Илтимос қисқа ва лўнда бўлсин.</b>
+Масалан:
+
+✏📄 <code> Шакар Сотаман. Улгуржи нархда. Россияда ишлаб чиқарилган. 1 қопда 50 кг. Минимал миқдор бир тўнна. Нархи 4500 сўм.</code>`;
+var html2=`<b>Элон Матнини киритинг.Илтимос қисқа ва лўнда болсин.</b>
+Masalan:
+
+✏📄 <code>Kаптива Автомобилини Сотиб оламан. Йили 2017. Қора Ранг </code>`;
+  }
+   else if (language=='Russian')
+  {
+    var sent=`Принят ` +phoneNumber+ ` номер телефона ✅`;
+    var html=`<b>Введите текст объявления.Пожалуйста как можно короче.</b>
+Например:
+
+✏📄<code> Продам Сахар. По оптовой цене. Коричневого цвета. Произведено в России. В упаковке 25 кг. Минимальный объем 1 тонна</code>`;
+         var html2=`<b>Введите текст объявления. Пожалуйста как можно короче.</b>
+Например:
+
+✏📄 <code>Куплю автомобиль Каптива. 2017 год выпуска. Черный Цвет</code>`;
+  }
+
+  bot.sendMessage(msg.chat.id,sent).then(()=>{
+    if (status==1 || status==2)
+    {
+      bot.sendMessage(msg.chat.id,html,{
+      parse_mode:"HTML",
+      reply_markup:{
+        keyboard:keyboard.backfromDesc,
+              resize_keyboard:true,
+              one_time_keyboard:true
+      }
+    }).then(()=>{
+         db.query(`UPDATE temp SET flag=2 WHERE user_id=${msg.from.id}`)
+    })
+     }
+     else if(status==3 || status==4)
+     {
+           if (language=='Uzbek')
+      {
+        bot.sendMessage(msg.chat.id,html2,{
+      parse_mode:"HTML",
+      reply_markup:{
+        keyboard:keyboard.backfromDesc,
+              resize_keyboard:true,
+              one_time_keyboard:true
+      }
+    }).then(()=>{
+          db.query(`UPDATE temp SET flag=2 WHERE user_id=${msg.from.id}`)
+    })
+     }
+     else if (language=='Russian')
+     {
+      bot.sendMessage(msg.chat.id,html2,{
+      parse_mode:"HTML",
+      reply_markup:{
+        keyboard:keyboard.backfromDesc2,
+              resize_keyboard:true,
+              one_time_keyboard:true
+      }
+    }).then(()=>{
+          db.query(`UPDATE temp SET flag=2 WHERE user_id=${msg.from.id}`)
+    })
+     }
+     }
+  })
+  
+  
+}
+
+  if (flag==1 && msg.text!=undefined && msg.text!='🏪 Бошига қайтиш' && msg.text!='🏪 Назад на главную' )
+{
+  if((/^[\+][9]{2}[8]{1}[1-9]{1}[0-9]{8}/.test(msg.text)))
+  {
+
+  var phoneNumber=msg.text;
+  db.query(`UPDATE temp SET phone_number='${phoneNumber}' WHERE user_id=${msg.from.id}`)
+
+    if (language == 'Uzbek')
+  {
+    var sent=phoneNumber+` Телефон Рақами қабул қилинди ✅`;
+    var html=`<b>Элон Матнини киритинг.Илтимос қисқа ва лўнда.</b>
+Масалан:
+
+✏📄<code>Шакар Сотаман. Улгуржи нархда. Россияда ишлаб чиқарилган. 1 қопда 50 кг. Минимал миқдор бир тўнна. Нархи 4500 сўм.</code>`;
+  }
+   else if (language=='Russian')
+  {
+    var sent=`Принят ` +phoneNumber+ ` номер телефона ✅`;
+    var html=`<b>Введите текст объявления.Пожалуйста как можно короче.</b>
+Например:
+
+✏📄 <code>Продам Сахар. По оптовой цене. Коричневого цвета. Произведено в России. В упаковке 25 кг. Минимальный объем 1 тонна </code>`;
+  }
+
+  
+    bot.sendMessage(msg.chat.id,sent).then(()=>{
+    bot.sendMessage(msg.chat.id,html,{
+      parse_mode:"HTML",
+      reply_markup:{
+        keyboard:keyboard.backfromDesc,
+              resize_keyboard:true,
+              one_time_keyboard:true
+      }
+    }).then(()=>{
+
+        db.query(`UPDATE temp SET flag=2 WHERE user_id=${msg.from.id}`)
+    })
+  })
+  
+    }
+    else {
+      if (language=='Uzbek')
+      { 
+       var text=`Сиз киритган <b>Телефон Рақамингиз</b> бизнинг стандартга тўгри келмади ❌ Илтимос қайтадан киритинг (мисол: +998901234567)`;
+       var text2=`📲 Телеграмдаги Телефон Рақамингизни жонатиш`;
+     var text3=`🏪 Бошига қайтиш`;
+      }
+      else if (language=='Russian')
+      {
+      var text=`Вы ввели <b>номер телефона</b> не соответствует нашим стандартам ❌ Пожалуйста, введите, используя этот шаблон (+998913274140)`;
+        var text2=`📲 отправьте номер телефона в вашей телеграмме контакты`; 
+      var text3=`🏪 Назад на главную`;
+      } 
+      bot.sendMessage(msg.chat.id,text,{
+        parse_mode:"HTML",
+             reply_markup:{
+              keyboard:[[
+             {
+                text: text2,
+                request_contact: true,
+
+             },
+
+            ],[text3]],
+              resize_keyboard:true,
+              one_time_keyboard:true
+             }
+      });
+
+      
+    }
+}
+//////////////////////////////////global key2/////////////////////////////////////////
+if (flag==2 && msg.text!='🏪 Бошига қайтиш' && msg.text!='🏪 Назад на главную')
+{
+  
+
+  
+  var check=0;
+  var description=msg.text;
+  
+
+  for (var count=0;description.length>count;count++)
+  {
+  
+    if (description[count]==';'|| description[count]==`"` || description[count]==`'` || description[count]==`/` ||description[count]==`%`)
+    {
+      check=1;
+
+    }
+  }
+  if (check==1)
+  { 
+    if (language=='Uzbek')
+    {
+       var attention=`<b>Сиз киритган еълон матни бизнинг стандартга тўгри келмади ❌ Илтимос еълон матнида (; " ' / % ) белгилардан фойдаланманг 🙅</b>`;
+       bot.sendMessage(msg.chat.id,attention,{
+        parse_mode:"HTML"
+       })
+    }
+    else if (language=='Russian')
+    {
+ var attention=`<b>введенный вами текст не соответствует наш стандарт ❌ Пожалуйста, не используйте 🙅 ети символы (; " ' / %) </b>`;
+       bot.sendMessage(msg.chat.id,attention,{
+        parse_mode:"HTML"
+       })
+    }
+  
+  }
+  else if (check==0)
+  {
+
+    db.query(`UPDATE temp SET description='${description}' WHERE user_id=${msg.from.id}`)
+
+    if (language=='Uzbek')
+  {
+     var pict=`Элонга таллуқли расм жойланг! 
+     👉Расм юклаш учун 📎белгисини босинг. 👉 Эсингизда бўлсин еълон расм билан яхшироқ кўринади ва харидорлар етиборини тортади. 
+     ❗️Расм ёқ бўлса "<b>Давом еттириш</b>" тугмасини босиб ушбу қадамни ўтказиб юборинг.`;
+bot.sendMessage(msg.chat.id,pict,{
+    parse_mode:"HTML",
+    reply_markup:{
+      keyboard:keyboard.desc,
+      resize_keyboard:true,
+      one_time_keyboard:true
+    }
+   }).then(()=>{
+   db.query(`UPDATE temp SET flag=3 WHERE user_id=${msg.from.id}`)
+   }) 
+   }
+   else if (language=='Russian')
+   {
+     var pict=`Загрузите 1 фотографию для этого объявления!
+👉Щелкните значок📎 изображения для загрузки.
+👉Имейте в виду, что объявления с изображением выглядит лучше и привлекает внимание клиента.
+❗️Если нет фото, пропустите этот шаг, нажав кнопку <b>«Продолжить»</b>.`;
+bot.sendMessage(msg.chat.id,pict,{
+    parse_mode:"HTML",
+    reply_markup:{
+      keyboard:keyboard.desc2,
+      resize_keyboard:true,
+      one_time_keyboard:true
+    }
+   }).then(()=>{
+     db.query(`UPDATE temp SET flag=3 WHERE user_id=${msg.from.id}`)
+   }) 
+   }
+  }
+  
+   
+   
+   
+  
+}
+///////////////////////////////////////////global key 3////////////////////////////////////////////////////
+if (flag==3 && msg.text==undefined)
+{
+  
+ db.query(`UPDATE temp SET flag=4 WHERE user_id=${msg.from.id}`)
+  
+
+   
+ 
+
+   
+     file_id=msg.photo[2].file_id;
+    var dir = './photos/';
+
+if (!fs.existsSync(dir)){
+    fs.mkdirSync(dir);
+}
+
+  var file_info =bot.getFile(file_id).then(function(resp)
+    {
+             file_path=resp.file_path;
+             bot.downloadFile(file_id,'./photos/').then(function(path)
+             {
+               
+               cloudinary.uploader.upload(path, function(result) { 
+              var image=result.url;
+               db.query(`UPDATE temp SET image='${image}' WHERE user_id=${msg.chat.id}`) 
+                Caption=`👉🏻 `+description+`
+
+☎️  Маълумот учун: `+phoneNumber+`
+
+⭐️ #`+status_name+` #`+HashCat+` #`+HashLoc+`
+
+📲 Каналга обуна учун 👉 @oziquz 👈 `+`
+<a href="`+result.url+`">&#160 </a>`;
+
+  
+    bot.sendMessage(msg.chat.id,Caption,{
+     parse_mode:"HTML"
+    }).then(()=>{
+      if (language=='Uzbek')
+      {
+          var text='❗ Агар еълон кўриниши ва Барча малумотлар тўгри бўлса еълон бериш клавишини босинг акс ҳолда бошига қайтинг'; 
+        bot.sendMessage(msg.chat.id,text,{
+        reply_markup:{
+          keyboard:keyboard.final,
+          resize_keyboard:true,
+              one_time_keyboard:true
+        }
+      })
+      }
+      else if(language=='Russian')
+      {
+           var text='❗ Если просматривать объявления и вся информация верны , нажмите на кнопку \"объявление\", в противном случае вернуться в Главное меню и заполнить все снова';
+         bot.sendMessage(msg.chat.id,text,{
+        reply_markup:{
+          keyboard:keyboard.final2,
+          resize_keyboard:true,
+              one_time_keyboard:true
+        }
+      })
+      }
+      
+    })
+}); 
+             });
+        
+
+    });
+
+}
+if(flag==6 && msg.text!=undefined && msg.text!='🏪 Бошига қайтиш' )
+{ 
+   db.query(`UPDATE temp SET flag=7 WHERE user_id=${msg.from.id}`)
+  adver=msg.text;
+  bot.sendMessage( Admin_id,"Расм Қўшмоқчимисиз ?",{
+  reply_markup:{
+     keyboard:keyboard.broadcast,
+     resize_keyboard:true,
+     one_time_keyboard:true
+  }
+ }) 
+ 
+
+}
+if (flag==6 && msg.text==undefined )
+{
+  bot.sendMessage(Admin_id,"Фақат string да хабар ёзинг");
+}
+if (flag==7 && msg.text==undefined)
+{  
+   cap=`<b>📢 News || Новости || Yangilik </b>
+   
+  👉🏻 <b>`+adver+`</b>`;
+  key=1;
+  news=msg.photo[2].file_id;
+  bot.sendPhoto(Admin_id,msg.photo[2].file_id,{
+    caption:cap,
+    parse_mode:"HTML",
+    reply_markup:{
+      keyboard:keyboard.broadcast2,
+     resize_keyboard:true,
+     one_time_keyboard:true,
+     hide_keyboard:true
+    }
+  })
+  
+}
+  }
+  else 
+  {
+    var count=0;
+ user_id=msg.from.id;
+
+
+ db.query(`SELECT user_id FROM temp WHERE user_id=${user_id}`,function(err,res)
+ {  
+     console.log(res)
+    let promises=res.map((f,i)=>{
+      count++;
+    })
+  Promise.all(promises).then(function(values){
+    if (count>0)
+    {
+      db.query(`DELETE FROM temp WHERE user_id=${user_id}`)
+      db.query(`INSERT INTO temp (user_id) VALUES (${user_id})`) 
+    }
+    else if(count==0)
+    {
+      db.query(`INSERT INTO temp (user_id) VALUES (${user_id})`)
+    }
+  })
+ })
+ 
+
+
+
+ username=msg.from.username;
+ path_to_broadcast=0;
+ 
+ const Html=
+ `🇺🇿 <b>Тилни Танланг 
+</b>🇷🇺 <b>Выберите язык</b>`;
+
+  bot.sendMessage(msg.chat.id,Html,{
+    parse_mode:"HTML",
+    reply_markup:{
+      keyboard:keyboard.home,
+      resize_keyboard:true,
+      one_time_keyboard:true
+    }
+  })
+  }
+  
+})
+
+
+
 		
        
 
