@@ -1355,7 +1355,7 @@ bot.sendMessage(Originalchannel_id,htm,{
     
      Promise.all(promises).then(function(values){
 
-    Caption=`👉🏻 `+description+`
+    var Caption=`👉🏻 `+description+`
 
 ☎️  Маълумот учун: `+phoneNumber+`
 
