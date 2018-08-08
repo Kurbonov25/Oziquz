@@ -421,8 +421,8 @@ if (!fs.existsSync(dir)){
 }
 if(flag==6 && msg.text!=undefined && msg.text!='🏪 Бошига қайтиш' )
 { 
-   
-   adver=msg.text;
+   db.query(`UPDATE temp SET flag=7 WHERE user_id=${msg.from.id}`)
+  adver=msg.text;
   bot.sendMessage( Admin_id,"Расм Қўшмоқчимисиз ?",{
   reply_markup:{
      keyboard:keyboard.broadcast,
@@ -430,7 +430,7 @@ if(flag==6 && msg.text!=undefined && msg.text!='🏪 Бошига қайтиш' 
      one_time_keyboard:true
   }
  }) 
- db.query(`UPDATE temp SET flag=7 WHERE user_id=${user_id}`)
+ 
 
 }
 if (flag==6 && msg.text==undefined )
