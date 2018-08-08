@@ -71,6 +71,7 @@ db.connect(function(err,res){
    if(!err)
    {
    	console.log("Successfully connected to Database 25");
+    db.query(`DELETE FROM temp`);
    	
    }
 
