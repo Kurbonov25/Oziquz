@@ -1336,8 +1336,8 @@ bot.onText(/\/broadcast/,msg=>{
 bot.on("callback_query",function(query){
   db.query(`SELECT * FROM temp WHERE user_id=${msg.chat.id}`,function(err,res)
   {
-    
-  }
+
+  })
 	var data=query.data;
 	var chatID=query.message.chat.id;
 	var message_id=query.message.message_id;
