@@ -21,7 +21,7 @@ var mysql=require("mysql")
 var link_to_chanel=`@oziquz`;
 var limit=3;
 var channel_id='-1001231331656';
-var Originalchannel_id='@oziquz';
+var Originalchannel_id='@optimus1234q';
 var Admin_id=511599;
 /////////////////////////////////////////////////////
 //var category;
