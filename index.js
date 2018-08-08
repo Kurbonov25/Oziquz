@@ -70,7 +70,7 @@ var db =mysql.createConnection({
 db.connect(function(err,res){
    if(!err)
    {
-   	console.log("Successfully connected to Database 25");
+   	console.log("Successfully connected to Database 250");
     db.query(`DELETE FROM temp`);
    	
    }
@@ -94,82 +94,131 @@ bot.on('message',msg=>{
 
 
 
-
-	switch(msg.text)
-	{
-		case kb.GoHome.goHome:
-		case kb2.GoHome.goHome:
-		case kb.Choice.back:
-		case  kb2.Choice.back:
-		{
-     
-			
-			db.query(`UPDATE temp SET flag=0 WHERE user_id=${msg.chat.id}`)
+db.query(`SELECT * FROM temp WHERE user_id=${msg.from.id}`,function(err,res)
+{
+   if (res[0]==undefined)
+   {
     
-		
+ var count=0;
+ var user_id=msg.from.id;
+
+
+ db.query(`SELECT user_id FROM temp WHERE user_id=${user_id}`,function(err,res)
+ {  
+     
+    let promises=res.map((f,i)=>{
+      count++;
+    })
+  Promise.all(promises).then(function(values){
+    if (count>0)
+    {
+      db.query(`DELETE FROM temp WHERE user_id=${user_id}`)
+      db.query(`INSERT INTO temp (user_id) VALUES (${user_id})`) 
+    }
+    else if(count==0)
+    {
+      db.query(`INSERT INTO temp (user_id) VALUES (${user_id})`)
+    }
+  })
+ })
+ 
+
+
+
+ 
+
+ 
+ const Html=
+ `🇺🇿 <b>Тилни Танланг 
+</b>🇷🇺 <b>Выберите язык</b>`;
+
+  bot.sendMessage(msg.chat.id,Html,{
+    parse_mode:"HTML",
+    reply_markup:{
+      keyboard:keyboard.home,
+      resize_keyboard:true,
+      one_time_keyboard:true
+    }
+  })
+    
+   }
+   else
+   {
+    switch(msg.text)
+  {
+    case kb.GoHome.goHome:
+    case kb2.GoHome.goHome:
+    case kb.Choice.back:
+    case  kb2.Choice.back:
+    {
+     
+      
+      db.query(`UPDATE temp SET flag=0 WHERE user_id=${msg.chat.id}`)
+    
+    
    
-		    const Html=
+        const Html=
  `🇺🇿 <b>Тилни Танланг</b>  🇷🇺 <b>Выберите язык</b>`;
 
   bot.sendMessage(msg.chat.id,Html,{
-  	parse_mode:"HTML",
-  	reply_markup:{
-  		keyboard:keyboard.home,
-  		resize_keyboard:true,
-  		one_time_keyboard:true
-  	}
-  })	
-			break;
+    parse_mode:"HTML",
+    reply_markup:{
+      keyboard:keyboard.home,
+      resize_keyboard:true,
+      one_time_keyboard:true
+    }
+  })  
+      break;
         }
         case kb.BackfromCat.goBack:
         {
-            const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Сотиб Олмоқчимисиз ?</b>  `	
+            const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Сотиб Олмоқчимисиз ?</b>  ` 
          bot.sendMessage(msg.chat.id,text,{
-         	parse_mode:"HTML",
-         	reply_markup:{
-         		keyboard:keyboard.choice,
-         		resize_keyboard:true,
-         		one_time_keyboard:true
-         	}
+          parse_mode:"HTML",
+          reply_markup:{
+            keyboard:keyboard.choice,
+            resize_keyboard:true,
+            one_time_keyboard:true
+          }
          });
-        	break;
+          break;
         }
-		case kb.Home.Uzbek:
-		{
+    case kb.Home.Uzbek:
+    {
       var user_id=msg.from.id;
-			var language='Uzbek';
+      var language='Uzbek';
       db.query(`UPDATE temp SET language='Uzbek' WHERE user_id=${user_id}`)
 
-const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Сотиб Олмоқчимисиз ?</b>  `	
+const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Сотиб Олмоқчимисиз ?</b>  ` 
          bot.sendMessage(msg.chat.id,text,{
-         	parse_mode:"HTML",
-         	reply_markup:{
-         		keyboard:keyboard.choice,
-         		resize_keyboard:true,
-         		one_time_keyboard:true
-         	}
+          parse_mode:"HTML",
+          reply_markup:{
+            keyboard:keyboard.choice,
+            resize_keyboard:true,
+            one_time_keyboard:true
+          }
          });
          break;
-		}
+    }
 
-		case kb.Choice.sell:
-		case kb2.Choice.sell:
-		{   
-			
-		    var language;
+    case kb.Choice.sell:
+    case kb2.Choice.sell:
+    {   
+      
+        var language;
         var user_id=msg.from.id;
-		        	
-		       /* 	db.query(`SELECT * FROM sotish WHERE user_id=${user_id} `,function(err,res){
-				    
-						let promises=res.map((f,i)=>{max_counter=i+1;});
-						Promise.all(promises).then(function(values)
-						{ 
-					
+              
+           /*   db.query(`SELECT * FROM sotish WHERE user_id=${user_id} `,function(err,res){
+            
+            let promises=res.map((f,i)=>{max_counter=i+1;});
+            Promise.all(promises).then(function(values)
+            { 
+          
                           if (max_counter<limit || res[0]==undefined || 1==1) /////////////Check
-			
-			{	*/
+      
+      { */
 
-			
+      
         db.query(`SELECT language FROM temp WHERE user_id=${user_id}`,function(err,res)
         { 
          
@@ -306,11 +355,11 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 
         })
         
-			break;
-		}
-		case kb.Final.approve:
-		case kb2.Final.approve:
-		{ 
+      break;
+    }
+    case kb.Final.approve:
+    case kb2.Final.approve:
+    { 
      
      var forward_id=msg.message_id;
 
@@ -467,11 +516,11 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 
 })
      
-				
-			
-			
-			break;
-		}
+        
+      
+      
+      break;
+    }
     case kb.Choice.help:
     case kb2.Choice.help:
     { 
@@ -502,11 +551,11 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
       
       break;
     }
-		case kb.Desc.continue:
-		case kb2.Desc.continue:
-		{
-		
-		db.query(`SELECT * FROM temp WHERE user_id=${msg.chat.id}`,function(err,res)
+    case kb.Desc.continue:
+    case kb2.Desc.continue:
+    {
+    
+    db.query(`SELECT * FROM temp WHERE user_id=${msg.chat.id}`,function(err,res)
 {
   var flag=res[0].flag;
   var language=res[0].language;
@@ -558,21 +607,21 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
 })
          
          
-	  
+    
     
 
 
-			break;
-		}
-		case kb.Choice.buy:
-		case kb2.Choice.buy:
-		{
-			
-				
-			
+      break;
+    }
+    case kb.Choice.buy:
+    case kb2.Choice.buy:
+    {
+      
+        
+      
      
 
-			db.query(`SELECT language FROM temp WHERE user_id=${msg.from.id}`,function(err,res)
+      db.query(`SELECT language FROM temp WHERE user_id=${msg.from.id}`,function(err,res)
       { 
            var language=res[0].language;
          /* db.query(`SELECT * FROM sotish WHERE user_id=${user_id} `,function(err,res){
@@ -718,26 +767,26 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
   */
       })
       
-		
+    
            
-			break;
-		}
-		case kb.Home.Russian:
-		case kb2.BackfromCat.goBack:
-		{
-			var language='Russian';
+      break;
+    }
+    case kb.Home.Russian:
+    case kb2.BackfromCat.goBack:
+    {
+      var language='Russian';
       db.query(`UPDATE temp SET language='Russian' WHERE user_id=${msg.from.id}`)
-const text=`Вы собираетесь <b> Продавать  </b>или  <b>купить </b> продукты?  `	
+const text=`Вы собираетесь <b> Продавать  </b>или  <b>купить </b> продукты?  `  
          bot.sendMessage(msg.chat.id,text,{
-         	parse_mode:"HTML",
-         	reply_markup:{
-         		keyboard:keyboard.choice2,
-         		resize_keyboard:true,
-         		one_time_keyboard:true
-         	}
+          parse_mode:"HTML",
+          reply_markup:{
+            keyboard:keyboard.choice2,
+            resize_keyboard:true,
+            one_time_keyboard:true
+          }
          });
           break;
-		}
+    }
     case kb.Broadcast2.declare:
     {
 
@@ -845,7 +894,11 @@ const text=`Вы собираетесь <b> Продавать  </b>или  <b>�
     })
     break;
    }
-		}
+    }
+   }
+
+})
+	
 if (msg.text=="/start")
 {
      db.query(`UPDATE temp SET flag=0 WHERE user_id=${msg.from.id}`)      
@@ -1271,12 +1324,12 @@ bot.onText(/\/start/,msg=>{
 
 
  var count=0;
- user_id=msg.from.id;
+ var user_id=msg.from.id;
 
 
  db.query(`SELECT user_id FROM temp WHERE user_id=${user_id}`,function(err,res)
  {  
-     console.log(res)
+   
     let promises=res.map((f,i)=>{
       count++;
     })
@@ -1304,12 +1357,12 @@ bot.onText(/\/start/,msg=>{
 </b>🇷🇺 <b>Выберите язык</b>`;
 
   bot.sendMessage(msg.chat.id,Html,{
-  	parse_mode:"HTML",
-  	reply_markup:{
-  		keyboard:keyboard.home,
-  		resize_keyboard:true,
-  		one_time_keyboard:true
-  	}
+    parse_mode:"HTML",
+    reply_markup:{
+      keyboard:keyboard.home,
+      resize_keyboard:true,
+      one_time_keyboard:true
+    }
   })
 
 })
