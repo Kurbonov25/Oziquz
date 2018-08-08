@@ -96,7 +96,7 @@ bot.on('message',msg=>{
 
 db.query(`SELECT * FROM temp WHERE user_id=${msg.from.id}`,function(err,res)
 {
-   if (res[0]==undefined || msg.text='/start')
+   if (res[0]==undefined || msg.text='\/start')
    {
     
  var count=0;
