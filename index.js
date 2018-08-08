@@ -1384,9 +1384,12 @@ bot.on("callback_query",function(query){
     }
     else if (res[0]!=undefined)
     {
-      var data=query.data;
-  var chatID=query.message.chat.id;
-  var message_id=query.message.message_id;
+
+    }
+  }
+	var data=query.data;
+	var chatID=query.message.chat.id;
+	var message_id=query.message.message_id;
   
   if (data=='post')
   {
@@ -1581,7 +1584,7 @@ bot.sendMessage(Originalchannel_id,htm,{
 
   
   
-  
+	
 db.query(`SELECT * FROM locations WHERE location='${data}'`,function(err,res)
 { var counter=0;
  
@@ -1666,7 +1669,4 @@ db.query(`SELECT * FROM locations WHERE location='${data}'`,function(err,res)
        
      
 
-    }
-  }
-	
 })
