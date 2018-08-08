@@ -1642,8 +1642,8 @@ db.query(`SELECT * FROM locations WHERE location='${data}'`,function(err,res)
 
 
 
- username=msg.from.username;
- path_to_broadcast=0;
+ 
+ 
  
  const Html=
  `🇺🇿 <b>Тилни Танланг 
