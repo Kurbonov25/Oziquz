@@ -1355,11 +1355,11 @@ bot.sendMessage(Originalchannel_id,htm,{
     
      Promise.all(promises).then(function(values){
 
-    var Caption=`👉🏻 `+description+`
+    var Caption=`👉🏻 `+description1+`
 
-☎️  Маълумот учун: `+phoneNumber+`
+☎️  Маълумот учун: `+phoneNumber1+`
 
-⭐️ #`+status_name+` #`+hash1+` #`+hash2+`
+⭐️ #`+status_name1+` #`+hash1+` #`+hash2+`
 
 📲 Каналга обуна учун 👉 @oziquz 👈 `+`
 <a href="`+link+`">&#160 </a>`;
