@@ -120,27 +120,7 @@ db.query(`SELECT * FROM temp WHERE user_id=${msg.from.id}`,function(err,res)
       db.query(`INSERT INTO temp (user_id) VALUES (${user_id})`)
     }
   })
- })
- 
-
-
-
- 
-
- 
- const Html=
- `🇺🇿 <b>Тилни Танланг 
-</b>🇷🇺 <b>Выберите язык</b>`;
-
-  bot.sendMessage(msg.chat.id,Html,{
-    parse_mode:"HTML",
-    reply_markup:{
-      keyboard:keyboard.home,
-      resize_keyboard:true,
-      one_time_keyboard:true
-    }
-  })
-    
+ })    
    }
    else
    {
@@ -899,12 +879,6 @@ const text=`Вы собираетесь <b> Продавать  </b>или  <b>�
 
 })
 	
-if (msg.text=="/start")
-{
-     db.query(`UPDATE temp SET flag=0 WHERE user_id=${msg.from.id}`)      
-}
-
-
 
 
 
