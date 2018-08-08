@@ -70,7 +70,7 @@ var db =mysql.createConnection({
 db.connect(function(err,res){
    if(!err)
    {
-   	console.log("Successfully connected to Database");
+   	console.log("Successfully connected to Database 25");
    	
    }
 
