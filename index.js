@@ -101,19 +101,18 @@ db.query(`SELECT * FROM temp WHERE user_id=${msg.from.id}`,function(err,res)
     
  var count=0;
  var user_id=msg.from.id;
-    let promises=res.map((f,i)=>{
-      count++;
-    })
-  Promise.all(promises).then(function(values){
-    if (count>0)
-    {
-      db.query(`DELETE FROM temp WHERE user_id=${user_id}`)
-      db.query(`INSERT INTO temp (user_id) VALUES (${user_id})`) 
-    }
-    else if(count==0)
-    {
-      db.query(`INSERT INTO temp (user_id) VALUES (${user_id})`)
-    }
+    
+
+            if (msg.text=="/start")
+            {
+                 db.query(`UPDATE temp SET flag=0 WHERE user_id=${msg.from.id}`)
+            }  
+            else 
+            {
+               db.query(`INSERT INTO temp (user_id) VALUES (${msg.from.id})`) 
+            }
+          
+    
 
     const Html=
  `🇺🇿 <b>Тилни Танланг 
@@ -128,8 +127,7 @@ db.query(`SELECT * FROM temp WHERE user_id=${msg.from.id}`,function(err,res)
     }
   })
 
-  })
-    
+
    }
    else
    {
@@ -1573,20 +1571,17 @@ db.query(`SELECT * FROM locations WHERE location='${data}'`,function(err,res)
  db.query(`SELECT user_id FROM temp WHERE user_id=${chatID}`,function(err,res)
  {  
     
-    let promises=res.map((f,i)=>{
-      count++;
-    })
-  Promise.all(promises).then(function(values){
-    if (count>0)
-    {
-      db.query(`DELETE FROM temp WHERE user_id=${chatID}`)
-      db.query(`INSERT INTO temp (user_id) VALUES (${chatID})`) 
-    }
-    else if(count==0)
-    {
-      db.query(`INSERT INTO temp (user_id) VALUES (${chatID})`)
-    }
-  })
+    if (res[0]==undefined)
+   {
+    db.query(`INSERT INTO temp (user_id) VALUES (${chatID})`)
+   }
+   else 
+   {
+     
+     db.query(`UPDATE temp SET flag=0 WHERE user_id=${chatID}`) 
+   } 
+   
+  
  })
  
 
