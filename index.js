@@ -93,7 +93,10 @@ bot.on('message',msg=>{
 
 
 
-
+if (msg.text=="/start")
+{
+    db.query(`UPDATE temp SET flag=0 WHERE user_id=${msg.from.id}`)
+}
 db.query(`SELECT * FROM temp WHERE user_id=${msg.from.id}`,function(err,res)
 {
    if (res[0]==undefined || msg.text=="/start")
