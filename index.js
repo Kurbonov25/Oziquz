@@ -1287,12 +1287,6 @@ bot.on("callback_query",function(query){
   var data=query.data;
   var chatID=query.message.chat.id;
   var message_id=query.message.message_id;
-  db.query(`SELECT * FROM temp WHERE user_id=${chatID}`,function(err,res)
-  {
-     if(res[0]!=undefined)
-     {
-     
-  
   if (data=='post')
   {
     var description1;
@@ -1384,8 +1378,15 @@ bot.sendMessage(Originalchannel_id,htm,{
   db.query(update);
   }
 
+  db.query(`SELECT * FROM temp WHERE user_id=${chatID}`,function(err,res)
+  {
+     if(res[0]!=undefined)
+     {
+     
+  
+  
  
-  db.query(`SELECT * FROM categories WHERE category='${data}'`,function(err,res){
+ 
     
     var counter=0; 
     res.map((f,i)=>{
@@ -1482,7 +1483,7 @@ bot.sendMessage(Originalchannel_id,htm,{
         });
    
      }
-  })
+  
 
   
   
