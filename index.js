@@ -101,19 +101,15 @@ db.query(`SELECT * FROM temp WHERE user_id=${msg.from.id}`,function(err,res)
     
  var count=0;
  var user_id=msg.from.id;
-    
-
-            if (msg.text=="/start")
-            {
-                 db.query(`UPDATE temp SET flag=0 WHERE user_id=${msg.from.id}`)
-            }  
-            else 
-            {
-               db.query(`INSERT INTO temp (user_id) VALUES (${msg.from.id})`) 
-            }
-          
-    
-
+   if (res[0]==undefined)
+   {
+       db.query(`INSERT INTO temp (user_id) VALUES (${user_id})`)
+   }
+   else 
+   {
+        db.query(`UPDATE temp SET flag=0 WHERE user_id=${msg.from.id}`)
+   }
+  
     const Html=
  `🇺🇿 <b>Тилни Танланг 
 </b>🇷🇺 <b>Выберите язык</b>`;
@@ -127,7 +123,8 @@ db.query(`SELECT * FROM temp WHERE user_id=${msg.from.id}`,function(err,res)
     }
   })
 
-
+  
+    
    }
    else
    {
@@ -1248,7 +1245,8 @@ if (flag==7 && msg.text==undefined)
   
 }
   }
- 
+
+  }
   
 })
 
@@ -1259,7 +1257,8 @@ if (flag==7 && msg.text==undefined)
 
 })
 
-//////////////////////////////bot.onText/////////////////////////////////////////////
+//////////////////////////////bot.onText///////////////////////////////////
+
 bot.onText(/\/broadcast/,msg=>{
 
 
@@ -1285,7 +1284,7 @@ bot.on("callback_query",function(query){
   var data=query.data;
   var chatID=query.message.chat.id;
   var message_id=query.message.message_id;
-  if (data=='post')
+   if (data=='post')
   {
     var description1;
     var phoneNumber1;
@@ -1376,16 +1375,14 @@ bot.sendMessage(Originalchannel_id,htm,{
   db.query(update);
   }
 
-  db.query(`SELECT * FROM temp WHERE user_id=${chatID}`,function(err,res)
+
+  db.query(`SELECT * FROM temp WHERE user_id=${chatID}`,function(err,res1)
   {
-     if(res[0]!=undefined)
-     {
-     
-  
-  
+     if(res1[0]!=undefined)
+     { 
  
- 
-    
+
+    db.query(`SELECT * FROM categories WHERE category='${data}'`,function(err,res){  
     var counter=0; 
     res.map((f,i)=>{
          counter++;
@@ -1481,7 +1478,7 @@ bot.sendMessage(Originalchannel_id,htm,{
         });
    
      }
-  
+  })
 
   
   
@@ -1567,29 +1564,9 @@ db.query(`SELECT * FROM locations WHERE location='${data}'`,function(err,res)
 
      }
      else {
-       var count=0;
- db.query(`SELECT user_id FROM temp WHERE user_id=${chatID}`,function(err,res)
- {  
-    
-    if (res[0]==undefined)
-   {
-    db.query(`INSERT INTO temp (user_id) VALUES (${chatID})`)
-   }
-   else 
-   {
-     
-     db.query(`UPDATE temp SET flag=0 WHERE user_id=${chatID}`) 
-   } 
-   
-  
- })
- 
+      
 
-
-
- 
- 
- 
+  db.query(`INSERT INTO temp (user_id) VALUES (${chatID})`)  
  const Html=
  `🇺🇿 <b>Тилни Танланг 
 </b>🇷🇺 <b>Выберите язык</b>`;
