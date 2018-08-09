@@ -1246,7 +1246,7 @@ if (flag==7 && msg.text==undefined)
 }
   }
 
-  }
+  
   
 })
 
