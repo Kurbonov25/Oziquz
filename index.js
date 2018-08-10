@@ -1332,7 +1332,7 @@ bot.sendMessage(Originalchannel_id,htm,{
        }
        else if (f.status==2)
        {
-        status_name="Продаем";
+        status_name1="Продаем";
        }
        else if (f.status==3)
        {
