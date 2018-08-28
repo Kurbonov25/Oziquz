@@ -1373,9 +1373,22 @@ bot.sendMessage(Originalchannel_id,htm,{
   else if(data=='delete')
   {
  
+
   bot.deleteMessage(chatID,message_id);
   var update=`UPDATE sotish SET position = 'Deleted' WHERE image_id=${message_id}`;
   db.query(update);
+
+  db.query(`SELECT * FROM sotish WHERE image_id=${message_id}`,function(err,res)
+  {
+    var text=`🇺🇿 Сизнинг еьлонингиз модератор назоратидан ўтмади ❌.
+🇷🇺 К сожалению, ваше объявление не принимается контроль модератора ❌.
+
+Description: <b>${res[0].description}</b>`;
+
+   bot.sendMessage(res[0].user_id,text,{
+    parse_mode:HTML
+   })
+  })
   }
 
 
