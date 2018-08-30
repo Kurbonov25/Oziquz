@@ -212,30 +212,12 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
                 
                 db.query(`SELECT number FROM users WHERE user_id=${msg.from.id}`,function(err,res)
                 {
-                    console.log(res[0].number)
-
-
-                })
-
-
-              })
-
-           /*   db.query(`SELECT * FROM sotish WHERE user_id=${user_id} `,function(err,res){
-            
-            let promises=res.map((f,i)=>{max_counter=i+1;});
-            Promise.all(promises).then(function(values)
-            { 
-          
-                          if (max_counter<limit || res[0]==undefined || 1==1) /////////////Check
-      
-      { */
-
-      
-        db.query(`SELECT language FROM temp WHERE user_id=${user_id}`,function(err,res)
+                    if (res[0].number<limit)
+                    {
+                       db.query(`SELECT language FROM temp WHERE user_id=${user_id}`,function(err,res)
         { 
-         
-          language=res[0].language;
-          if (language=="Uzbek"){
+                           language=res[0].language;
+                           if (language=="Uzbek"){
             db.query(`UPDATE temp SET status=1, status_name='Сотамиз'  WHERE user_id=${msg.from.id}`)
           }
         else if (language=="Russian"){
@@ -256,9 +238,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
             var text=`Выберите категорию продукта которую хотите продать:`;
             var text2=`Чтобы вернуться нажмите на кнопки 🏪 ⬅`;
             var keyboardCat=keyboard.backfromCat2;
-            } 
 
-           
             var array1=[];
             var array2=[];
             var counter1=0;
@@ -331,12 +311,18 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
           
           
          });
-         
-         // }  
-      
-  /*    else if (max_counter>2)
-        {
-          if (language=='Uzbek')
+            } 
+
+        })
+
+                    }
+
+                    if (res[0].number>=limit)
+                    {
+                       db.query(`SELECT language FROM temp WHERE user_id=${user_id}`,function(err,res)
+        { 
+                    language=res[0].language;
+                      if (language=='Uzbek')
           {
                      var text=`<b>Сизда еълон бериш лимити тугади!
 Агар сиз кўпроқ еълон бермоқчи бўлсангиз пуллик хизматдан фойдаланинг. 💰 1 та еълон бериш учун PayMe ёки CLICK орқали қуйидаги карта 8600 3029 2503 5154 га 30.000 (ўттиз минг сўм) ўтказиб бизга yozing. Тўлиқ малумот учун бизга @ёзинг</b>`;
@@ -353,19 +339,19 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
           bot.sendMessage(msg.chat.id,text,{
             parse_mode:"HTML"
           });
-        }*/
-            
-        //  });
-        //  });
-
-
-        
-          
-         
-        
-      
 
         })
+
+
+                    }
+
+
+                })
+
+
+              })
+//////////////////////////////////////////////
+
         
       break;
     }
