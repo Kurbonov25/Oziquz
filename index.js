@@ -208,8 +208,9 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
         var user_id=msg.from.id;
               db.query(`SELECT chegara FROM password`,function(err,res)
               {
-                  console.log(res[0].chegara)
+                  limit=res[0].chegara;
               })
+              console.log(limit)
 
            /*   db.query(`SELECT * FROM sotish WHERE user_id=${user_id} `,function(err,res){
             
