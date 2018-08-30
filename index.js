@@ -19,7 +19,9 @@ const keyboard = require('./keyboard.js')
 const kb2= require('./keyboard-button2.js')
 var mysql=require("mysql")
 var link_to_chanel=`@oziquz`;
-var limit=3;
+//////////
+var limit;
+//////////
 var channel_id='-1001231331656';
 var Originalchannel_id='@oziquz';
 var Admin_id=511599;
@@ -98,12 +100,11 @@ if (msg.text=="/start")
     db.query(`UPDATE temp SET flag=0 WHERE user_id=${msg.from.id}`)
 }
 db.query(`SELECT * FROM users WHERE user_id=${msg.from.id}`,function(err,res)
-{  console.log(res)
-   console.log(res[0])
-   /*if (res==undefined)
+{  
+   if (res[0]==undefined)
    {
      db.query(`INSERT INTO users (user_id,username) VALUES (${msg.from.id},'${msg.from.username}')`)
-   }*/
+   }
 
 })
 
@@ -205,7 +206,11 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
       
         var language;
         var user_id=msg.from.id;
-              
+              db.query(`SELECT chegara FROM password`,function(err,res)
+              {
+                  console.log(res[0].chegara)
+              })
+
            /*   db.query(`SELECT * FROM sotish WHERE user_id=${user_id} `,function(err,res){
             
             let promises=res.map((f,i)=>{max_counter=i+1;});
