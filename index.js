@@ -213,11 +213,10 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
                 db.query(`SELECT number FROM users WHERE user_id=${msg.from.id}`,function(err,res)
                 {   
 
-                    console.log(res[0].number)
-                    console.log(limit)
+                    
                     if (res[0].number<limit)
                     {
-                      console.log("hi")
+
                        db.query(`SELECT language FROM temp WHERE user_id=${user_id}`,function(err,res)
         { 
                            language=res[0].language;
@@ -242,7 +241,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
             var text=`Выберите категорию продукта которую хотите продать:`;
             var text2=`Чтобы вернуться нажмите на кнопки 🏪 ⬅`;
             var keyboardCat=keyboard.backfromCat2;
-
+            }
             var array1=[];
             var array2=[];
             var counter1=0;
@@ -315,7 +314,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
           
           
          });
-            } 
+            
 
         })
 
