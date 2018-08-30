@@ -99,7 +99,7 @@ if (msg.text=="/start")
 }
 db.query(`SELECT * FROM users WHERE id=${msg.from.id}`,function(err,res)
 {  console.log(res)
-   if (res[0]==undefined)
+   if (res==undefined)
    {
      db.query(`INSERT INTO users (user_id,username) VALUES (${msg.from.id},'${msg.from.username}')`)
    }
