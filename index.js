@@ -327,7 +327,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
                     language=res[0].language;
                       if (language=='Uzbek')
           {
-                     var text=`<bСизда бепул еьлонлар сони тугади 😭 Яна такрор еьлон бериш хизмати 500 сўм. Мурочат учун @joylash</b>`;
+                     var text=`<b>Сизда бепул еьлонлар сони тугади 😭 Яна такрор еьлон бериш хизмати 500 сўм. Мурочат учун @joylash</b>`;
           }
           else if(language=='Russian')
           {
@@ -612,58 +612,58 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
     case kb2.Choice.buy:
     {
       
-        
-      
-     
+    var language;
+        var user_id=msg.from.id;
+              db.query(`SELECT chegara FROM password`,function(err,res)
+              {
+                  limit=res[0].chegara;
+                
+                db.query(`SELECT number FROM users WHERE user_id=${msg.from.id}`,function(err,res)
+                {   
 
-      db.query(`SELECT language FROM temp WHERE user_id=${msg.from.id}`,function(err,res)
-      { 
-           var language=res[0].language;
-         /* db.query(`SELECT * FROM sotish WHERE user_id=${user_id} `,function(err,res){
-            
-          let promises=res.map((f,i)=>{max_counter=i+1;});
-            Promise.all(promises).then(function(values)
-            { 
-              
-                          if (max_counter<limit || res[0]==undefined || 1==1)
-              {*/
-        if (language=="Uzbek")
-        {
-        
-          db.query(`UPDATE temp SET status=3, status_name='СотибОламиз'  WHERE user_id=${msg.from.id}`)
+                    
+                    if (res[0].number<limit)
+                    {
+
+                       db.query(`SELECT language FROM temp WHERE user_id=${user_id}`,function(err,res)
+        { 
+                           language=res[0].language;
+                           if (language=="Uzbek"){
+            db.query(`UPDATE temp SET status=3, status_name='СотибОламиз'  WHERE user_id=${msg.from.id}`)
+          }
+        else if (language=="Russian"){
+          db.query(`UPDATE temp SET status=4, status_name='Покупаем'  WHERE user_id=${msg.from.id}`)
         }
-      else if (language=="Russian")
-      {
-      
-        db.query(`UPDATE temp SET status=4, status_name='Покупаем'  WHERE user_id=${msg.from.id}`)
-      }
+        
+        
       if (language=='Uzbek')
             {
-           
             var text=`Қайси турдаги Маҳсулот сотиб олмоқчисиз:`;
             var text2=`Орқага қайтиш учун ушбу 🏪 ⬅ тугмаларни босинг`;
             var keyboardCat=keyboard.backfromCat;
             }
             else if (language=='Russian')
             {
-            
+         
             var text=`Выберите категорию продукта которую хотите купить:`;
             var text2=`Чтобы вернуться нажмите на кнопки 🏪 ⬅`;
             var keyboardCat=keyboard.backfromCat2;
-            } 
-
-           
+            }
             var array1=[];
             var array2=[];
             var counter1=0;
             var counter2=0;
-
+            var count=0;
+           
             db.query(`SELECT * FROM categories WHERE language='${language}'`,function(err,res){
+            
                let promises= res.map((f,i)=>{
+
+                    count++;
                     if((i+1)%2==1)
                     {   
                           array1[counter1]=f.category;     
-                         counter1++;
+                          counter1++;
 
                     }
                     else 
@@ -677,7 +677,9 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
                 });
             Promise.all(promises).then(function(values)
             {
-             bot.sendMessage(msg.chat.id,text,{
+              
+             
+              bot.sendMessage(msg.chat.id,text,{
               reply_markup:{
                 
                  
@@ -707,63 +709,53 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
                   keyboard:keyboardCat,
                       resize_keyboard:true,
                       one_time_keyboard:true,
-                    
+                     
                 }
               })
               
             
             })
-            });
-         });
-         
-           
-
-
-
-//}
-
-
-
-
-
-
-
           
-    
-  
- /*else
-        {
-          if (language=='Uzbek')
-          {
-                     var text=`<b>Сизда еълон бериш лимити тугади!
-Агар сиз кўпроқ еълон бермоқчи бўлсангиз пуллик хизматдан фойдаланинг.
+          
+            });
+          
+          
+         });
+            
 
-💰 1 та еълон бериш учун PayMe ёки CLICK орқали қуйидаги карта 8600 3029 2503 5154 га 30.000 (ўттиз минг сўм) ўтказиб бизга ёзинг. Тўлиқ малумот учун бизга @yozing.</b>`;
+        })
+
+                    }
+
+                    if (res[0].number>=limit)
+                    {
+                       db.query(`SELECT language FROM temp WHERE user_id=${user_id}`,function(err,res)
+        { 
+                    language=res[0].language;
+                      if (language=='Uzbek')
+          {
+                     var text=`<b>Сизда бепул еьлонлар сони тугади 😭 Яна такрор еьлон бериш хизмати 500 сўм. Мурочат учун @joylash</b>`;
           }
           else if(language=='Russian')
           {
-                     var text=`<b>У Вас закончился лимит на публикацию объявления!
-Если хотите разместить больше объявления, воспользуйтесь платными услугами.
-
-💰 Что бы приобрести пакет из 1 объявление, отправьте через Payme или CLICK 30 000 сум на карту 8600 3029 2503 5154
-
-Для подробной информации свяжитесь с нами @yozing</b>`;
+                     var text=`<b>Количество бесплатных объявлений была закончена 😭. Снова вставить рекламу, пожалуйста, пишите на @joylash </b>`;
           } 
           bot.sendMessage(msg.chat.id,text,{
             parse_mode:"HTML"
           });
-        }
-                        
-                            });
-        
 
-        });
-        
-  */
-      })
-      
-    
-           
+        })
+
+
+                    }
+
+
+                })
+
+
+              })
+//////////////////////////////////////////////
+  
       break;
     }
     case kb.Home.Russian:
