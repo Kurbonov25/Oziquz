@@ -206,11 +206,32 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
       
         var language;
         var user_id=msg.from.id;
-        
               db.query(`SELECT chegara FROM password`,function(err,res)
               {
                   limit=res[0].chegara;
-                 db.query(`SELECT language FROM temp WHERE user_id=${user_id}`,function(err,res)
+                
+                db.query(`SELECT * number FROM users WHERE user_id=${msg.from.id}`,function(err,res)
+                {
+                    console.log(res[0].number)
+
+
+                })
+
+
+              })
+
+           /*   db.query(`SELECT * FROM sotish WHERE user_id=${user_id} `,function(err,res){
+            
+            let promises=res.map((f,i)=>{max_counter=i+1;});
+            Promise.all(promises).then(function(values)
+            { 
+          
+                          if (max_counter<limit || res[0]==undefined || 1==1) /////////////Check
+      
+      { */
+
+      
+        db.query(`SELECT language FROM temp WHERE user_id=${user_id}`,function(err,res)
         { 
          
           language=res[0].language;
@@ -345,23 +366,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
       
 
         })
-
-
-
-              })
-
-           /*   db.query(`SELECT * FROM sotish WHERE user_id=${user_id} `,function(err,res){
-            
-            let promises=res.map((f,i)=>{max_counter=i+1;});
-            Promise.all(promises).then(function(values)
-            { 
-          
-                          if (max_counter<limit || res[0]==undefined || 1==1) /////////////Check
-      
-      { */
-
-      
-                
+        
       break;
     }
     case kb.Final.approve:
