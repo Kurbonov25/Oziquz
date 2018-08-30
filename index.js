@@ -327,11 +327,11 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
                     language=res[0].language;
                       if (language=='Uzbek')
           {
-                     var text=`<b>Сизда бепул еьлонлар сони тугади 😭 Яна такрор еьлон бериш хизмати 500 сўм. Мурочат учун @joylash</b>`;
+                     var text=`<b>Сизда бепул еьлонлар сони тугади 😭 Яна такрор еьлон бериш хизмати 5000 сўм. Мурочат учун </b>@joylash`;
           }
           else if(language=='Russian')
           {
-                     var text=`<b>Количество бесплатных объявлений была закончена 😭. Снова вставить рекламу, пожалуйста, пишите на @joylash </b>`;
+                     var text=`<b>У вас закончилася количество бесплатных объявлений 😭. Добавление следующего объявления 5000 сум, пожалуйста, пишите на </b> @joylash `;
           } 
           bot.sendMessage(msg.chat.id,text,{
             parse_mode:"HTML"
@@ -421,6 +421,11 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
           
 
             db.query(`INSERT INTO sotish (user_id,category,location,phone_number,description,status,username,image_id,hashCat,hashLoc) VALUES (${user_id},'${category}','${location}','${phoneNumber}','${description}',${status},'${username}',${ImageId_to_database},'${HashCat}','${HashLoc}')`);
+            db.query(`SELECT number FROM users WHERE user_id=${msg.from.id}`,function(err,res)
+            {
+                db.query(`UPDATE users SET number=${res[0].number+1} WHERE user_id=${msg.from.id}`)
+
+            })
           }) 
       
       }
@@ -476,6 +481,11 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
           }).then(()=>{
         
             db.query(`INSERT INTO sotish (user_id,category,location,phone_number,description,status,picture_path,username,image_id,hashCat,hashLoc) VALUES (${user_id},'${category}','${location}','${phoneNumber}','${description}',${status},'${image}','${username}',${ImageId_to_database},'${HashCat}','${HashLoc}')`);
+             db.query(`SELECT number FROM users WHERE user_id=${msg.from.id}`,function(err,res)
+            {
+                db.query(`UPDATE users SET number=${res[0].number+1} WHERE user_id=${msg.from.id}`)
+
+            })
           }) 
             
 
@@ -734,11 +744,11 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
                     language=res[0].language;
                       if (language=='Uzbek')
           {
-                     var text=`<b>Сизда бепул еьлонлар сони тугади 😭 Яна такрор еьлон бериш хизмати 500 сўм. Мурочат учун @joylash</b>`;
+                     var text=`<b>Сизда бепул еьлонлар сони тугади 😭 Яна такрор еьлон бериш хизмати 500 сўм. Мурочат учун</b> @joylash`;
           }
           else if(language=='Russian')
           {
-                     var text=`<b>Количество бесплатных объявлений была закончена 😭. Снова вставить рекламу, пожалуйста, пишите на @joylash </b>`;
+                     var text=`<b>У вас закончилася количество бесплатных объявлений 😭. Добавление следующего объявления 5000 сум, пожалуйста, пишите на </b> @joylash`;
           } 
           bot.sendMessage(msg.chat.id,text,{
             parse_mode:"HTML"
