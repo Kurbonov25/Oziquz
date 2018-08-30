@@ -217,6 +217,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
                     console.log(limit)
                     if (res[0].number<limit)
                     {
+                      console.log("hi")
                        db.query(`SELECT language FROM temp WHERE user_id=${user_id}`,function(err,res)
         { 
                            language=res[0].language;
