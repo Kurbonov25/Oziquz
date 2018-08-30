@@ -210,7 +210,7 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
               {
                   limit=res[0].chegara;
                 
-                db.query(`SELECT * number FROM users WHERE user_id=${msg.from.id}`,function(err,res)
+                db.query(`SELECT number FROM users WHERE user_id=${msg.from.id}`,function(err,res)
                 {
                     console.log(res[0].number)
 
