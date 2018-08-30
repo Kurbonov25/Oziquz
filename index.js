@@ -97,7 +97,7 @@ if (msg.text=="/start")
 {
     db.query(`UPDATE temp SET flag=0 WHERE user_id=${msg.from.id}`)
 }
-db.query(`SELECT * FROM users WHERE id=${msg.from.id}`,function(err,res)
+db.query(`SELECT * FROM users WHERE user_id=${msg.from.id}`,function(err,res)
 {  console.log(res)
    console.log(res[0])
    /*if (res==undefined)
