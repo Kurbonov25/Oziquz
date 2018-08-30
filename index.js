@@ -98,11 +98,13 @@ if (msg.text=="/start")
     db.query(`UPDATE temp SET flag=0 WHERE user_id=${msg.from.id}`)
 }
 db.query(`SELECT * FROM users WHERE id=${msg.from.id}`,function(err,res)
-{  console.log(res[0])
-   if (res[0]==undefined)
+{  console.log(res)
+   console.log(res[0])
+   /*if (res==undefined)
    {
      db.query(`INSERT INTO users (user_id,username) VALUES (${msg.from.id},'${msg.from.username}')`)
-   }
+   }*/
+
 })
 
 //////////////////////////////////////////////////////////////////
