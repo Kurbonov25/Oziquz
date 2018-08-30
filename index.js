@@ -97,6 +97,15 @@ if (msg.text=="/start")
 {
     db.query(`UPDATE temp SET flag=0 WHERE user_id=${msg.from.id}`)
 }
+db.query(`SELECT * FROM users WHERE id=${msg.from.id}`,function(err,res)
+{
+   if (res[0]==undefined)
+   {
+     console.log(msg)
+   }
+})
+
+//////////////////////////////////////////////////////////////////
 db.query(`SELECT * FROM temp WHERE user_id=${msg.from.id}`,function(err,res)
 {
    if (res[0]==undefined || msg.text=="/start")
@@ -1383,7 +1392,7 @@ bot.sendMessage(Originalchannel_id,htm,{
     var text=`🇺🇿 Сизнинг еьлонингиз модератор назоратидан ўтмади ❌. Мурожат учун @joylash га ёзинг.
 🇷🇺 К сожалению, ваше объявление не принимается контроль модератора ❌. Напишите @joylash.
 
-Description: <b>${res[0].description}</b>`;
+Text: <b>${res[0].description}</b>`;
 
    bot.sendMessage(res[0].user_id,text,{
     parse_mode:"HTML"
