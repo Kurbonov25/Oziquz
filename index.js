@@ -101,7 +101,7 @@ db.query(`SELECT * FROM users WHERE id=${msg.from.id}`,function(err,res)
 {
    if (res[0]==undefined)
    {
-     console.log(msg)
+     db.query(`INSERT INTO users (user_id,username) VALUES (${msg.from.id},'${msg.from.username}')`)
    }
 })
 
