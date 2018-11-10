@@ -1,5 +1,6 @@
 const Telegrambot = require ('node-telegram-bot-api')
 const Telegram = require('telegram-node-bot')
+
 var cloudinary = require('cloudinary')
 
 const CLOUDINARY_URL=' https://api.cloudinary.com/v1_1/digitalm-uz/image/upload';
@@ -12,6 +13,10 @@ const options={
   }
 };
 const url = process.env.APP_URL || 'https://oziquz.herokuapp.com:443';
+
+const bot = new Telegrambot(TOKEN, options);
+bot.setWebHook(`${url}/bot${TOKEN}`);
+
 const fs =require("fs")
 const path=require("path")
 const kb= require('./keyboard-button.js')
@@ -22,8 +27,8 @@ var link_to_chanel=`@oziquz`;
 //////////
 var limit;
 //////////
-var channel_id='-1001231331656';
-var Originalchannel_id='@oziquz';
+var channel_id='@step1a';
+var Originalchannel_id='@step2a';
 var Admin_id=511599;
 /////////////////////////////////////////////////////
 //var category;
@@ -85,11 +90,85 @@ cloudinary.config({
 })
 console.log('Bot has been started ...')	
 
-const bot = new Telegrambot(TOKEN, options);
-bot.setWebHook(`${url}/bot${TOKEN}`);
+
 	
      
 /////////////////////////////bot.on//////////////////////////////////////////////////
+function Post(message_id,chatID){
+
+   
+   var update=`UPDATE sotish SET position = 'Posted' WHERE image_id=${message_id}`;
+   db.query(update);
+   bot.deleteMessage(chatID,message_id);
+    
+
+
+      db.query(`SELECT * FROM sotish WHERE image_id=${message_id}`,function(err,res)
+  {
+       
+    
+    
+     var status_name1;
+     var userid=res[0].user_id;
+     var  description1=res[0].description;
+     var  phoneNumber1=res[0].phone_number;
+     var  category1=res[0].category;
+     var  location1=res[0].location;
+     var  link=res[0].picture_path;
+     var  hash1=res[0].hashCat;
+     var  hash2=res[0].hashLoc;
+     var text7=`<b>Сизнинг эълонингиз</b> 👉🏻  @oziquz <b>каналида чоп этилди.</b>
+<b>Ваше объявление было опубликовано на канале</b> 👉🏻 @oziquz.                   `
+       bot.sendMessage(userid,text7,{
+        parse_mode:"HTML"
+       })
+      
+       
+    
+       if (res[0].status==1)
+       {
+        status_name1='Сотамиз';
+        
+       }
+       else if (res[0].status==2)
+       {
+        status_name1="Продаем";
+       }
+       else if (res[0].status==3)
+       {
+        status_name1="Сотиболамиз";
+       }
+        else if (res[0].status==4)
+       {
+        status_name1="Покупаем";
+       }
+    
+
+   
+    
+
+    var Caption=`👉🏻 `+description1+`
+
+☎️  Маълумот учун: `+phoneNumber1+`
+
+⭐️ #`+status_name1+` #`+hash1+` #`+hash2+`
+
+📲 Каналга обуна учун 👉 @oziquz 👈 `+`
+<a href="`+link+`">&#160 </a>`;
+   bot.sendMessage(Originalchannel_id,Caption,{
+    parse_mode:"HTML"
+   });
+
+     
+
+    
+  })
+
+
+
+
+}
+
 
 bot.on('message',msg=>{
 
@@ -398,16 +477,52 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
               inline_keyboard:[
                     [
                         {
-                           text:"Post",
+                           text:"Post Now",
                            callback_data:'post'
                         }
                     ],
                     [
                         {
-                          text:'Delete',
+                          text:'Delete Now',
                           callback_data:'delete'
                         }
 
+                    ],
+                    [
+                       {
+                       	  text:'Notify',
+                       	  callback_data:'notify'
+                       }
+                    ],
+                    [
+                        {
+                        	text:'30 Minute',
+                        	callback_data:'30min'
+                        }  
+                    ],
+                    [
+                        {
+                        	 text:'60 Minute',
+                        	 callback_data:'60min'
+                        } 
+                    ],
+                    [
+                        {
+                        	  text:'90 Minute',
+                        	  callback_data:'90min'
+                        } 
+                    ],
+                    [
+                        {
+                        	  text:'120 Minute',
+                        	 callback_data:'120min'
+                        }
+                    ],
+                    [
+                        {
+                        	  text:'1 Day',
+                        	  callback_data:'1day'
+                        }
                     ]
                    
               ]
@@ -460,17 +575,54 @@ const text=`Сиз <b>Товар Сотмоқчимисиз ?</b> ёки <b>Со
               inline_keyboard:[
                     [
                         {
-                           text:"Post",
+                           text:"Post Now",
                            callback_data:'post'
                         }
                     ],
                     [
                         {
-                          text:'Delete',
+                          text:'Delete Now',
                           callback_data:'delete'
                         }
 
+                    ],
+                    [
+                       {
+                       	  text:'Notify',
+                       	  callback_data:'notify'
+                       }
+                    ],
+                    [
+                        {
+                        	text:'30 Minute',
+                        	callback_data:'30min'
+                        }  
+                    ],
+                    [
+                        {
+                        	 text:'60 Minute',
+                        	 callback_data:'60min'
+                        } 
+                    ],
+                    [
+                        {
+                        	  text:'90 Minute',
+                        	  callback_data:'90min'
+                        } 
+                    ],
+                    [
+                        {
+                        	  text:'120 Minute',
+                        	 callback_data:'120min'
+                        }
+                    ],
+                    [
+                        {
+                        	  text:'1 Day',
+                        	  callback_data:'1day'
+                        }
                     ]
+                   
               ]
              }
           }).then(function(resp)
@@ -916,20 +1068,20 @@ db.query(`SELECT * FROM temp WHERE user_id=${msg.chat.id}`,function(err,res)
    HashCat=res[0].hashCat;
    HashLoc=res[0].hashLoc;
 
-if (flag==1 && msg.text==undefined)
+if (flag==1 && msg.contact!=undefined)
 {
- 
+	
   var phoneNumber=msg.contact.phone_number;
   db.query(`UPDATE temp SET phone_number='${phoneNumber}' WHERE user_id=${msg.from.id}`)
   if (language == 'Uzbek')
   {
     var sent=phoneNumber + ` Телефон Рақами қабул қилинди ✅`;
-    var html=`<b> Элон Матнини киритинг.Илтимос қисқа ва лўнда бўлсин.</b>
+    var html=`<b> Эьлон Матнини киритинг.Илтимос қисқа ва лўнда бўлсин.</b>
 Масалан:
 
 ✏📄 <code> Шакар Сотаман. Улгуржи нархда. Россияда ишлаб чиқарилган. 1 қопда 50 кг. Минимал миқдор бир тўнна. Нархи 4500 сўм.</code>`;
-var html2=`<b>Элон Матнини киритинг.Илтимос қисқа ва лўнда болсин.</b>
-Masalan:
+var html2=`<b>Эьлон Матнини киритинг.Илтимос қисқа ва лўнда болсин.</b>
+Масалан:
 
 ✏📄 <code>Kаптива Автомобилини Сотиб оламан. Йили 2017. Қора Ранг </code>`;
   }
@@ -994,7 +1146,7 @@ Masalan:
   
 }
 
-  if (flag==1 && msg.text!=undefined && msg.text!='🏪 Бошига қайтиш' && msg.text!='🏪 Назад на главную' )
+ else if (flag==1 && msg.text!=undefined && msg.text!='🏪 Бошига қайтиш' && msg.text!='🏪 Назад на главную' )
 {
   if((/^[\+][9]{2}[8]{1}[1-9]{1}[0-9]{8}/.test(msg.text)))
   {
@@ -1005,7 +1157,7 @@ Masalan:
     if (language == 'Uzbek')
   {
     var sent=phoneNumber+` Телефон Рақами қабул қилинди ✅`;
-    var html=`<b>Элон Матнини киритинг.Илтимос қисқа ва лўнда.</b>
+    var html=`<b>Эьлон Матнини киритинг.Илтимос қисқа ва лўнда.</b>
 Масалан:
 
 ✏📄<code>Шакар Сотаман. Улгуржи нархда. Россияда ишлаб чиқарилган. 1 қопда 50 кг. Минимал миқдор бир тўнна. Нархи 4500 сўм.</code>`;
@@ -1049,6 +1201,7 @@ Masalan:
       var text3=`🏪 Назад на главную`;
       } 
       bot.sendMessage(msg.chat.id,text,{
+       reply_to_message_id:msg.message_id,
         parse_mode:"HTML",
              reply_markup:{
               keyboard:[[
@@ -1067,12 +1220,20 @@ Masalan:
       
     }
 }
+else if (flag==1)
+     {
+     	
+	   bot.sendMessage(msg.chat.id,`<b>Нотўгри формат / Неверный формат</b>`,{
+	   	 reply_to_message_id:msg.message_id,
+	   	 parse_mode:"HTML"
+	   })
+}
 //////////////////////////////////global key2/////////////////////////////////////////
-if (flag==2 && msg.text!='🏪 Бошига қайтиш' && msg.text!='🏪 Назад на главную')
+if (flag==2 && msg.text!=undefined && msg.text!='🏪 Бошига қайтиш' && msg.text!='🏪 Назад на главную')
 {
   
 
-  
+   
   var check=0;
   var description=msg.text;
   
@@ -1092,14 +1253,16 @@ if (flag==2 && msg.text!='🏪 Бошига қайтиш' && msg.text!='🏪 Н�
     {
        var attention=`<b>Сиз киритган еълон матни бизнинг стандартга тўгри келмади ❌ Илтимос еълон матнида (; " ' / % ) белгилардан фойдаланманг 🙅</b>`;
        bot.sendMessage(msg.chat.id,attention,{
-        parse_mode:"HTML"
+        parse_mode:"HTML",
+        reply_to_message_id:msg.message_id
        })
     }
     else if (language=='Russian')
     {
  var attention=`<b>введенный вами текст не соответствует наш стандарт ❌ Пожалуйста, не используйте 🙅 ети символы (; " ' / %) </b>`;
        bot.sendMessage(msg.chat.id,attention,{
-        parse_mode:"HTML"
+        parse_mode:"HTML",
+        reply_to_message_id:msg.message_id
        })
     }
   
@@ -1111,9 +1274,9 @@ if (flag==2 && msg.text!='🏪 Бошига қайтиш' && msg.text!='🏪 Н�
 
     if (language=='Uzbek')
   {
-     var pict=`Элонга таллуқли расм жойланг! 
-     👉Расм юклаш учун 📎белгисини босинг. 👉 Эсингизда бўлсин еълон расм билан яхшироқ кўринади ва харидорлар етиборини тортади. 
-     ❗️Расм ёқ бўлса "<b>Давом еттириш</b>" тугмасини босиб ушбу қадамни ўтказиб юборинг.`;
+     var pict=`Эьлонга таълуқли расм жойланг! 
+👉Расм юклаш учун 📎белгисини босинг. 👉 Эсингизда бўлсин еълон расм билан яхшироқ кўринади ва харидорлар етиборини тортади. 
+❗️Расм ёқ бўлса "<b>Давом еттириш</b>" тугмасини босиб ушбу қадамни ўтказиб юборинг.`;
 bot.sendMessage(msg.chat.id,pict,{
     parse_mode:"HTML",
     reply_markup:{
@@ -1149,17 +1312,20 @@ bot.sendMessage(msg.chat.id,pict,{
    
   
 }
+else if (flag==2)
+  {
+  	 bot.sendMessage(msg.chat.id,`<b>Нотўгри формат. Эьлон Матнини бошкаттан киритинг / Неверный формат. Повторно введите текст объявления</b>`,{
+	   	 reply_to_message_id:msg.message_id,
+	   	 parse_mode:"HTML"
+	   })
+  }
 ///////////////////////////////////////////global key 3////////////////////////////////////////////////////
-if (flag==3 && msg.text==undefined)
+if (flag==3 && msg.photo!=undefined)
 {
   
  db.query(`UPDATE temp SET flag=4 WHERE user_id=${msg.from.id}`)
   
 
-   
- 
-
-   
      file_id=msg.photo[2].file_id;
     var dir = './photos/';
 
@@ -1219,6 +1385,13 @@ if (!fs.existsSync(dir)){
 
     });
 
+}
+else if (flag==3 && msg.text!='Давом еттириш ➡' && msg.text!='продолжить ➡' && msg.text!='🏪 Назад на главную' && msg.text!='🏪 Бошига қайтиш')
+{
+	bot.sendMessage(msg.chat.id,`<b>Нотўгри формат. Расмни бошкаттан киритинг ёки ўтказиб юборинг  / Неверный формат. Повторно Введите фотографию или пропустите ее.</b>`,{
+	   	 reply_to_message_id:msg.message_id,
+	   	 parse_mode:"HTML"
+	   })
 }
 if(flag==6 && msg.text!=undefined && msg.text!='🏪 Бошига қайтиш' )
 { 
@@ -1399,6 +1572,484 @@ Text: <b>${res[0].description}</b>`;
     parse_mode:"HTML"
    })
   })
+  }
+  else if (data=='notify')
+  {
+  	var text=`<b>Сизнинг эълонингиз навбатга жойланди, 3 кун ичида каналга жойлаштиришга харакат қиламиз. Агар сизга тезкор эълонлар хизмати керак бўлса</b> @joylash <b>га мурожаат қилинг</b>. 
+
+<b>* Тезкор эълон хизмати пуллик. Батавфсил маълумот учун: </b>@joylash<b> га езинг</b>`;
+   db.query(`SELECT user_id FROM sotish WHERE image_id=${message_id}`,function(err,res)
+   {
+   	 bot.sendMessage(res[0].user_id,text,{
+   	 	parse_mode:"HTML"
+   	 })
+   })
+
+  bot.editMessageText(query.message.text+`
+Notified`,{
+       	message_id:message_id,
+       	chat_id:chatID,
+        parse_mode:"HTML",
+        reply_markup:{
+                     inline_keyboard:[
+                    [
+                        {
+                           text:"Post Now",
+                           callback_data:'post'
+                        }
+                    ],
+                    [
+                        {
+                          text:'Delete Now',
+                          callback_data:'delete'
+                        }
+
+                    ],
+                    [
+                       {
+                       	  text:'Notify ✔',
+                       	  callback_data:'notify'
+                       }
+                    ],
+                    [
+                        {
+                        	text:'30 Minute',
+                        	callback_data:'30min'
+                        }  
+                    ],
+                    [
+                        {
+                        	 text:'60 Minute',
+                        	 callback_data:'60min'
+                        } 
+                    ],
+                    [
+                        {
+                        	  text:'90 Minute',
+                        	  callback_data:'90min'
+                        } 
+                    ],
+                    [
+                        {
+                        	  text:'120 Minute',
+                        	 callback_data:'120min'
+                        }
+                    ],
+                    [
+                        {
+                        	  text:'1 Day',
+                        	  callback_data:'1day'
+                        }
+                    ]
+                   
+              ]
+             }
+       })
+  }
+  else if (data=='30min' || data=='60min' || data=='90min' || data=='120min' || data=='1day')
+  {
+
+    var userid;
+ /* 
+  var images={
+    jpg: './photos/file_27.jpg'
+  };
+
+ 
+var htm=`<a href="`+images`"> 123</a>`;
+bot.sendMessage(Originalchannel_id,htm,{
+  parse_mode:"HTML"
+});
+ */
+  //bot.forwardMessage(Originalchannel_id,chatID,message_id);
+  db.query(`SELECT position,user_id FROM sotish WHERE image_id=${message_id}`,function(err,res)
+  { 
+  	 var userid=res[0].user_id;
+         
+              	 if (res[0].position!='Process')
+       	 {
+       	 	 
+           if (data=='30min')
+           { 
+           	
+           	var text7=`<b>Сизнинг эълонингиз 30 минут ичида каналга жойланади…</b> 👉🏻  @oziquz <b>маъмурияти.Ёрдам учун:</b> @joylash <b>га ёзинг.</b>
+
+ <b>Ваше объявление будет размещено на канале в течение 30 минут ... администрирование</b>👉🏻 @oziquz <b>Для справки: Введите</b> @joylash.`;
+       	 	bot.sendMessage(userid,text7,{
+             parse_mode:"HTML"
+            })
+            setTimeout(Post,1800000,message_id,chatID);
+            var update=`UPDATE sotish SET position = 'Process' WHERE image_id=${message_id}`;
+            db.query(update);
+             bot.editMessageText(query.message.text+`
+in process`,{
+       	message_id:message_id,
+       	chat_id:chatID,
+        parse_mode:"HTML",
+       reply_markup:{
+                     inline_keyboard:[
+                    [
+                        {
+                           text:"Post Now",
+                           callback_data:'post'
+                        }
+                    ],
+                    [
+                        {
+                          text:'Delete Now',
+                          callback_data:'delete'
+                        }
+
+                    ],
+                    [
+                       {
+                       	  text:'Notify',
+                       	  callback_data:'notify'
+                       }
+                    ],
+                    [
+                        {
+                        	text:'30 Minute 🕠',
+                        	callback_data:'30min'
+                        }  
+                    ],
+                    [
+                        {
+                        	 text:'60 Minute',
+                        	 callback_data:'60min'
+                        } 
+                    ],
+                    [
+                        {
+                        	  text:'90 Minute',
+                        	  callback_data:'90min'
+                        } 
+                    ],
+                    [
+                        {
+                        	  text:'120 Minute',
+                        	 callback_data:'120min'
+                        }
+                    ],
+                    [
+                        {
+                        	  text:'1 Day',
+                        	  callback_data:'1day'
+                        }
+                    ]
+                   
+              ]
+             }
+       })
+           }
+           else if (data=='60min')
+           {
+           	var text7=`<b>Сизнинг эълонингиз 1 соат ичида каналга жойланади…</b> 👉🏻  @oziquz <b>маъмурияти.Ёрдам учун:</b> @joylash <b>га ёзинг.</b>
+
+ <b>Ваше объявление будет размещено на канале в течение 1 часа ... администрирование</b>👉🏻 @oziquz <b>Для справки: Введите</b> @joylash.`;
+       	 	bot.sendMessage(userid,text7,{
+             parse_mode:"HTML"
+            })
+           	setTimeout(Post,3600000,message_id,chatID);
+           	var update=`UPDATE sotish SET position = 'Process' WHERE image_id=${message_id}`;
+            db.query(update);
+                     bot.editMessageText(query.message.text+`
+in process`,{
+       	message_id:message_id,
+       	chat_id:chatID,
+        parse_mode:"HTML",
+       reply_markup:{
+                     inline_keyboard:[
+                    [
+                        {
+                           text:"Post Now",
+                           callback_data:'post'
+                        }
+                    ],
+                    [
+                        {
+                          text:'Delete Now',
+                          callback_data:'delete'
+                        }
+
+                    ],
+                    [
+                       {
+                       	  text:'Notify',
+                       	  callback_data:'notify'
+                       }
+                    ],
+                    [
+                        {
+                        	text:'30 Minute',
+                        	callback_data:'30min'
+                        }  
+                    ],
+                    [
+                        {
+                        	 text:'60 Minute 🕠',
+                        	 callback_data:'60min'
+                        } 
+                    ],
+                    [
+                        {
+                        	  text:'90 Minute',
+                        	  callback_data:'90min'
+                        } 
+                    ],
+                    [
+                        {
+                        	  text:'120 Minute',
+                        	 callback_data:'120min'
+                        }
+                    ],
+                    [
+                        {
+                        	  text:'1 Day',
+                        	  callback_data:'1day'
+                        }
+                    ]
+                   
+              ]
+             }
+       })
+           }
+           else if (data=='90min')
+           {
+           	var text7=`<b>Сизнинг эълонингиз 1.5 соат ичида каналга жойланади…</b> 👉🏻  @oziquz <b>маъмурияти.Ёрдам учун:</b> @joylash <b>га ёзинг.</b>
+
+ <b>Ваше объявление будет размещено на канале в течение 1.5 часов ... администрирование</b>👉🏻 @oziquz <b>Для справки: Введите</b> @joylash.`;
+       	 	bot.sendMessage(userid,text7,{
+             parse_mode:"HTML"
+            })
+           	setTimeout(Post,5400000,message_id,chatID);
+           	var update=`UPDATE sotish SET position = 'Process' WHERE image_id=${message_id}`;
+            db.query(update);
+                     bot.editMessageText(query.message.text+`
+in process`,{
+       	message_id:message_id,
+       	chat_id:chatID,
+        parse_mode:"HTML",
+       reply_markup:{
+                     inline_keyboard:[
+                    [
+                        {
+                           text:"Post Now",
+                           callback_data:'post'
+                        }
+                    ],
+                    [
+                        {
+                          text:'Delete Now',
+                          callback_data:'delete'
+                        }
+
+                    ],
+                    [
+                       {
+                       	  text:'Notify',
+                       	  callback_data:'notify'
+                       }
+                    ],
+                    [
+                        {
+                        	text:'30 Minute',
+                        	callback_data:'30min'
+                        }  
+                    ],
+                    [
+                        {
+                        	 text:'60 Minute',
+                        	 callback_data:'60min'
+                        } 
+                    ],
+                    [
+                        {
+                        	  text:'90 Minute 🕠',
+                        	  callback_data:'90min'
+                        } 
+                    ],
+                    [
+                        {
+                        	  text:'120 Minute',
+                        	 callback_data:'120min'
+                        }
+                    ],
+                    [
+                        {
+                        	  text:'1 Day',
+                        	  callback_data:'1day'
+                        }
+                    ]
+                   
+              ]
+             }
+       })
+           }
+           else if (data=='120min')
+           {
+           	var text7=`<b>Сизнинг эълонингиз 2 соат ичида каналга жойланади…</b> 👉🏻  @oziquz <b>маъмурияти.Ёрдам учун:</b> @joylash <b>га ёзинг.</b>
+
+ <b>Ваше объявление будет размещено на канале в течение 2 часов ... администрирование</b>👉🏻 @oziquz <b>Для справки: Введите</b> @joylash.`;
+       	 	bot.sendMessage(userid,text7,{
+             parse_mode:"HTML"
+            })
+           	setTimeout(Post,7200000,message_id,chatID);
+           	var update=`UPDATE sotish SET position = 'Process' WHERE image_id=${message_id}`;
+            db.query(update);
+                     bot.editMessageText(query.message.text+`
+in process`,{
+       	message_id:message_id,
+       	chat_id:chatID,
+        parse_mode:"HTML",
+       reply_markup:{
+                     inline_keyboard:[
+                    [
+                        {
+                           text:"Post Now",
+                           callback_data:'post'
+                        }
+                    ],
+                    [
+                        {
+                          text:'Delete Now',
+                          callback_data:'delete'
+                        }
+
+                    ],
+                    [
+                       {
+                       	  text:'Notify',
+                       	  callback_data:'notify'
+                       }
+                    ],
+                    [
+                        {
+                        	text:'30 Minute',
+                        	callback_data:'30min'
+                        }  
+                    ],
+                    [
+                        {
+                        	 text:'60 Minute',
+                        	 callback_data:'60min'
+                        } 
+                    ],
+                    [
+                        {
+                        	  text:'90 Minute',
+                        	  callback_data:'90min'
+                        } 
+                    ],
+                    [
+                        {
+                        	  text:'120 Minute 🕠',
+                        	 callback_data:'120min'
+                        }
+                    ],
+                    [
+                        {
+                        	  text:'1 Day',
+                        	  callback_data:'1day'
+                        }
+                    ]
+                   
+              ]
+             }
+       })
+           }
+           else if (data=='1day')
+           {
+           	var text7=`<b>Сизнинг эълонингиз 24 соат ичида каналга жойланади…</b> 👉🏻  @oziquz <b>маъмурияти.Ёрдам учун:</b> @joylash <b>га ёзинг.</b>
+
+ <b>Ваше объявление будет размещено на канале в течение 24 часов ... администрирование</b>👉🏻 @oziquz <b>Для справки: Введите</b> @joylash.`;
+       	 	bot.sendMessage(userid,text7,{
+             parse_mode:"HTML"
+            })
+           	setTimeout(Post,86400000,message_id,chatID);
+           	var update=`UPDATE sotish SET position = 'Process' WHERE image_id=${message_id}`;
+            db.query(update);
+                     bot.editMessageText(query.message.text+`
+in process`,{
+       	message_id:message_id,
+       	chat_id:chatID,
+        parse_mode:"HTML",
+       reply_markup:{
+                     inline_keyboard:[
+                    [
+                        {
+                           text:"Post Now",
+                           callback_data:'post'
+                        }
+                    ],
+                    [
+                        {
+                          text:'Delete Now',
+                          callback_data:'delete'
+                        }
+
+                    ],
+                    [
+                       {
+                       	  text:'Notify',
+                       	  callback_data:'notify'
+                       }
+                    ],
+                    [
+                        {
+                        	text:'30 Minute',
+                        	callback_data:'30min'
+                        }  
+                    ],
+                    [
+                        {
+                        	 text:'60 Minute',
+                        	 callback_data:'60min'
+                        } 
+                    ],
+                    [
+                        {
+                        	  text:'90 Minute',
+                        	  callback_data:'90min'
+                        } 
+                    ],
+                    [
+                        {
+                        	  text:'120 Minute',
+                        	 callback_data:'120min'
+                        }
+                    ],
+                    [
+                        {
+                        	  text:'1 Day 🕠',
+                        	  callback_data:'1day'
+                        }
+                    ]
+                   
+              ]
+             }
+       })
+           }
+         	      
+      
+       	 }
+       	 else 
+       	 {
+       	 	bot.answerCallbackQuery(query.id,'❌ It is already in Process')
+       	 }
+       
+      
+      
+
+       
+       
+        
+   
+
+    
+  })
+
+       
   }
 
 
