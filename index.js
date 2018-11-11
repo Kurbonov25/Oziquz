@@ -63,9 +63,9 @@ var key;
 //////////////////////////Alter process////////////////////////////////////////////////
 
 var reqTimer = setTimeout(function wakeUp() {
-   request("https://oziquz.herokuapp.com", function() {
+
       console.log("WAKE UP DYNO");
-   });
+   };
    return reqTimer = setTimeout(wakeUp, 12000);
 }, 1200000);
 
