@@ -65,9 +65,9 @@ var key;
 var reqTimer = setTimeout(function wakeUp() {
 
       console.log("WAKE UP DYNO");
-   };
+  
    return reqTimer = setTimeout(wakeUp, 12000);
-}, 1200000);
+}, 12000);
 
 
 
