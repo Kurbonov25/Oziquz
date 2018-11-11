@@ -1644,7 +1644,12 @@ Notified`,{
                    
               ]
              }
-       })
+       }).catch(function(error){
+               if (error.response.statusCode === 400)
+               {
+               
+               }
+            });
   }
   else if (data=='30min' || data=='60min' || data=='90min' || data=='120min' || data=='1day')
   {
