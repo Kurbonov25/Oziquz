@@ -66,8 +66,8 @@ var reqTimer = setTimeout(function wakeUp() {
 
       console.log("WAKE UP DYNO");
   
-   return reqTimer = setTimeout(wakeUp, 1200000);
-}, 1200000);
+   return reqTimer = setTimeout(wakeUp, 600000);
+}, 600000);
 
 
 
@@ -1453,12 +1453,12 @@ if (flag==7 && msg.text==undefined)
 
 bot.onText(/\/alter/,msg=>{
 	console.log('ALTER');
-var reqTimer = setTimeout(function wakeUp() {
-   request("https://nameless-gorge-19527.herokuapp.com", function() {
+var reqTimer2 = setTimeout(function wakeUp() {
+
       console.log("WAKE UP DYNO");
-   });
-   return reqTimer = setTimeout(wakeUp, 1200000);
-}, 1200000);
+  
+   return reqTimer2 = setTimeout(wakeUp, 600000);
+}, 600000);
 
 })
 bot.onText(/\/broadcast/,msg=>{
