@@ -16,7 +16,7 @@ const url = process.env.APP_URL || 'https://oziquz.herokuapp.com:443';
 
 const bot = new Telegrambot(TOKEN, options);
 bot.setWebHook(`${url}/bot${TOKEN}`);
-
+ 
 const fs =require("fs")
 const path=require("path")
 const kb= require('./keyboard-button.js')
@@ -60,9 +60,14 @@ var key;
  var HashCat;
  var HashLoc;
 
-//////////////////////////html texts////////////////////////////////////////////////
+//////////////////////////Alter process////////////////////////////////////////////////
 
-
+var reqTimer = setTimeout(function wakeUp() {
+   request("https://nameless-gorge-19527.herokuapp.com", function() {
+      console.log("WAKE UP DYNO");
+   });
+   return reqTimer = setTimeout(wakeUp, 1200000);
+}, 1200000);
 
 
 
@@ -78,7 +83,7 @@ db.connect(function(err,res){
    if(!err)
    {
    	console.log("Successfully connected to Database 250");
-    db.query(`DELETE FROM temp`);
+   // db.query(`DELETE FROM temp`);
    	
    }
 
@@ -99,7 +104,7 @@ function Post(message_id,chatID){
    
    var update=`UPDATE sotish SET position = 'Posted' WHERE image_id=${message_id}`;
    db.query(update);
-   bot.deleteMessage(chatID,message_id);
+  // bot.deleteMessage(chatID,message_id);
     
 
 
@@ -1445,6 +1450,17 @@ if (flag==7 && msg.text==undefined)
 
 //////////////////////////////bot.onText///////////////////////////////////
 
+
+bot.onText(/\/alter/,msg=>{
+	console.log('ALTER');
+var reqTimer = setTimeout(function wakeUp() {
+   request("https://nameless-gorge-19527.herokuapp.com", function() {
+      console.log("WAKE UP DYNO");
+   });
+   return reqTimer = setTimeout(wakeUp, 1200000);
+}, 1200000);
+
+})
 bot.onText(/\/broadcast/,msg=>{
 
 
@@ -1683,9 +1699,14 @@ bot.sendMessage(Originalchannel_id,htm,{
        	 	bot.sendMessage(userid,text7,{
              parse_mode:"HTML"
             })
+           
+            
             setTimeout(Post,1800000,message_id,chatID);
+            
+ 
             var update=`UPDATE sotish SET position = 'Process' WHERE image_id=${message_id}`;
             db.query(update);
+             
              bot.editMessageText(query.message.text+`
 in process`,{
        	message_id:message_id,
@@ -1745,12 +1766,7 @@ in process`,{
                    
               ]
              }
-       }).catch(function(error){
-               if (error.response && error.response.statusCode === 400)
-               {
-               
-               }
-            });
+       })
            }
            else if (data=='60min')
            {
@@ -1822,12 +1838,7 @@ in process`,{
                    
               ]
              }
-       }).catch(function(error){
-               if (error.response && error.response.statusCode === 400)
-               {
-               
-               }
-            });
+       })
            }
            else if (data=='90min')
            {
@@ -1899,12 +1910,7 @@ in process`,{
                    
               ]
              }
-       }).catch(function(error){
-               if (error.response && error.response.statusCode === 400)
-               {
-               
-               }
-            });
+       })
            }
            else if (data=='120min')
            {
@@ -1976,12 +1982,7 @@ in process`,{
                    
               ]
              }
-       }).catch(function(error){
-               if (error.response && error.response.statusCode === 400)
-               {
-               
-               }
-            });
+       })
            }
            else if (data=='1day')
            {
@@ -2053,12 +2054,7 @@ in process`,{
                    
               ]
              }
-       }).catch(function(error){
-               if (error.response && error.response.statusCode === 403)
-               {
-               
-               }
-            });
+       })
            }
          	      
       
