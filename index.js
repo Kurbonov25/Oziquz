@@ -1740,7 +1740,12 @@ in process`,{
                    
               ]
              }
-       })
+       }).catch(function(error){
+               if (error.response && error.response.statusCode === 400)
+               {
+               
+               }
+            });
            }
            else if (data=='60min')
            {
@@ -1812,7 +1817,12 @@ in process`,{
                    
               ]
              }
-       })
+       }).catch(function(error){
+               if (error.response && error.response.statusCode === 400)
+               {
+               
+               }
+            });
            }
            else if (data=='90min')
            {
@@ -1884,7 +1894,12 @@ in process`,{
                    
               ]
              }
-       })
+       }).catch(function(error){
+               if (error.response && error.response.statusCode === 400)
+               {
+               
+               }
+            });
            }
            else if (data=='120min')
            {
@@ -1956,7 +1971,12 @@ in process`,{
                    
               ]
              }
-       })
+       }).catch(function(error){
+               if (error.response && error.response.statusCode === 400)
+               {
+               
+               }
+            });
            }
            else if (data=='1day')
            {
@@ -2028,7 +2048,12 @@ in process`,{
                    
               ]
              }
-       })
+       }).catch(function(error){
+               if (error.response && error.response.statusCode === 403)
+               {
+               
+               }
+            });
            }
          	      
       
