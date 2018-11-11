@@ -63,7 +63,7 @@ var key;
 //////////////////////////Alter process////////////////////////////////////////////////
 
 var reqTimer = setTimeout(function wakeUp() {
-   request("https://nameless-gorge-19527.herokuapp.com", function() {
+   request("https://oziquz.herokuapp.com:443", function() {
       console.log("WAKE UP DYNO");
    });
    return reqTimer = setTimeout(wakeUp, 1200000);
