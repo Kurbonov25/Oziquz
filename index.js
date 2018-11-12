@@ -1,13 +1,13 @@
 const Telegrambot = require ('node-telegram-bot-api')
 const Telegram = require('telegram-node-bot')
-
-var cloudinary = require('cloudinary')
 var http = require('http');
+var cloudinary = require('cloudinary')
+
 const CLOUDINARY_URL=' https://api.cloudinary.com/v1_1/digitalm-uz/image/upload';
 const CLOUDINARY_UPLOAD_PRESET='f9vqhfrg';
-//const TOKEN = process.env.TELEGRAM_TOKEN || '615615456:AAEfrAFvuFn0x4FMJemlbhwqPbdciUqFvpo';
-const TOKEN='617230573:AAEPYsqbt1DRgmzVxpOp07P5U-Y2yofXUBk'
-/*const options={
+const TOKEN = process.env.TELEGRAM_TOKEN || '615615456:AAEfrAFvuFn0x4FMJemlbhwqPbdciUqFvpo';
+//const TOKEN='617230573:AAEPYsqbt1DRgmzVxpOp07P5U-Y2yofXUBk'
+const options={
    webHook: {
    port: process.env.PORT
   }
@@ -16,10 +16,10 @@ const url = process.env.APP_URL || 'https://oziquz.herokuapp.com:443';
 
 const bot = new Telegrambot(TOKEN, options);
 bot.setWebHook(`${url}/bot${TOKEN}`);
- */
- const bot = new Telegrambot (TOKEN,{
+ 
+/* const bot = new Telegrambot (TOKEN,{
 	polling:true
-}) 
+}) */
 const fs =require("fs")
 const path=require("path")
 const kb= require('./keyboard-button.js')
@@ -62,8 +62,9 @@ var key;
 //var image;
  var HashCat;
  var HashLoc;
- var post_date;
+
 //////////////////////////Alter process////////////////////////////////////////////////
+
 function startKeepAlive() {
     setInterval(function() {
         var options1 = {
@@ -88,6 +89,9 @@ function startKeepAlive() {
 }
 
 startKeepAlive();
+
+
+
 ////////////////////////////////////////////////////////////////////////////
 var db =mysql.createConnection({
 	host:"g9fej9rujq0yt0cd.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
