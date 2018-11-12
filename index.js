@@ -17,9 +17,9 @@ const url = process.env.APP_URL || 'https://oziquz.herokuapp.com:443';
 const bot = new Telegrambot(TOKEN, options);
 bot.setWebHook(`${url}/bot${TOKEN}`);
  
-/* const bot = new Telegrambot (TOKEN,{
+/*const bot = new Telegrambot (TOKEN,{
 	polling:true
-}) */
+})*/ 
 const fs =require("fs")
 const path=require("path")
 const kb= require('./keyboard-button.js')
@@ -63,6 +63,7 @@ var key;
  var HashCat;
  var HashLoc;
 
+
 //////////////////////////Alter process////////////////////////////////////////////////
 
 function startKeepAlive() {
@@ -77,6 +78,7 @@ function startKeepAlive() {
                 try {
                      console.log("1")
                     console.log("HEROKU RESPONSE: " + chunk);
+
 
                 } catch (err) {
                     console.log(err.message);
@@ -104,8 +106,7 @@ db.connect(function(err,res){
    if(!err)
    {
    	console.log("Successfully connected to Database 250");
-   // db.query(`DELETE FROM temp`);
-   	
+   	Time();
    }
 
 })
@@ -118,11 +119,36 @@ console.log('Bot has been started ...')
 
 
 	
-     
+function Time()
+{
+	console.log("Timer starts")
+  db.query(`SELECT DATE_ADD(post_time, INTERVAL 5 HOUR) as post_time,image_id FROM sotish WHERE position='Process'  ORDER BY post_time ASC LIMIT 1`,function(err,res){
+      if(res[0]!=undefined)
+      {
+      	
+      	var post_time=res[0].post_time;
+        var post_id=res[0].image_id;
+      
+      var seconds = new Date().getTime();
+      var time_interval=post_time.getTime()-seconds;
+      if (seconds>=post_time.getTime())
+       {
+       	  Post(post_id,channel_id);
+       }
+       else
+       {
+       	 setTimeout(Post,time_interval,post_id,channel_id)
+       	 
+       }
+      }
+   	  
+
+   })
+}     
 /////////////////////////////bot.on//////////////////////////////////////////////////
 function Post(message_id,chatID){
 
-   
+   Time();
    var update=`UPDATE sotish SET position = 'Posted' WHERE image_id=${message_id}`;
    db.query(update);
    bot.deleteMessage(chatID,message_id);
@@ -1246,7 +1272,7 @@ var html2=`<b>Эьлон Матнини киритинг.Илтимос қисқ
       
     }
 }
-else if (flag==1)
+else if (flag==1 && msg.text!='🏪 Назад на главную' && msg.text!='🏪 Бошига қайтиш')
      {
      	
 	   bot.sendMessage(msg.chat.id,`<b>Нотўгри формат / Неверный формат</b>`,{
@@ -1338,7 +1364,7 @@ bot.sendMessage(msg.chat.id,pict,{
    
   
 }
-else if (flag==2)
+else if (flag==2 && msg.text!='🏪 Назад на главную' && msg.text!='🏪 Бошига қайтиш')
   {
   	 bot.sendMessage(msg.chat.id,`<b>Нотўгри формат. Эьлон Матнини бошкаттан киритинг / Неверный формат. Повторно введите текст объявления</b>`,{
 	   	 reply_to_message_id:msg.message_id,
@@ -1703,7 +1729,7 @@ bot.sendMessage(Originalchannel_id,htm,{
   { 
   	 var userid=res[0].user_id;
          
-              	 if (res[0].position!='Process')
+              	 if (1==1 || res[0].position!='Process')
        	 {
        	 	 
            if (data=='30min')
@@ -1717,13 +1743,12 @@ bot.sendMessage(Originalchannel_id,htm,{
             })
            
             
-            setTimeout(Post,1800000,message_id,chatID);
             
- 
-            var update=`UPDATE sotish SET position = 'Process' WHERE image_id=${message_id}`;
+           
+            var update=`UPDATE sotish SET position = 'Process', post_created=CURTIME(), post_time=DATE_ADD(NOW(), INTERVAL 30 MINUTE) WHERE image_id=${message_id}`;
             db.query(update);
-             
-             bot.editMessageText(query.message.text+`
+
+            bot.editMessageText(query.message.text+`
 in process`,{
        	message_id:message_id,
        	chat_id:chatID,
@@ -1783,6 +1808,8 @@ in process`,{
               ]
              }
        })
+             
+     
            }
            else if (data=='60min')
            {
@@ -1792,9 +1819,9 @@ in process`,{
        	 	bot.sendMessage(userid,text7,{
              parse_mode:"HTML"
             })
-           	setTimeout(Post,3600000,message_id,chatID);
-           	var update=`UPDATE sotish SET position = 'Process' WHERE image_id=${message_id}`;
-            db.query(update);
+           	
+           	var update=`UPDATE sotish SET position = 'Process', post_created=CURTIME(), post_time=DATE_ADD(NOW(), INTERVAL 1 HOUR ) WHERE image_id=${message_id}`;
+            db.query(update);     
                      bot.editMessageText(query.message.text+`
 in process`,{
        	message_id:message_id,
@@ -1864,10 +1891,10 @@ in process`,{
        	 	bot.sendMessage(userid,text7,{
              parse_mode:"HTML"
             })
-           	setTimeout(Post,5400000,message_id,chatID);
-           	var update=`UPDATE sotish SET position = 'Process' WHERE image_id=${message_id}`;
+           	//setTimeout(Post,5400000,message_id,chatID);
+           var update=`UPDATE sotish SET position = 'Process', post_created=CURTIME(), post_time=DATE_ADD(NOW(), INTERVAL 90 MINUTE) WHERE image_id=${message_id}`;
             db.query(update);
-                     bot.editMessageText(query.message.text+`
+                      bot.editMessageText(query.message.text+`
 in process`,{
        	message_id:message_id,
        	chat_id:chatID,
@@ -1936,10 +1963,10 @@ in process`,{
        	 	bot.sendMessage(userid,text7,{
              parse_mode:"HTML"
             })
-           	setTimeout(Post,7200000,message_id,chatID);
-           	var update=`UPDATE sotish SET position = 'Process' WHERE image_id=${message_id}`;
-            db.query(update);
-                     bot.editMessageText(query.message.text+`
+       //    	setTimeout(Post,7200000,message_id,chatID);
+           	var update=`UPDATE sotish SET position = 'Process', post_created=CURTIME(), post_time=DATE_ADD(NOW(), INTERVAL 2 HOUR) WHERE image_id=${message_id}`;
+             db.query(update);
+                      bot.editMessageText(query.message.text+`
 in process`,{
        	message_id:message_id,
        	chat_id:chatID,
@@ -2002,15 +2029,16 @@ in process`,{
            }
            else if (data=='1day')
            {
+           	
            	var text7=`<b>Сизнинг эълонингиз 24 соат ичида каналга жойланади…</b> 👉🏻  @oziquz <b>маъмурияти.Ёрдам учун:</b> @joylash <b>га ёзинг.</b>
 
  <b>Ваше объявление будет размещено на канале в течение 24 часов ... администрирование</b>👉🏻 @oziquz <b>Для справки: Введите</b> @joylash.`;
        	 	bot.sendMessage(userid,text7,{
              parse_mode:"HTML"
             })
-           	setTimeout(Post,86400000,message_id,chatID);
-           	var update=`UPDATE sotish SET position = 'Process' WHERE image_id=${message_id}`;
-            db.query(update);
+      //     	setTimeout(Post,86400000,message_id,chatID);
+           	var update=`UPDATE sotish SET position = 'Process', post_created=CURTIME(), post_time=DATE_ADD(NOW(), INTERVAL 1 DAY) WHERE image_id=${message_id}`;
+             db.query(update);  
                      bot.editMessageText(query.message.text+`
 in process`,{
        	message_id:message_id,
