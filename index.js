@@ -137,7 +137,7 @@ function Time()
       console.log(time_interval)
       if (seconds>=post_time.getTime())
        {
-       	  Post(post_id,channel_id);
+       	 // Post(post_id,channel_id);
        }
        else
        {
