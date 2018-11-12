@@ -126,12 +126,13 @@ function Time()
       if(res[0]!=undefined)
       {
       	
-      	console.log(post_time);
-      	console.log(post_id);
+      	console.log(res);
+      	
       	var post_time=res[0].post_time;
         var post_id=res[0].image_id;
-      
+      console.log(post_time);
       var seconds = new Date().getTime();
+      console.log(seconds)
       var time_interval=post_time.getTime()-seconds;
       console.log(time_interval)
      /* if (seconds>=post_time.getTime())
