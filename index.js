@@ -2,12 +2,12 @@ const Telegrambot = require ('node-telegram-bot-api')
 const Telegram = require('telegram-node-bot')
 
 var cloudinary = require('cloudinary')
-
+var http = require('http');
 const CLOUDINARY_URL=' https://api.cloudinary.com/v1_1/digitalm-uz/image/upload';
 const CLOUDINARY_UPLOAD_PRESET='f9vqhfrg';
-const TOKEN = process.env.TELEGRAM_TOKEN || '615615456:AAEfrAFvuFn0x4FMJemlbhwqPbdciUqFvpo';
-
-const options={
+//const TOKEN = process.env.TELEGRAM_TOKEN || '615615456:AAEfrAFvuFn0x4FMJemlbhwqPbdciUqFvpo';
+const TOKEN='617230573:AAEPYsqbt1DRgmzVxpOp07P5U-Y2yofXUBk'
+/*const options={
    webHook: {
    port: process.env.PORT
   }
@@ -16,7 +16,10 @@ const url = process.env.APP_URL || 'https://oziquz.herokuapp.com:443';
 
 const bot = new Telegrambot(TOKEN, options);
 bot.setWebHook(`${url}/bot${TOKEN}`);
- 
+ */
+ const bot = new Telegrambot (TOKEN,{
+	polling:true
+}) 
 const fs =require("fs")
 const path=require("path")
 const kb= require('./keyboard-button.js')
@@ -59,18 +62,32 @@ var key;
 //var image;
  var HashCat;
  var HashLoc;
-
+ var post_date;
 //////////////////////////Alter process////////////////////////////////////////////////
+function startKeepAlive() {
+    setInterval(function() {
+        var options1 = {
+            host: 'oziquz.herokuapp.com',
+            port: 80,
+            path: '/'
+        };
+        http.get(options1, function(res) {
+            res.on('data', function(chunk) {
+                try {
+                     console.log("1")
+                    console.log("HEROKU RESPONSE: " + chunk);
 
-var reqTimer = setTimeout(function wakeUp() {
+                } catch (err) {
+                    console.log(err.message);
+                }
+            });
+        }).on('error', function(err) {
+            console.log("Error: " + err.message);
+        });
+    }, 20 * 60 * 1000); // load every 20 minutes
+}
 
-      console.log("WAKE UP DYNO");
-  
-   return reqTimer = setTimeout(wakeUp, 600000);
-}, 600000);
-
-
-
+startKeepAlive();
 ////////////////////////////////////////////////////////////////////////////
 var db =mysql.createConnection({
 	host:"g9fej9rujq0yt0cd.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
