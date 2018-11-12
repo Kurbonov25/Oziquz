@@ -130,8 +130,11 @@ function Time()
       	
       	var post_time=res[0].post_time;
         var post_id=res[0].image_id;
+      
       var seconds = new Date().getTime();
+
       var time_interval=post_time.getTime()-seconds;
+      console.log(time_interval)
       if (seconds>=post_time.getTime())
        {
        	  Post(post_id,channel_id);
