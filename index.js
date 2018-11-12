@@ -122,16 +122,19 @@ console.log('Bot has been started ...')
 function Time()
 {
 	console.log("Timer starts")
-  db.query(`SELECT DATE_ADD(post_time, INTERVAL 5 HOUR) as post_time,image_id FROM sotish WHERE position='Process'  ORDER BY post_time ASC LIMIT 1`,function(err,res){
+  db.query(`SELECT post_time, image_id FROM sotish WHERE position='Process'  ORDER BY post_time ASC LIMIT 1`,function(err,res){
       if(res[0]!=undefined)
       {
       	
+      	console.log(post_time);
+      	console.log(post_id);
       	var post_time=res[0].post_time;
         var post_id=res[0].image_id;
       
       var seconds = new Date().getTime();
       var time_interval=post_time.getTime()-seconds;
-      if (seconds>=post_time.getTime())
+      console.log(time_interval)
+     /* if (seconds>=post_time.getTime())
        {
        	  Post(post_id,channel_id);
        }
@@ -139,7 +142,7 @@ function Time()
        {
        	 setTimeout(Post,time_interval,post_id,channel_id)
        	 
-       }
+       }*/
       }
    	  
 
