@@ -124,7 +124,7 @@ console.log('Bot has been started ...')
 function Time()
 {
 	console.log("Timer starts")
-  db.query(`SELECT post_time, image_id FROM sotish WHERE position='Process'  ORDER BY post_time ASC LIMIT 1`,function(err,res){
+  db.query(`SELECT post_time, image_id FROM sotish WHERE position='Process' ORDER BY post_time ASC LIMIT 1`,function(err,res){
       if(res[0]!=undefined)
       {
       	
@@ -139,7 +139,7 @@ function Time()
       console.log(time_interval)
       if (seconds>=post_time.getTime())
        {
-       	  Post(post_id,channel_id);
+       	  //Post(post_id,channel_id);
        }
        else
        {
