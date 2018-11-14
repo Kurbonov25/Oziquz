@@ -124,7 +124,7 @@ console.log('Bot has been started ...')
 function Time()
 {
 	console.log("Timer starts")
-  db.query(`SELECT post_time, image_id FROM sotish WHERE position='Process' ORDER BY post_time ASC LIMIT 1`,function(err,res){
+  db.query(`SELECT post_time, image_id FROM sotish WHERE position='Process'  ORDER BY post_time ASC LIMIT 1`,function(err,res){
       if(res[0]!=undefined)
       {
       	
@@ -143,6 +143,7 @@ function Time()
        }
        else
        {
+       	console.log("123")
        	 setTimeout(Post,time_interval,post_id,channel_id)
        	 
        }
@@ -213,7 +214,8 @@ function Post(message_id,chatID){
 
 📲 Каналга обуна учун 👉 @oziquz 👈 `+`
 <a href="`+link+`">&#160 </a>`;
-   bot.sendMessage(Originalchannel_id,Caption,{
+var channel=`@step2a`;
+   bot.sendMessage(channel,Caption,{
     parse_mode:"HTML"
    });
 
@@ -1751,7 +1753,7 @@ bot.sendMessage(Originalchannel_id,htm,{
             
             
            
-            var update=`UPDATE sotish SET position = 'Process', post_created=CURTIME(), post_time=DATE_ADD(NOW(), INTERVAL 30 MINUTE) WHERE image_id=${message_id}`;
+            var update=`UPDATE sotish SET position = 'Process', post_created=CURTIME(), post_time=DATE_ADD(NOW(), INTERVAL 3 MINUTE) WHERE image_id=${message_id}`;
             db.query(update);
 
             bot.editMessageText(query.message.text+`
