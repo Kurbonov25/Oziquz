@@ -66,6 +66,8 @@ var key;
  var HashLoc;
 
 
+var timeout;
+
 //////////////////////////Alter process////////////////////////////////////////////////
 
 function startKeepAlive() {
@@ -127,7 +129,7 @@ function Time()
   db.query(`SELECT post_time, image_id FROM sotish WHERE position='Process'  ORDER BY post_time ASC LIMIT 1`,function(err,res){
       if(res[0]!=undefined)
       {
-      	
+         console.log(timeout)	
       	console.log(res);
       	
       	var post_time=res[0].post_time;
@@ -144,7 +146,7 @@ function Time()
        else
        {
        	console.log("123")
-       	 setTimeout(Post,time_interval,post_id,channel_id)
+       	 timeout=setTimeout(Post,time_interval,post_id,channel_id)
        	 
        }
       }
