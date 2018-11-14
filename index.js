@@ -155,7 +155,7 @@ function Time()
 /////////////////////////////bot.on//////////////////////////////////////////////////
 function Post(message_id,chatID){
 
-   
+   console.log("777")
    var update=`UPDATE sotish SET position = 'Posted' WHERE image_id=${message_id}`;
    db.query(update);
    bot.deleteMessage(chatID,message_id);
