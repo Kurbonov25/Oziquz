@@ -219,8 +219,8 @@ function Post(message_id,chatID){
 
 📲 Каналга обуна учун 👉 @oziquz 👈 `+`
 <a href="`+link+`">&#160 </a>`;
-var channel=`@step2a`;
-   bot.sendMessage(channel,Caption,{
+
+   bot.sendMessage(Originalchannel_id,Caption,{
     parse_mode:"HTML"
    });
 
