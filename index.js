@@ -1758,7 +1758,7 @@ bot.sendMessage(Originalchannel_id,htm,{
             
             
            
-            var update=`UPDATE sotish SET position = 'Process', post_created=CURTIME(), post_time=DATE_ADD(NOW(), INTERVAL 3 MINUTE) WHERE image_id=${message_id}`;
+            var update=`UPDATE sotish SET position = 'Process', post_created=CURTIME(), post_time=DATE_ADD(NOW(), INTERVAL 30 MINUTE) WHERE image_id=${message_id}`;
             db.query(update);
 
             bot.editMessageText(query.message.text+`
